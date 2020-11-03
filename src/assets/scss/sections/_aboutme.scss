@@ -1,0 +1,36 @@
+#about-me {
+  .hero-body {
+    .title {
+      font-size: 64px;
+    }
+    .subtitle {
+      font-size: 32px;
+    }
+  }
+}
+
+#about-me2 {
+  .title {
+    font-size: 23px;
+  }
+
+  table {
+    tr {
+      border-bottom: 1px solid #f0f0f0;
+
+      td {
+        padding-top: 5px;
+        padding-bottom: 5px;
+
+        &:not(:first-of-type) {
+          padding-left: 10px;
+        }
+
+        &:first-of-type {
+          padding-right: 10px;
+          border-right: 1px solid #f0f0f0;
+        }
+      }
+    }
+  }
+}
