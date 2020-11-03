@@ -32,11 +32,30 @@
 
       .links {
         margin-top: 15px;
+        width: 100%;
+        display: block;
+
+        @media screen and (max-width: 767px) {
+          display: flex;
+          flex-direction: column;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
 
         a {
+          @media screen and (max-width: 767px) {
+            display: block;
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+
           &:not(:last-of-type) {
-            &:after {
-              content: ' | ';
+            @media screen and (min-width: 768px) {
+              &:after {
+                content: ' | ';
+              }
             }
           }
         }
