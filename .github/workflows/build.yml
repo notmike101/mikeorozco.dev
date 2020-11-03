@@ -18,7 +18,7 @@ jobs:
           token: ${{ secrets.TOKEN }}
       
       - name: Install
-        run: npm Install
+        run: npm ci
 
       - name: Build
         run: npm run build
