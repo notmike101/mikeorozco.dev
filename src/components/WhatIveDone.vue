@@ -280,10 +280,10 @@ export default {
           links: ['https://md5.xyz', 'https://github.com/notmike101/NodeMD5'],
           description:
             `NodeMD5 is a simple web application powered by Node.JS and ` +
-            `built using a MEAN (Mongo, Express, Angler, Nginx) stack. It ` +
-            `compiles a list of MD5 hashes from user input and allows users ` +
-            `to look up MD5 hashes through the list, as well as create ` +
-            `their own MD5 hashes.`
+            `built using a MEN (Mongo, Express, Nginx) (Yes, that's ` +
+            `intentional) stack. It compiles a list of MD5 hashes from user ` +
+            `input and allows users to look up MD5 hashes through the list, ` +
+            `as well as create their own MD5 hashes.`
         },
         {
           title: 'Hell0W0rld',
