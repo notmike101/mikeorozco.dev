@@ -26,5 +26,10 @@
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
+  },
+  "volta": {
+    "node": "16.1.0",
+    "yarn": "1.22.11",
+    "npm": "7.11.2"
   }
 }
