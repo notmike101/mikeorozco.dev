@@ -20,7 +20,6 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
           ref: src
-          token: ${{ secrets.TOKEN }}
       
       - name: Install
         run: npm install
@@ -36,5 +35,5 @@ jobs:
         env:
           REPO: self
           BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
           FOLDER: dist
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
