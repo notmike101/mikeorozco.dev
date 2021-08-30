@@ -15,6 +15,9 @@
       <b-navbar-item href="https://linkedin.com/in/mikeoroz" target="_BLANK">
         <i class="fab fa-linkedin"></i>
       </b-navbar-item>
+      <b-navbar-item href="https://keybase.io/notmike" target="_BLANK">
+        <i class="fab fa-keybase"></i>
+      </b-navbar-item>
     </template>
   </b-navbar>
 </template>
