@@ -16,7 +16,7 @@
                 class="column"
                 :class="{
                   'is-two-thirds': entry.image,
-                  'is-full': !entry.image
+                  'is-full': !entry.image,
                 }"
               >
                 <p v-if="entry.title" class="title">{{ entry.title }}</p>
@@ -56,36 +56,36 @@ export default {
           links: ['https://github.com/notmike101/express-rest-api-template'],
           description:
             `REST API built using ExpressJS framework & NodeJS. This is a ` +
-            `template for future REST APIs I may build.`
+            `template for future REST APIs I may build.`,
         },
         {
           title: 'MangaMags',
           date: '2013-01-01',
           links: [
             'https://mangamags.com',
-            'https://github.com/notmike101/mangamags.com'
+            'https://github.com/notmike101/mangamags.com',
           ],
           description:
             `An old project that allowed visitors to read a collection of ` +
             `Manga that was stored in a MySQL database. This project was ` +
-            `completed in a period of 3 days.`
+            `completed in a period of 3 days.`,
         },
         {
           title: 'OLX.ro Scraper',
           date: '2020-10-26',
           links: ['https://github.com/notmike101/OLX.ro-Scraper'],
           // eslint-disable-next-line max-len
-          description: `Scrapes www.olx.ro for any phone numbers when given a URL`
+          description: `Scrapes www.olx.ro for any phone numbers when given a URL`,
         },
         {
           title: 'Harris County Court Record Extraction Script',
           date: '2020-10-18',
           links: [
             // eslint-disable-next-line max-len
-            'https://github.com/notmike101/harriscounty-texas-court-record-extract'
+            'https://github.com/notmike101/harriscounty-texas-court-record-extract',
           ],
           // eslint-disable-next-line max-len
-          description: `Scrapes Harris County, Texas court website for eviction cases.`
+          description: `Scrapes Harris County, Texas court website for eviction cases.`,
         },
         {
           title: 'Blobfuse Mount Service',
@@ -94,19 +94,19 @@ export default {
           description:
             `Takes multiple stored configuration files specifying which blob ` +
             `storage block to use and mounts the blob block into ` +
-            `/mnt/fuse-(blobname).`
+            `/mnt/fuse-(blobname).`,
         },
         {
           title: 'ReadCreepy',
           date: '2018-06-07',
           links: [
             'https://readcreepy.gq',
-            'https://github.com/notmike101/readcreepy'
+            'https://github.com/notmike101/readcreepy',
           ],
           description:
             `My first project that made use of GitHub pages. This is a proof ` +
             `of concept project for Artris to test a web-optimization tool ` +
-            `using JavaScript.`
+            `using JavaScript.`,
         },
         {
           title: 'QuikHop',
@@ -115,7 +115,7 @@ export default {
           description:
             `Simple Source Engine hack that allows for users to utilize ` +
             `momentum boosts acquired through "bunny hopping" and perfectly ` +
-            `timed jumps`
+            `timed jumps`,
         },
         {
           title: 'Microsoft Teams Custom Code Patch',
@@ -124,7 +124,7 @@ export default {
           description:
             `Allow custom javascript code to be ran locally on MS Teams. ` +
             `Can be used for multiple purposes such as creating self-bots ` +
-            `and injecting custom styling.`
+            `and injecting custom styling.`,
         },
         {
           title: 'Bad Password Generator',
@@ -133,7 +133,7 @@ export default {
           description:
             `A FireFox plugin that allows for secure password generation. ` +
             `Passwords generated using this tool contain profanity and are ` +
-            `considered humorous in the English language.`
+            `considered humorous in the English language.`,
         },
         {
           title: 'Klyde',
@@ -145,7 +145,7 @@ export default {
             `designed and given functionality by myself. Also created an API ` +
             `to integrate with the backend of the website so future apps can ` +
             `access the same information as the website. Backend written in ` +
-            `pure native PHP with a custom made template engine.`
+            `pure native PHP with a custom made template engine.`,
         },
         {
           title: 'Multi-OS Shellcode',
@@ -156,39 +156,40 @@ export default {
             `used across multiple versions of the Windows operating system. ` +
             `It works by putting null code (\\DE\\AD\\C0\\DE) in place of ` +
             `library addresses, then finds the proper addresses during ` +
-            `run-time.`
+            `run-time.`,
         },
         {
           title: 'LeakedWP',
           date: '2016-12-17',
           links: [
             'https://leakedwp.com',
-            'https://github.com/notmike101/leakedwp.com'
+            'https://github.com/notmike101/leakedwp.com',
           ],
           description:
             `A website created for sharing and distributing WordPress ` +
             `plugins and themes under the GPL license. Maintained by ` +
-            `separate developers, designed by myself.`
+            `separate developers, designed by myself.`,
         },
         {
           title: 'WordPress Backdoor Plugin',
           date: '2016-06-28',
           links: ['https://github.com/notmike101/Wordpress-Backdoor-Plugin'],
           description:
-            `An installable plugin that will give you unrestricted access to ` +
-            `the server's file system and allow for uninterrupted or ` +
-            `undetected access. This plugin is strictly for educational and ` +
-            `rescue purposes only, and built with the intention of ` +
-            `non-malicious use. Misuse of this plugin is caused by the ` +
-            `intention of the user, not at the contributors. The ` +
-            `contributors take no responsibility for any misuse of this plugin.`
+            'An installable plugin that will give you unrestricted access to ' +
+            "the server's file system and allow for uninterrupted or " +
+            'undetected access. This plugin is strictly for educational and ' +
+            'rescue purposes only, and built with the intention of ' +
+            'non-malicious use. Misuse of this plugin is caused by the ' +
+            'intention of the user, not at the contributors. The ' +
+            'contributors take no responsibility for any misuse of this ' +
+            'plugin.',
         },
         {
           title: 'InTouch Marketing Blog',
           links: ['https://blog.intouch-marketing.com'],
           description:
             `Designed and developed using the HubSpot platform with no theme ` +
-            `used, for InTouch Marketing.`
+            `used, for InTouch Marketing.`,
         },
         {
           title: 'WP Protectors',
@@ -196,7 +197,7 @@ export default {
           links: ['https://wpprotectors.com'],
           description:
             `Designed and developed using the Bridge WordPress ` +
-            `Theme, for InTouch Marketing.`
+            `Theme, for InTouch Marketing.`,
         },
         {
           title: 'Harmony Insurance',
@@ -204,7 +205,7 @@ export default {
           links: ['http://hsocal.com/'],
           description:
             `Designed and developed using the Bridge WordPress Theme, for ` +
-            `InTouch Marketing.`
+            `InTouch Marketing.`,
         },
         {
           title: 'IDR Environmental Blog',
@@ -212,7 +213,7 @@ export default {
           links: ['https://blog.idrenvironmental.com'],
           description:
             `Designed and developed using the HubSpot platform with no theme ` +
-            `used, for InTouch Marketing & IDR Environmental.`
+            `used, for InTouch Marketing & IDR Environmental.`,
         },
         {
           title: 'GeekSquad MRI Loader',
@@ -224,14 +225,14 @@ export default {
             `fake the date checking routine built into the software by ` +
             `keeping the year in-between the expected year for the software ` +
             `to work. The source code to this is kept private to prevent any ` +
-            `IP issues.`
+            `IP issues.`,
         },
         {
           title: 'Serofit Website',
           links: ['https://serofit.com'],
           description:
             `Designed and developed using the Bridge WordPress Theme, for ` +
-            `SmartChicksMedia.`
+            `SmartChicksMedia.`,
         },
         {
           title: 'BetterDiscord - EvenBetterRepo',
@@ -241,7 +242,7 @@ export default {
             `A better implementation of a repository for themes & plugins ` +
             `for BetterDiscord that allows for users of Discord to easily ` +
             `install plugins and themes to their client. Built using ` +
-            `JavaScript & jQuery.`
+            `JavaScript & jQuery.`,
         },
         {
           title: 'Michael Pham Law Website',
@@ -249,21 +250,21 @@ export default {
           description:
             `Designed and developed using the Bridge WordPress Theme, as ` +
             `requested, for SmartChicksMedia then passed on to another ` +
-            `development team.`
+            `development team.`,
         },
         {
           title: 'LabTech Supply Company Website',
           links: ['https://labtechsupplyco.com'],
           description:
             `Designed and developed using the Envision WordPress Theme for ` +
-            `InTouch Marketing.`
+            `InTouch Marketing.`,
         },
         {
           title: 'AZ Solar Now',
           links: ['https://azsolarnow.com'],
           description:
             `Designed and developed using the Bridge WordPress Theme for ` +
-            `InTouch Marketing, then passed to another development team.`
+            `InTouch Marketing, then passed to another development team.`,
         },
         {
           title: 'Google Spreadsheet Database',
@@ -272,7 +273,7 @@ export default {
           description:
             `An example of how to use a Google Drive spreadsheet as a small ` +
             `database for web applications. A detailed description of ` +
-            `how this works is in the code repository's README file.`
+            `how this works is in the code repository's README file.`,
         },
         {
           title: 'NodeMD5',
@@ -283,7 +284,7 @@ export default {
             `built using a MEN (Mongo, Express, Nginx) (Yes, that's ` +
             `intentional) stack. It compiles a list of MD5 hashes from user ` +
             `input and allows users to look up MD5 hashes through the list, ` +
-            `as well as create their own MD5 hashes.`
+            `as well as create their own MD5 hashes.`,
         },
         {
           title: 'Hell0W0rld',
@@ -293,10 +294,10 @@ export default {
             `A not-so-simple "Hello, World" program that was built for a ` +
             `self-provided test for my personal abilities to see how I've ` +
             `progressed since first learning C++. This test implements use ` +
-            `of linked lists, pointers, classes, and template functions.`
-        }
-      ]
-    }
-  }
-}
+            `of linked lists, pointers, classes, and template functions.`,
+        },
+      ],
+    };
+  },
+};
 </script>

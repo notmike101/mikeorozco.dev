@@ -1,30 +1,19 @@
 <template>
   <div id="app">
     <Header />
-    <Hero />
-    <About />
-    <WhatIDo />
-    <WhatIveDone />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Header from '@/components/Header.vue'
-import Hero from '@/components/Hero.vue'
-import About from '@/components/About.vue'
-import WhatIDo from '@/components/WhatIDo.vue'
-import WhatIveDone from '@/components/WhatIveDone.vue'
+import Header from '@/components/Header.vue';
 
 export default {
   name: 'App',
   components: {
     Header,
-    Hero,
-    About,
-    WhatIDo,
-    WhatIveDone
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss">

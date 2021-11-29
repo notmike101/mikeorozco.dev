@@ -30,60 +30,60 @@ export default {
           title: 'WordPress Development',
           content:
             `I am experienced with WordPress and can create, update, and ` +
-            `maintain your websites with ease.`
+            `maintain your websites with ease.`,
         },
         {
           icon: 'fa-server',
           title: 'Full-Stack Development',
           content:
             `I've kept up to date on modern web technologies and can build a ` +
-            `website that you want from scratch!`
+            `website that you want from scratch!`,
         },
         {
           icon: 'fa-user',
           title: 'Server Administration',
           content:
             `Servers are an area that I studied for self-benefit, but it ` +
-            `grew into a passion that I can now offer as a service to you!`
+            `grew into a passion that I can now offer as a service to you!`,
         },
         {
           icon: 'fa-laptop-code',
           title: 'Web App Development',
           content:
             `Using the skills from software and web development, I ` +
-            `can create web applications to fit your every need!`
+            `can create web applications to fit your every need!`,
         },
         {
           icon: 'fa-code',
           title: 'Software Development',
           content:
             `I know multiple programming languages for desktop and server ` +
-            `environments!`
+            `environments!`,
         },
         {
           icon: 'fa-mobile-alt',
           title: 'Mobile App Development',
           content:
             `I use the Quasar framework to build mobile apps, which ` +
-            `allows for cross-platform app development.`
-        }
-      ]
-    }
+            `allows for cross-platform app development.`,
+        },
+      ],
+    };
   },
   computed: {
     chunkedEntries() {
       return this.entries.reduce((result, entry, index) => {
-        const chunkIndex = Math.floor(index / this.entriesPerColumn)
+        const chunkIndex = Math.floor(index / this.entriesPerColumn);
 
         if (!result[chunkIndex]) {
-          result[chunkIndex] = []
+          result[chunkIndex] = [];
         }
 
-        result[chunkIndex].push(entry)
+        result[chunkIndex].push(entry);
 
-        return result
-      }, [])
-    }
-  }
-}
+        return result;
+      }, []);
+    },
+  },
+};
 </script>
