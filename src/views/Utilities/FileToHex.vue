@@ -33,8 +33,11 @@
         />
       </div>
     </div>
-    <br />
-    <textarea v-model="hex" readonly></textarea>
+    <textarea
+      v-model="hex"
+      readonly
+      placeholder="File content converted to hex..."
+    ></textarea>
   </section>
 </template>
 
@@ -87,3 +90,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+textarea {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+}
+</style>
