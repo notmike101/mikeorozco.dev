@@ -1,15 +1,14 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  target: 'static',
+  router: {
+    base: '/',
+  },
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxtjs/google-fonts',
     'nuxt-icon',
   ],
-  svg: {
-    vueSvgLoader: {
-
-    },
-  },
   tailwindcss: {
     exposeConfig: true,
   },
