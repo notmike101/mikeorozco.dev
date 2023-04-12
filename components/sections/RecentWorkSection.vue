@@ -79,13 +79,15 @@ const projects = [
   </div>
   <div class="flex flex-row justify-center pb-20">
     <div class="flex flex-col">
-      <FancyButton
-        icon="grommet-icons:github"
-        href="https://github.com/notmike101"
-        hover-text-color-light-mode="light"
-      >
-        See More On GitHub
-      </FancyButton>
+      <client-only>
+        <FancyButton
+          icon="grommet-icons:github"
+          href="https://github.com/notmike101"
+          hover-text-color-light-mode="light"
+        >
+          See More On GitHub
+        </FancyButton>
+      </client-only>
     </div>
   </div>
 </template>

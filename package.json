@@ -6,6 +6,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
+    "preview-generated": "pnpx serve ./dist",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
@@ -14,11 +15,9 @@
     "@fortawesome/vue-fontawesome": "^3.0.3"
   },
   "devDependencies": {
-    "@nuxtjs/color-mode": "^3.2.0",
     "@nuxtjs/google-fonts": "^3.0.0",
     "@nuxtjs/tailwindcss": "^6.6.5",
     "nuxt": "^3.4.0",
-    "nuxt-icon": "^0.3.3",
-    "nuxt-svgo": "1.1.1-development"
+    "nuxt-icon": "^0.3.3"
   }
 }
