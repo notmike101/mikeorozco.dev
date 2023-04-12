@@ -35,11 +35,6 @@ jobs:
           version: 8.2.0
           run_install: false
 
-      - name: Setup GH Pages
-        uses: actions/configure-pages@v3
-        with:
-          static_site_generator: nuxt
-
       - name: Get pnpm store directory
         id: pnpm-cache
         shell: bash
