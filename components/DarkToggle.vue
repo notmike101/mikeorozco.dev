@@ -15,19 +15,22 @@ const browserColorScheme = () => {
   return 'light';
 };
 
-const currentColorMode = ref(localStorage.getItem('color-mode') ?? browserColorScheme());
-const currentModeIcon = computed(() => currentColorMode.value === 'dark' ? 'material-symbols:dark-mode' : 'material-symbols:light-mode');
+const currentColorMode = ref<string>('light');
 
 watch(currentColorMode, (value) => {
-  if (localStorage.getItem('color-mode') !== value) {
-    localStorage.setItem('color-mode', value);
+  if (!localStorage?.getItem('color-mode')) {
+    localStorage?.setItem('color-mode', value);
   }
 
   const { documentElement } = document;
 
   documentElement.classList.remove('dark', 'light');
   documentElement.classList.add(value);
-}, { immediate: true });
+});
+
+onMounted(() => {
+  currentColorMode.value = localStorage?.getItem('color-mode') ?? browserColorScheme();
+});
 </script>
 
 <template>
@@ -35,6 +38,7 @@ watch(currentColorMode, (value) => {
     @click="currentColorMode = currentColorMode === 'dark' ? 'light' : 'dark'"
     class="border flex p-2.5 rounded-full bg-transparent transition-colors duration-300 hover:text-white hover:bg-preferred-light-red hover:dark:bg-preferred-dark-red"
   >
-    <Icon :name="currentModeIcon" />
+    <Icon v-if="currentColorMode === 'dark'" name="material-symbols:dark-mode" />
+    <Icon v-else name="material-symbols:light-mode" />
   </button>
 </template>
