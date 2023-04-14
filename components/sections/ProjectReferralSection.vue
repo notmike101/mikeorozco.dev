@@ -5,7 +5,7 @@ import FancyButton from '@/components/FancyButton.vue';
 <template>
   <div class="flex flex-row bg-preferred-light-red py-10">
     <div class="flex flex-col basis-full justify-center items-center">
-      <div class="flex flex-row max-w-[800px] w-full justify-center items-center">
+      <div class="flex flex-col md:flex-row max-w-[800px] w-full justify-center items-center">
         <div class="flex flex-col basis-1/2 items-start">
           <img class="w-[350px]" src="/images/coders-together.svg" alt="Coders sitting together working" />
         </div>
