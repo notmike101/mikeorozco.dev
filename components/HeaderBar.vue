@@ -18,14 +18,16 @@ const socialLinks = [
   <header class="fixed top-0 left-0 w-full bg-white dark:bg-preferred-dark-blue border-b z-20 shadow-sm">
     <nav class="flex flex-row-reverse md:flex-row container mx-auto py-6 justify-between items-center">
       <div class="flex flex-col">
-        <FancyButton
-          icon="material-symbols:android-messages"
-          href="mailto:me@mikeorozco.dev"
-          :rounded="true"
-          hover-text-color-light-mode="light"
-        >
-          Say Hello
-        </FancyButton>
+        <client-only>
+          <FancyButton
+            icon="material-symbols:android-messages"
+            hidden-href="bWFpbHRvOm1lQG1pa2Vvcm96Y28uZGV2"
+            :rounded="true"
+            hover-text-color-light-mode="light"
+          >
+            Say Hello
+          </FancyButton>
+        </client-only>
       </div>
       <div class="flex flex-col">
         <div class="flex flex-row">

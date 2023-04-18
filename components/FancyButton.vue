@@ -3,6 +3,7 @@ interface IProps {
   icon?: string;
   rounded?: boolean;
   href?: string;
+  hiddenHref?: string;
   showText?: boolean;
   textColorLightMode?: 'light' | 'dark';
   textColorDarkMode?: 'light' | 'dark';
@@ -26,12 +27,20 @@ const props = withDefaults(defineProps<IProps>(), {
   paddingUnits: 'px',
 });
 
+const href = computed(() => {
+  if (props.hiddenHref) {
+    return window.atob(props.hiddenHref);
+  }
+
+  return props.href;
+});
+
 const paddingSimplifiedValue = computed(() => `${props.paddingTop}${props.paddingUnits} ${props.paddingRight}${props.paddingUnits} ${props.paddingBottom}${props.paddingUnits} ${props.paddingLeft}${props.paddingUnits}`);
 </script>
 
 <template>
   <a
-    :href="props.href"
+    :href="href"
     target="_BLANK"
     :class="{
       'rounded-full': props.rounded === true,

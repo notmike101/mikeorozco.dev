@@ -12,16 +12,17 @@ import FancyButton from '@/components/FancyButton.vue';
         <div class="flex flex-col basis-1/2 items-center">
           <h2 class="text-xl text-white font-bold">Got an idea?</h2>
           <h2 class="text-xl text-white font-bold mb-6">Lets build it together!</h2>
-
-          <FancyButton
-            icon="material-symbols:code"
-            href="mailto:me@mikeorozco.dev?subject=Start%20A%20Project"
-            :rounded="true"
-            text-color-light-mode="light"
-            hover-text-color-light-mode="light"
-          >
-            Lets Start Working
-          </FancyButton>
+          <client-only>
+            <FancyButton
+              icon="material-symbols:code"
+              hidden-href="bWFpbHRvOm1lQG1pa2Vvcm96Y28uZGV2"
+              :rounded="true"
+              text-color-light-mode="light"
+              hover-text-color-light-mode="light"
+            >
+              Lets Start Working
+            </FancyButton>
+          </client-only>
         </div>
       </div>
     </div>
