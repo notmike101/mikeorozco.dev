@@ -4,32 +4,38 @@ const projects = [
     title: 'Pack3D',
     description: 'Electron app written with TypeScript that optimizes GLTF files',
     url: 'https://github.com/notmike101/pack3d',
-    image: '/images/pack3d-screenshot.png',
+    image: 'https://share.mikeorozco.dev/1682995148.92e151a9-15ae-4333-bd88-b410bd66e467.png',
   },
   {
     title: 'WordPress Backdoor',
     description: 'WordPress plugin demonstrating persistent malicious user access & control',
     url: 'https://github.com/notmike101/Wordpress-Backdoor-Plugin',
-    image: '/images/Wordpress-Logo.svg',
+    image: 'https://share.mikeorozco.dev/1682995196.eb1b125c-b27d-46c3-98e9-22c51a0e59ea.svg',
   },
   {
     title: 'Sunshine Sink Updater',
     description: 'Windows CLI tool to easily update audio sink configurations',
     url: 'https://github.com/notmike101/sunshine-stream-windows-audio-sink-updater',
-    image: '/images/sunshine-audio-sink.png',
+    image: 'https://share.mikeorozco.dev/1682995210.0d64b6b2-3fca-458e-a0d2-051940b0986c.png',
   },
   {
     title: 'BD Server Themes',
     description: 'Extension to customize Discord based on which server is being viewed',
     url: 'https://github.com/notmike101/betterdiscord-server-themes',
-    image: '/images/betterdiscord.svg'
+    image: 'https://share.mikeorozco.dev/1682995221.522c2ac2-b547-429b-88e5-75d491f13e78.svg'
   },
   {
     title: 'BD Google Fonts',
     description: 'Extension to replace Discord fonts with a user selected font from Google Fonts',
     url: 'https://github.com/notmike101/betterdiscord-google-fonts',
-    image: '/images/betterdiscord.svg',
+    image: 'https://share.mikeorozco.dev/1682995221.522c2ac2-b547-429b-88e5-75d491f13e78.svg',
   },
+  {
+    title: 'JavaScript MonkeyPatcher',
+    description: 'General purpose JavaScript monkey patcher',
+    url: 'https://gist.github.com/notmike101/55e3e4b64a35de3fb2ab8894744c6d2b',
+    image: 'https://share.mikeorozco.dev/brave_1682995120.4da9f553-a095-46f8-aa22-e517479d8182.png'
+  }
 ];
 </script>
 
