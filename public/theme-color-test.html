@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="theme-color" content="#ffffff">
+  </head>
+  <body>
+    <script>
+      (() => {
+        const themeColor = document.querySelector("meta[name='theme-color']");
+        
+        setInterval(() => {
+          themeColor.setAttribute('content', `#${Math.floor(Math.random()*16777215).toString(16)}`);
+        }, 500);
+      })();
+    </script>
+  </body>
+</html>
