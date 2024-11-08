@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Dying Light 2: Reloaded Edition</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+  height: 48px;
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+	height: 48px;
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, #24282f, rgba(100,100,100,0.73))">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button> Dying Light 2: Reloaded Edition</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />							<TR>
+								<TD>Playtime</TD>
+								<TD>4h 0m 0s</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descending_name_ascending.html#quicklink-4/1/2024">4/1/2024</a> 23:36:02</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descending_name_ascending.html#quicklink-6/8/2024">6/8/2024</a> 19:59:09</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descending_name_ascending.html#quicklink-6/8/2024">6/8/2024</a> 19:59:35</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascending_name_ascending.html#quicklink-Played">Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default%20list%20text_source_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascending_name_ascending.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-2/3/2022">2/3/2022</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-72">72</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-77">77</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Adventure">Adventure</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Role-playing (RPG)">Role-playing (RPG)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Techland">Techland</a><br/><a href="default%20list%20text%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Techland Publishing">Techland Publishing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Spike ChunSoft">Spike ChunSoft</a><br/><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Techland Publishing">Techland Publishing</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Co-Operative">Co-Operative</a><br/><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Multiplayer">Multiplayer</a><br/><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://dyinglightgame.com/" target="_blank">Official</a><br/><a href="https://www.facebook.com/DyingLightGame" target="_blank">Facebook</a><br/><a href="https://twitter.com/DyingLightGame" target="_blank">Twitter</a><br/><a href="https://www.instagram.com/dyinglightgame" target="_blank">Instagram</a><br/><a href="https://en.wikipedia.org/wiki/Dying_Light_2" target="_blank">Wikipedia</a><br/><a href="https://www.youtube.com/user/DyingLightGame" target="_blank">YouTube</a><br/><a href="https://www.reddit.com/r/dyinglight" target="_blank">Reddit</a><br/><a href="https://store.steampowered.com/app/534380" target="_blank">Steam</a><br/><a href="https://www.epicgames.com/p/dying-light-2-stay-human" target="_blank">Epic</a><br/><a href="https://www.twitch.tv/directory/game/Dying%20Light%202" target="_blank">Twitch</a><br/><a href="https://dyinglight.wiki.gg/" target="_blank">Wikia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<strong>Dying Light 2 Stay Human: Reloaded Edition includes:</strong><br><ul class="bb_ul"><li>Dying Light 2 Stay Human<br></li><li>‘Bloody Ties’ DLC</li></ul> <br>It’s been 20 years since the events of the original game. The virus won, and humanity is slowly dying. You play as Aiden Caldwell, a wandering Pilgrim who delivers goods, brings news, and connects the few remaining survivor settlements in barren lands devastated by the zombie virus. However, your true goal is to find your little sister Mia, who you left behind as a kid to escape Dr. Waltz's torturous experiments. Haunted by the past, you eventually make the decision to confront it when you learn that Mia may still be alive in Villedor — the last city standing on Earth.<br><br>You quickly find yourself in a settlement torn by conflict. You’ll need to engage in creative and gory combat, so hone your skills to defeat hordes of zombies and make allies. Roam the city, free run across Villedor’s buildings and rooftops in search of loot in remote areas, and be wary of the night. With every sunset, monsters take control of the streets.<h2 class="bb_tag">A WORLD AFTER THE APOCALYPSE</h2>Fifteen years ago, humanity was devastated by the Fall — a catastrophic event that would change the world forever. With the Harran virus spreading around the globe, people quickly found out that all hope for tomorrow is lost. By 2036, only a few settlements remain, and humanity is slowly dying, making way for the new species out there — a horde of relentless zombies.<h2 class="bb_tag">DAY’S FOR THE LIVING, NIGHT’S FOR THE INFECTED</h2>Welcome to Villedor, one of the last bastions of humanity. During the day, survivors still try to have a life here and find a false sense of normalcy. Relationships are formed, dreams are dreamed, and life carries on. On the surface, everything seems… fine. Until sunset, that is. With the last ray of light dying out, other, more dreadful, dwellers of The City crawl out of their gloomy interiors, taking over the streets. If you are not vigilant and stay out too long in the dark, you may never return.<h2 class="bb_tag">YOU HAVE TO MOVE TO SURVIVE</h2>Not all fights can be won. Sometimes it’s best to run and, thankfully, you have the skills for it. Parkour lets you escape when odds are not in your favor. Jump from rooftop to rooftop, swing across the cityscape, ride ziplines, and much more. Whatever you do, experience a unique sense of freedom as you freerun across Villedor’s buildings and rooftops in search of loot or while running away from the dangers of the night.<h2 class="bb_tag">GET BRUTAL AND BE CREATIVE ABOUT IT</h2>In a world as dangerous as this one, only the strongest survive. Whether you prefer to smash, slice or dismember those who stand in your way, you have to be creative about it to make it through. And who says you need weapons? Utilize the entirety of your parkour moveset to get the jump on your enemies. Learn the ways of combat and parkour to feel the crunch of skulls and slices of flesh as you swing weapons or use your moves to fend off any forms of danger. And let’s not forget that Villedor has weapons that put the most advanced post-apocalyptic armories to shame.<h2 class="bb_tag">FOUR PILGRIMS ARE BETTER THAN ONE</h2>Surviving in Villedor is easier with friends. Team up with up to 3 other players and increase your chances out there. Unravel the story together, take on Pilgrim Outpost challenges, or simply wreak havoc on the city streets.<br><br><br><img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/534380/extras/steam_footer_dying_light2.jpg?t=1717592174" />
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

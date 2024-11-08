@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Nether</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+  height: 48px;
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+	height: 48px;
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, #24282f, rgba(100,100,100,0.73))">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button> Nether</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />							<TR>
+								<TD>Playtime</TD>
+								<TD>1h 10m 0s</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descending_name_ascending.html#quicklink-6/28/2014">6/28/2014</a> 18:50:19</TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descending_name_ascending.html#quicklink-1/1/2024">1/1/2024</a> 17:16:43</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descending_name_ascending.html#quicklink-1/1/2024">1/1/2024</a> 17:27:50</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascending_name_ascending.html#quicklink-Played">Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default%20list%20text_source_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascending_name_ascending.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-6/5/2014">6/5/2014</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-61">61</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-60">60</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Indie">Indie</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Real Time Strategy (RTS)">Real Time Strategy (RTS)</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Role-playing (RPG)">Role-playing (RPG)</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Shooter">Shooter</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Simulator">Simulator</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Sport">Sport</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Phosphor">Phosphor</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Nether Productions, LLC">Nether Productions, LLC</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Massively Multiplayer Online (MMO)">Massively Multiplayer Online (MMO)</a><br/><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Multiplayer">Multiplayer</a><br/><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="http://nether.su" target="_blank">Official</a><br/><a href="https://store.steampowered.com/app/247730" target="_blank">Steam</a><br/><a href="https://www.twitch.tv/directory/game/Nether" target="_blank">Twitch</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					NETHER...IS...BACK!  We have rolled back the game to Summer of 2014, when it first left Early Access and was still being developed by us, Phosphor Games Studio.  <br><br><strong>RIGHT NOW</strong>:<br>- Single Player enabled: It was not possible before, but now it's working, and it's hard!  Have fun surviving the monster-filled urban apocalypse alone<br>- No more micro-transactions: all items can be bought with in game cash<br>- Multiplayer via player hosted servers! The old back end ripped out - no need for any login besides Steam.  You control your community, and nobody can take your game from you again<br><br><strong>WHAT IS IN DEVELOPMENT</strong>:<br>- Custom server settings: you decided how many players, how many Nether, how much gun spawns, etc.<br>- Modding tools![/b]<br>- Bug fixes (including playing as a Nether, which was always pretty buggy<br><br><strong>GAME SUMMARY</strong>:<br>Nether is a fast-paced survival game that forces you to make quick life-saving decisions in an unforgiving environment. In this post-apocalyptic urban world, death is waiting around every corner, at the top of high-rise buildings, and in the grasp of powerful teleporting creatures known as 'Nethers'. These creatures and the other players are real challenges to overcome, requiring tactical gameplay, awareness, stealth, and cooperation. To navigate this high-tension environment, you must use skill and cunning in order to scavenge, trade, craft or loot for food, weapons, supplies, and other resources necessary to stay alive in a desolate and dangerous city. Team up with other survivors and take advantage of group play, as a tribe, to complete treacherous world objectives, or play as a lone wolf in an attempt to endure the hostile environment. In the end you must decide whether to Prey or Pray.<h2 class="bb_tag">Key Features</h2><br><strong>EXPLORE</strong><br>The game's landscape is a beautifully conceived vision of a post apocalyptic Chicago, ravaged by disaster and time. Almost every low and high-rise building can be individually explored in a cityscape that stretches 150 blocks. Beyond the city lies the Wastelands, an unforgiving desolate landscape that is slowly sinking into the earth. <br><br><strong>SURVIVE, CRAFT, TRADE, LOOT AND SHOOT</strong><br>Start off, armed only with a kitchen knife and scavenge your way through an environment on a daily battle to stay alive. Beware the Nether, poor mutated souls who roam the city in search of human flesh. Scavenge for food and water to stay nourished, and search for useful items that could be crafted into makeshift weapons to help in your battle for life.  Hunt and kill Nether to trade their body parts to the mysterious Cult located in the few markets that scatter the city. Over time, build up your skills and earn rewards for surviving each precious new day. But always beware of the other survivors who may be only one moment away from death, and see killing you and looting your possessions as their only salvation. <br><br><strong>TRIBES AND TERRITORY WARS </strong><br>Find safety in numbers by joining a tribe. Only tribes can capture and own territory, and the urban landscape is the perfect setting for turf domination. Compete with rival tribes in territory wars for control of the city by capturing strategic landmarks to reap resources and experience; prove your dominance over all other tribes. Spy on rival tribes or infiltrate and kill them by playing as a Nether. Ambush them from above by swooping in for the kill using the wing suit. Tribes change the survival experience by establishing a true social construct, with all the consequences of behavior that you would expect in the real world. Your actions have real repercussions enforced organically through reputation and standing.<br><br><strong>PLAYER AND GROUP MISSIONS</strong><br>Players can complete an assortment of individual or group missions to earn money, experience and reputation. Perform vital supply runs between the markets, work with your tribe to take down the swarms of Nether lead by the vicious boss Reaper that sporadically surge to attack neighborhoods, or keep the creatures out of the Safezones by working in groups to repair the anti-nether devices when they fail.<br><br><strong>CHARACTER CUSTOMIZATION </strong><br>Nether offers a wide variety of character customization and allows you to play as a male or female character. There is a huge selection of cosmetic items and player taunts to assert your individuality along with entire outfits to play roles like survivalist, soldier and biker - or even just play in your underwear.<br><br><strong>OTHER</strong><br><ul class="bb_ul"><li>Host your own private servers and control your settings and player population<br></li><li>First-person perspective creates a true survival experience<br></li><li>Meld of PvE (player versus environment) and PvP (player versus player) gameplay<br></li><li>New weapons and items become available as players explore the game world<br></li><li>Up to 64 players per game server<br></li><li>Single purchase, downloadable client allows full game access without subscription</li></ul>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Lost Light</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+  height: 48px;
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+	height: 48px;
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, #24282f, rgba(100,100,100,0.73))">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button> Lost Light</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descending_name_ascending.html#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descending_name_ascending.html#quicklink-10/2/2024">10/2/2024</a> 20:50:46</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descending_name_ascending.html#quicklink-10/2/2024">10/2/2024</a> 20:52:35</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default%20list%20text_source_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascending_name_ascending.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-9/1/2022">9/1/2022</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Shooter">Shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-NetEase Games">NetEase Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-NetEase Games">NetEase Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Co-Operative">Co-Operative</a><br/><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Multiplayer">Multiplayer</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://store.steampowered.com/app/1797880" target="_blank">Steam</a><br/><a href="https://www.lostlight.game/" target="_blank">Official</a><br/><a href="https://www.facebook.com/lostlightgame" target="_blank">Facebook</a><br/><a href="https://discord.gg/nEcAhhjakN" target="_blank">Discord</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<h2 class="bb_tag">Easy to play! Both FPP and TPP are here for you to choose from.</h2><br><br><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1797880/extras/221216-第一人称展示gif.gif?t=1711521041" /><h2 class="bb_tag">Realistic warfare survival</h2>Factories, harbors, forests...... these once familiar sights have been desecrated by the wrath of the apocalypse. Never neglect small details on the battlefield or there will be fatal consequences. You must know your weapons and know your equipment, explore every corner of the battlefield, learn to effectively deal with hunger and pain, and make tactical plans...... Complete survivors' commissions, scavenge for supplies, and hone your skills to survive the exclusion zone.<br><br><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1797880/extras/1-真实战场2.gif?t=1711521041" /><h2 class="bb_tag">Authentic Firearm Customization</h2>From structures to textures, the firearms in the game are meticulously recreated to provide players with the most realistic firearms experience. Each firearm supports up to 12 modifiable parts and hundreds of components to choose from. It's time to optimize your loadout from hundreds of possibilities. Of course, the system will also provide several recommended loadouts for Quick Equip.<br><br><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1797880/extras/枪-2.gif?t=1711521041" /><h2 class="bb_tag">All About Tactics</h2>In Lost Light, violence is not always the answer—as long as you can find the evacuation point, you can make it out alive. You may choose to go armed to the teeth, wreaking havoc and reaping the loots, or you may choose to be a minimalist, scavenging your way to a small fortune. But remember, if you die in combat, you lose everything—the loots are not yours until you make it out alive!<br><br><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1797880/extras/火拼-慢速-3.gif?t=1711521041" /><h2 class="bb_tag">Map Out Before Moving Out</h2>Prepare yourself for battle in your shelter. Not only do you need to boost your body energy and stay in good shape, but more importantly, you have to customize and build your own loadout. But be careful with the gear you choose, because the battle begins when you start to equip yourself.<br><br><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1797880/extras/【gif-4】tsbms-l2v2g.gif?t=1711521041" /><h2 class="bb_tag">Diversified Social Interaction</h2>Unlike conventional competitive survival games, Lost Light allows you to choose partnership over being a lone wolf. You may decide to team up with a spared enemy or commission other players to rescue you after you're knocked out—endless possibilities await!<br><br><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1797880/extras/5-救援V1_1.gif?t=1711521041" /><h2 class="bb_tag">Profit Off Free-trade</h2>After the evacuation, you retreat deep within the abandoned subway tunnels where you stash your loot and establish a foothold. After upgrading it to a full-fledged base of operations, you can set up shop and trade within Lost Light's player-driven economy. Sell your surplus and buy what's in need—Trade wisely and your chance of survival increases!<br><br><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1797880/extras/6-捡东西.gif?t=1711521041" /><h2 class="bb_tag">Cross-Platform Play</h2>PC gamers can now feel the exhilaration of battle. Players on mobile devices and PC will be able to chat with one another for a cross-platform gaming experience. Form parties across the different platforms to complete more challenges and achieve the impossible!
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

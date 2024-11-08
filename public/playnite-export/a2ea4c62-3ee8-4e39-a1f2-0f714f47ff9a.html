@@ -1,0 +1,456 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Tr&#252;berbrook</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+  height: 48px;
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+	height: 48px;
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, #24282f, rgba(100,100,100,0.73))">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button> Tr&#252;berbrook</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descending_name_ascending.html#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descending_name_ascending.html#quicklink-1/1/2024">1/1/2024</a> 17:16:30</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descending_name_ascending.html#quicklink-1/1/2024">1/1/2024</a> 17:25:59</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascending_name_ascending.html#quicklink-Gog">Gog</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default%20list%20text_source_ascending_name_ascending.html#quicklink-GOG">GOG</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascending_name_ascending.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-3/12/2019">3/12/2019</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-70">70</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-77">77</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Adventure">Adventure</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Indie">Indie</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Point-and-click">Point-and-click</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Puzzle">Puzzle</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-btf">btf</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Headup Games">Headup Games</a><br/><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-WhisperGames">WhisperGames</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="http://truberbrook.com" target="_blank">Official</a><br/><a href="https://store.steampowered.com/app/757300" target="_blank">Steam</a><br/><a href="https://www.facebook.com/Trueberbrook" target="_blank">Facebook</a><br/><a href="https://twitter.com/trueberbrook" target="_blank">Twitter</a><br/><a href="https://www.instagram.com/trueberbrook" target="_blank">Instagram</a><br/><a href="https://www.youtube.com/channel/UCmk8aFvvSzxXktlkftGXczw" target="_blank">YouTube</a><br/><a href="https://www.gog.com/game/truberbrook" target="_blank">GOG</a><br/><a href="https://www.epicgames.com/store/en-US/p/truberbrook" target="_blank">Epic</a><br/><a href="https://www.twitch.tv/directory/game/Tr%C3%BCberbrook" target="_blank">Twitch</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/en/scifi-in-1960s.png">
+
+<br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/still_03.jpg">
+
+<br>
+<i><b>»Trüberbrook« is a thrilling mystery-sci-fi adventure game.</b></i> 
+<br>
+Enjoy an adventurous vacation to a 1960's parallel universe! A Sci-Fi-Mystery Adventure Game with handmade scenery.
+<br>
+
+<br>
+Imagine yourself on a vacation to Europe in the late sixties. Now, picture yourself as a young American scientist; Hans Tannhauser. Yes, that's your name in this scenario. While you're at it, think of Trüberbrook, a remote village in rural, mountain-sloped and densely forested cold-war Germany. Because, that's where you somehow end up after hitting the continent. But who cares, you won the trip in a lottery! Or at least, that’s how it seems. But don't fear, instead of getting some rest, you could find yourself having to save the world …
+<br>
+
+<br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/still_02.jpg">
+
+<br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/en/features.png">
+
+<br>
+<ul class="bb_ul"><li><b>Suspense! Mystery! Thrills!</b> After all, it's a single player sci-fi mystery adventure game. We want to keep you entertained!
+<br>
+</li><li>Join American student Tannhauser, stranger in a strange land
+<br>
+</li><li>Set in <b>cold-war rural Germany</b> in the late 1960s
+<br>
+</li><li>Inspired by Twin Peaks, The X-Files, Stranger Things &amp; Star Trek
+<br>
+</li><li>Indulge in universal themes such as love, friendship, loyalty, self-discovery and dinosaurs
+<br>
+</li><li><b>Handmade miniature scenery!</b>
+<br>
+</li><li>Full voice acting in both English and German!
+<br>
+</li><li>Atmospheric, moody soundtrack
+<br>
+</li><li>Up to 10 hours of super exciting gameplay!</li></ul>
+<br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/en/kickstarter.png">
+
+<br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/tb_funded.png">
+
+<br>
+Trüberbrook was successfully funded on Kickstarter in December 2017 within only 30 hours. The game will be enhanced by several new features thanks to the joint force of our 5078 wonderful backers! &lt;3
+<br>
+
+<br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/en/story.png">
+
+<br>
+<b>The year is 1967.</b> The world policy is dominated by the Cold War and Vietnam, Russia and America are racing to the moon. At the same time in Europe, students take to the streets from Paris to Berlin.
+<br>
+
+<br>
+On a larger scale, the world is locked in turmoil, but most people are unaware of the events unfolding in an overlooked, sleepy part in the German province. <b>Hans Tannhauser</b>, an American student in his late twenties is caught by surprise: Out of the blue, he wins a trip to a small, German village, <b>Trüberbrook</b>. Truber-what? No idea! It doesn’t help he can’t remember taking part in any lottery in the first place … Happy to put some distance between him and his Ph.D. in quantum physics, he makes his way to Trüberbrook, Germany, bursting with curiosity.
+<br>
+
+<br>
+But shortly after his arrival, inexplicable things start to happen: A mysterious stranger breaks into his room at the Guesthouse Waldeslust and steals a paper on physics. But who would do that? And why?
+<br>
+
+<br>
+Gradually, he gets to know the various villagers and spa guests, one more peculiar than the other. Only young anthropologist Greta Lemke, who is on a research trip to Trüberbrook, seems normal to him. Before he knows it, Greta becomes Tannhauser’s accomplice on the <b>adventure of a lifetime</b>! It slowly dawns on the aspiring physicist that his presence in Tüberbrook is not accidental – he is here to save the world!
+<br>
+
+<br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/still_01.jpg">
+
+<br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/en/characters.png">
+
+<br>
+As the story proceeds, Tannhauser teams up with <b>Greta Lemke</b>, a student of paleoanthropology, and bumps into the enigmatic inventor <b>Lazarus Taft</b>.
+<br>
+
+<br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/tb_tannhauser.png">
+
+<br>
+<b>Hans Tannhauser</b> is an American physics student in his mid-twenties – and a clever one at that. The adorable little fellow is well-read, always curious and of a deeply friendly nature.
+<br>
+
+<br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/tb_gretchen.png">
+
+<br>
+<b>Greta Lemke</b> was always the fiercest kid in the sandbox; cute but merciless if someone dared interrupting her excavations of twig bones and toy artefacts. The somewhat overenthusiastic student of paleoanthropology arrives in Trüberbrook on an adventure to unravel the mysteries surrounding the village.
+<br>
+
+<br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/tb_taft.png">
+
+<br>
+As much a reclusive inventor as it gets, <b>Lazarus Taft</b> quickly became talk of the town due to his superior card playing. There must be a reason he bought this costly old mansion in Trüberbrook, of all places … What's up with Lazarus Taft?
+<br>
+
+<br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/tb_ensemble.png">
+
+<br>
+Trüberbrook is full of quirky villagers, tourists and strangers – like the gruffy but warm-hearted innkeeper Trude or her daughter Leni, "the weird kid" from Trüberbrook Elementary. And there's the old baron, a veteran of two world wars, or Lessing, the prototype of modern day conspiracists. And of course Trübi, the legendary lake monster. To name a few.
+<br>
+
+<br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/en/handcrafted-scenery.png">
+
+<br>
+One of the most distinctive features of the game is the unique visual style. The sceneries are purely handmade. 'Handmade' as in: 'Manufactured using real hands!' And fingers!
+<br>
+
+<br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/gif_1.jpg">
+
+<br>
+Not the most efficient way of doing things, but certainly the most inefficient one. We're loving it, though! Look at what we do here, piece by piece, by the sweat of our brows. Every little detail is custom-made.
+<br>
+
+<br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/gif_4.jpg">
+
+<br>
+The models are digitized using a technique called photogrammetry and later retopologized. This way we get highly detailed polygon models that blend perfectly with our digital characters.
+<br>
+
+<br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/gif_5.jpg">
+
+<br>
+It is a lot of work, but also quite exciting! You may ask yourself, how can they reach this level of detail? Are there very tiny people involved? They can't accomplish all of this with mere human hands, right? Well yes, we can! The answer might be our abundance of professional hands. Twenty-four seven at our disposal in all shapes and colors, they get things done!
+<br>
+
+<br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/gif_8.jpg">
+
+<br>
+Every scene gets an individual treatment and is staged with actual physical lighting. This allows us to simulate different hours of the day or weather conditions. Even a change of seasons is possible just by redecorating the set with real tiny little snowflakes, no joke.
+<br>
+
+<br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/gif_6.jpg">
+
+<br>
+This way we achieve an exceptional and magical look that visually reflects the world of Trüberbrook.
+<br>
+
+<br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/gif_7.jpg">
+
+<br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/en/gameplay.png">
+
+<br>
+Trüberbrook is a story-driven adventure game with a strong focus on characters and the narrative, but includes a lot of puzzles that need to be solved to progress the story. The puzzles are designed to integrate into the narrative.
+<br>
+
+<br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/gameplay_1.jpg">
+
+<br>
+You navigate Tannhauser through the different sceneries from a third person perspective, usually in long distance shots to intensify the impression of peeking into a little diorama. The story unfolds as you interact with your environment, talk to other characters and solve puzzles. These range from inventory-based puzzles to social challenges (such as persuading other characters) up to passing unsettling psycho tests.
+<br>
+
+<br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/gameplay_3.jpg">
+
+<br>
+For the console versions, we came up with a very intuitive controller input, allowing you to move the line of sight and walking directions independently. For the PC versions, you can choose between classic point and click mouse controls, and the controller navigation.
+<br>
+
+<br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/gameplay_5.jpg">
+
+<br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/en/soundtrack.png">
+
+<br>
+The soundtrack of Trüberbrook is an original composition to fit the mood of the game – sort of a tranquil doom jazz. Inspirations come from the works of <i>Tom Waits</i>, <i>Angelo Badalamenti</i>, <i>Mark Lanegan</i>, <i>Timber Timbre</i> or <i>Bohren &amp; der Club of Gore</i>. The soundtrack is directed by Sebastian Nagel &amp; Albrecht Schrader.
+<br>
+
+<br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/en/localization.png">
+
+<br>
+We've spent a lot of time working on a voice acting concept that joins in with the genetic code of the game. Since the protagonist is an American in the midst of a bunch of Germans, we wanted to reflect this in our choice of actors: In the international English audio, the main character Tannhauser speaks native American English, while all of the townspeople of Trüberbrook sport genuine German accents!
+<br><br>
+<img src="https://items.gog.com/truberbrook_–_a_nerd_saves_the_world/trueberbrook_dcp_2019.jpg">
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

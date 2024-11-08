@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Undawn</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+  height: 48px;
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+	height: 48px;
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, #24282f, rgba(100,100,100,0.73))">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button> Undawn</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descending_name_ascending.html#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descending_name_ascending.html#quicklink-10/2/2024">10/2/2024</a> 20:50:46</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descending_name_ascending.html#quicklink-10/2/2024">10/2/2024</a> 20:52:42</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default%20list%20text_source_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascending_name_ascending.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-6/12/2023">6/12/2023</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Adventure">Adventure</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Role-playing (RPG)">Role-playing (RPG)</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Shooter">Shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-LightSpeed Studios">LightSpeed Studios</a><br/><a href="default%20list%20text%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Tencent Games">Tencent Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Level Infinite">Level Infinite</a><br/><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Tencent Games">Tencent Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Co-Operative">Co-Operative</a><br/><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Massively Multiplayer Online (MMO)">Massively Multiplayer Online (MMO)</a><br/><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Multiplayer">Multiplayer</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.undawn.game/" target="_blank">Official</a><br/><a href="https://www.facebook.com/gaming/UndawnGame" target="_blank">Facebook</a><br/><a href="https://twitter.com/UndawnGame" target="_blank">Twitter</a><br/><a href="https://discord.gg/undawn" target="_blank">Discord</a><br/><a href="https://www.twitch.tv/directory/game/Undawn" target="_blank">Twitch</a><br/><a href="https://store.steampowered.com/app/1881700" target="_blank">Steam</a><br/><a href="https://play.google.com/store/apps/details?id=com.tencent.cosna" target="_blank">Android</a><br/><a href="https://www.youtube.com/undawngameofficial" target="_blank">YouTube</a><br/><a href="http://itunes.apple.com/us/app/id1564044476#?platform=iphone" target="_blank">iPhone</a><br/><a href="http://itunes.apple.com/us/app/id1564044476#?platform=ipad" target="_blank">iPad</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					Explore, adapt, and survive in Undawn, a free-to-play open-world survival RPG for mobile and PC developed by LightSpeed Studios and published by Level Infinite. Embark on an adventure with other survivors four years after a worldwide disaster where hordes of infected roam a shattered world. Undawn combines PvP and PvE modes as players fend off dual threats of the infected and other humans as they fight to survive in this apocalyptic wasteland.<br><br><strong>SURVIVE YOUR WAY</strong><br><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1881700/extras/Survival_-_Made_with_Clipchamp.gif?t=1709540647" /><br>Become the ultimate endurance expert. Protect your home, allies, and what's left of humanity against overwhelming odds. The seamless open world of Undawn is filled with realistic details, made using Unreal Engine 4. In this world, players must brave rain, heat, snow, and storms and track their character’s survival indicators such as Hunger, Body Type, Vigor, Health, Hydration, and even Mood. Changes in the environment will also affect these survival indicators in real time. Players can customize their character’s appearance and outfits, interact with other players to trade weapons and resources, and fight to protect their resources. <br><br><strong>EXPLORE AN EXPANSIVE OPEN WORLD</strong><br><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1881700/extras/Environment.gif?t=1709540647" /><br>Dare to explore a huge seamless map filled with distinct terrains such as plains, mines, deserts, swamps, and abandoned cities, each with diverse ecosystems filled with animals, plants, and weather systems. While exploring the remains of society, players can discover special game modes through interactive environmental items, embattled strongholds, and dynamic weekly events and side quests. Players must bravely explore the continent, learning to craft tools, master different weapons, build a shelter, search for survival buddies, and do everything they can to stay alive. The infected can appear anytime as you are exploring and are a huge threat to your continued existence!<br><br><strong>REBUILD THE RUINS</strong><br><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1881700/extras/Building_-_Made_with_Clipchamp__1_.gif?t=1709540647" /><br>Rebuild a new home and a new civilization with the wisdom of humanity – build your base of operations to your specifications and survive on your own or with your friends inside a massive 1-acre manor. The robust free building system allows more than 1,000 types and styles of furniture and structures, as well as ways to grow your settlement over time. Search for other outposts to form alliances and fight back against the infected together to keep your home safe.<br><br><strong>SQUAD UP TO SURVIVE</strong><br><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1881700/extras/Teamwork.gif?t=1709540647" /><br>Set yourself up for success as a member of the storied Raven Squad. The raven is traditionally a symbol of death and bad omens but can also stand for prophecy and insight. Your squad lives between these two meanings each day and night. In the new world, four years after the disaster, survivors have split into different factions, each with their own rules of survival. Face off against members of the Clowns, Eagles, Night Owls, and Reivers for territory, and get through some darkest nights for the next sunrise.<br><br><strong>ARM YOURSELF FOR THE APOCALYPSE</strong><br><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1881700/extras/Arm_yourself_for_survival_V2_-_Made_with_Clipchamp__2_.gif?t=1709540647" /><br>Protect your home, allies, and what's left of humanity against all odds with a wide variety of weapons and armor for you and your homebase. Beyond the standard weapons, players can also use other tactical gear including melee weapons, drones, decoy bombs, auto turrets and more to level the playing field. Choose from more than 50 types of vehicles for quick supply runs and to conquer new lands, while utilizing tailored-to-environment tactics to dominate the various infected zones found throughout the game.
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

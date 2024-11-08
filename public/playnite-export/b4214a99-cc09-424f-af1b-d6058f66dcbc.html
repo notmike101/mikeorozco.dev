@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Snafu</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+  height: 48px;
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+	height: 48px;
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, #24282f, rgba(100,100,100,0.73))">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button> Snafu</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descending_name_ascending.html#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descending_name_ascending.html#quicklink-1/1/2024">1/1/2024</a> 17:16:43</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descending_name_ascending.html#quicklink-1/1/2024">1/1/2024</a> 17:26:27</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default%20list%20text_source_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascending_name_ascending.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-"></a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Adventure">Adventure</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Indie">Indie</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://store.steampowered.com/app/2298080" target="_blank">Steam</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					Snafu is a horror game that takes a step back from the usual haunted house / paranormal style game and creates a unique horror environment using unconventional mechanics, story and charm. And of course some spooky moments in between. Snafu may be a horror game that is not for everyone, but it will definitely be an interesting experience.<br><br><strong><u>*Warning* This game includes significant scares, disturbing events, disturbing audio and flashing lights. Please proceed at your own volition.  </u></strong><br><br><strong><u>*The Estimated Completion Time For Snafu is Approximately 80-min*</u></strong><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/2298080/extras/TheSTORY.png?t=1678298344" /><br><br><strong>What is the story behind Snafu?</strong><br><br>You begin playing the Medieval Grow your Business Game with hopes and ambitions to make as much money as you can. Alibaba, the main NPC and caretaker of the game introduces what the game has to offer. However, as you begin to delve deeper into the world, Alibaba discovers a glitch, or virus of some sort. Something foreign has gotten into the system and has begun to terrorize everything this Medieval Grow your Business Game had to offer. NPCs begin to act strangely, textures begin to morph, and the Glitch known as Snafu begins to wonder the streets – especially at night fall. It is Alibaba’s hope that you make it to the main castle and unplug him from the game before Snafu completely takes over.<br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/2298080/extras/Giff1_Edited.gif?t=1678298344" /><br><br>Throughout your journey, meet new NPCs and hear their tale - learn how Snafu has affected their &quot;lives&quot; and what you can do to ease their pains. They may not have long, anyhow...<br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/2298080/extras/Snapshot.png?t=1678298344" /><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/2298080/extras/Giff2_Edited.gif?t=1678298344" /><br><br><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/2298080/extras/WhatToExpect.png?t=1678298344" /><br><br><strong>What can I expect when I play Snafu?</strong><br><br>Play a game within a game - It is your goal to save Alibaba from Snafu's terror; however, to reach him, you must level up, and make more money.<br>- You have access to over one hundred purchases,<br>- Raise your rank,<br>- Purchase your own home (Which may or may not be haunted...)<br>- Complete mini side-quests,<br>- Have access to 3 separate endings,<br>- And hear the stories the NPC's have to tell. It has not been easy for them, lately. <br><br>All of these steps are necessary in order to reach the Castle where Alibaba is held. You must progress through the game as originally intended with the hope to bring the Medieval Grow Your Business Game offline, for good, before Snafu can inflict any more damage. It's harsh, but sometimes when a file becomes so corrupt, you must take extreme measures...<br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/2298080/extras/Giff3_Edited.gif?t=1678298344" /><br><br>There are many traps throughout the game you will want to avoid. But don't forget, Snafu is always watching and will toy with you until it is ready to truly take your life... It is your ambition to save Alibaba from the terrors of Snafu; however, Snafu will do its best to terrorize you along the way.<br><br><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/2298080/extras/DevNotes.png?t=1678298344" /><br><br>And here we are, another game... The Dev notes is usually my favorite part about writing a game's description. It usually has very little to do with the game, but rather, tells the incredible tale of developing the game... Maybe not so incredible?<br><br>As you can tell, Snafu is a significantly different approach to the style of games I am used to developing. You will usually see me create a bunch of &quot;Realism&quot;, very scary, atmospheric games. However, with Snafu, I've taken a complete 360 and delved into Pixel &amp; Low Polly design. I've also implemented a much larger open world than what I am used to. It's quite different, to say the least. <br><br>But, what I've also done which is quite new on my end is finally adding controller support! Super happy to be able to finally sit back, and play this thing with some random controller I may have lying around here. And, since we're talking about new things, Snafu also includes a full-on save-game system. Save the game (also auto save) and play where you've left off. I am usually very hesitant with adding save functionality to short horror games because I always fear that pausing / leaving the game for later will ruin the experience. However, Snafu has a longer play time than my average game, so I figured adding save game functionality for this title was a must. If I feel that the average play time of a game will exceed 80-100 min, I feel like I have no choice - save game it is!<br><br>Anyways, as always, I want to thank all my supporters, followers and customers. The fact that many of you all enjoy my creations truly means the world to me. As I've said many times, I will continue to build these games, experiment with new things here and there, and try to pump out the best product I can. <br><br>With that being said, I hope you enjoy what Snafu has to offer.<br><br>Cheers, everyone, and happy gaming!<br><br>Stan. T
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,338 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sigma Theory: Global Cold War</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+  height: 48px;
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+	height: 48px;
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, #24282f, rgba(100,100,100,0.73))">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button> Sigma Theory: Global Cold War</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descending_name_ascending.html#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descending_name_ascending.html#quicklink-1/1/2024">1/1/2024</a> 17:16:30</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descending_name_ascending.html#quicklink-1/1/2024">1/1/2024</a> 17:34:39</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascending_name_ascending.html#quicklink-Gog">Gog</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default%20list%20text_source_ascending_name_ascending.html#quicklink-GOG">GOG</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascending_name_ascending.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-4/18/2019">4/18/2019</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-70">70</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Adventure">Adventure</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Indie">Indie</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Role-playing (RPG)">Role-playing (RPG)</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Simulator">Simulator</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Strategy">Strategy</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Turn-based strategy (TBS)">Turn-based strategy (TBS)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Mi-Clos Studio">Mi-Clos Studio</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Mi-Clos Studio">Mi-Clos Studio</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://store.steampowered.com/app/716640" target="_blank">Steam</a><br/><a href="http://www.sigmatheorygame.com" target="_blank">Official</a><br/><a href="https://sigmatheory.gamepedia.com/Sigma_Theory:_Global_Cold_War_Wiki" target="_blank">Wikia</a><br/><a href="https://www.facebook.com/sigmatheory" target="_blank">Facebook</a><br/><a href="https://twitter.com/sigmatheory" target="_blank">Twitter</a><br/><a href="https://www.youtube.com/channel/UCAlIR24GUOUG-DRcLIazC5g" target="_blank">YouTube</a><br/><a href="https://www.gog.com/game/sigma_theory_global_cold_war" target="_blank">GOG</a><br/><a href="http://itunes.apple.com/us/app/id1492483961#?platform=iphone" target="_blank">iPhone</a><br/><a href="http://itunes.apple.com/us/app/id1492483961#?platform=ipad" target="_blank">iPad</a><br/><a href="https://www.twitch.tv/directory/game/Sigma%20Theory" target="_blank">Twitch</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<img src="https://items.gog.com/sigma_theory_global_cold_war/coldwar.gif"><h4>STORY</h4>From the creators of the award-winning sci-fi game Out There...
+<br>
+
+<br>
+In the near future, a paradigm-shifting scientific discovery looms over the world, promising radical new technologies. The world’s superpowers realize they could have the power to destroy the global financial system, wipe out entire countries or even gain access to immortality. 
+<br>
+
+<br>
+However, this discovery — called “The Sigma Theory” — can only be harnessed by a handful of scientists. You are placed at the head of your country’s Sigma division. Your objective is to ensure that it is your nation that reaps the benefits of Sigma Theory before anyone else. 
+<br>
+
+<br>
+To achieve this you will have powerful resources at your disposal: a cadre of the world’s most elite covert agents, advanced tactical drones and, of course, your own skills in diplomacy and subterfuge. 
+<br>
+
+<br>
+It’s a cold war out there, one in which mankind must face up to its future.
+<br>
+
+<br>
+<img src="https://items.gog.com/sigma_theory_global_cold_war/drone.gif"><h4>THE ULTIMATE ESPIONAGE SIMULATION</h4><b>Turn-based espionage:</b> Use your special agents to dominate the world. Seduction, blackmail, manipulation, industrial espionage… Every low blow is both permitted and encouraged.
+<br>
+<b>Dynamic narrative:</b> Develop and manage your relations with over 100 NPCs: lobbies, armed groups, politicians… Alliance, deception or assassination, you choose. 
+<br>
+<b>Field operations:</b> Direct the kidnapping of your targets during gripping pursuits through the world’s greatest cities. Discretion or direct confrontation, your agent’s life is in your hands.
+<br>
+
+<br>
+<img src="https://items.gog.com/sigma_theory_global_cold_war/recruitment.jpg">
+<b>Recruitment</b>
+<br>
+First, recruit a team of four special agents from 50 unique unlockable characters to support your missions. Each comes with their own story, motivations and traits that define their behavior during missions.
+<br>
+Access the investigator, soldier, hacker, seducer and other archetypes to complete your Sigma division and execute your strategy.
+<br>
+
+<br>
+<img src="https://items.gog.com/sigma_theory_global_cold_war/map.jpg">
+<b>Espionage</b>
+<br>
+When your team is ready, assign them missions around the world to gather scientists, discover compromising documents on local politicians, and more.
+<br>
+Exploit your agents’ abilities to seduce, manipulate and bribe your targets over to your side or have them neutralized.
+<br>
+
+<br>
+<img src="https://items.gog.com/sigma_theory_global_cold_war/interrogation.jpg">
+<b>Counter-espionage</b>
+<br>
+Other nations will also use their agents to infiltrate your country and seize your scientists. Track, capture and interrogate them to gain information on your enemies, then exchange them for ransom when they are no longer useful.
+<br>
+
+<br>
+<img src="https://items.gog.com/sigma_theory_global_cold_war/exfiltration.jpg">
+<b>Exfiltration</b>
+<br>
+Order your agents to exfiltrate scientists recruited to your cause during gripping turn-based exfiltration phases through the world’s greatest capitals. Choose the position your drones wisely to support these delicate missions.
+<br>
+
+<br>
+<img src="https://items.gog.com/sigma_theory_global_cold_war/reddragon.jpg">
+<b>Diplomacy</b>
+<br>
+In Sigma Theory, diplomacy is the key to achieving your goals. Meet your foreign counterparts and further your objectives using flattery, threats or blackmail. You can also recover your captured agents, advance your research, and much more. Develop your relations with powerful lobbies and armed and influential groups to obtain their favor. But be careful, they may turn on you.
+<br>
+
+<br>
+<img src="https://items.gog.com/sigma_theory_global_cold_war/tech.jpg">
+<b>Tech Tree</b>
+<br>
+Sigma Theory is the cause of this cold war. Rally scientists from around the world to your cause to discover new technologies to gain the edge and change the world. Mind control, destabilization of the world economy, robot soldiers, immortality… Will you keep these discoveries for yourself or share them with the world?<h4> Games that inspired us: </h4>XCom, Phantom Doctrine, Plague Inc, Pandemic (board game), Rocket Ranger, Tropico, Armello, Civilization, Curious Expedition and so much more
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Warhammer Horus Heresy: Legions</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+  height: 48px;
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+	height: 48px;
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, #24282f, rgba(100,100,100,0.73))">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button> Warhammer Horus Heresy: Legions</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descending_name_ascending.html#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descending_name_ascending.html#quicklink-10/2/2024">10/2/2024</a> 20:50:46</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descending_name_ascending.html#quicklink-10/2/2024">10/2/2024</a> 20:52:20</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default%20list%20text_source_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascending_name_ascending.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-7/26/2018">7/26/2018</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Adventure">Adventure</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Strategy">Strategy</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Everguild">Everguild</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Everguild">Everguild</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Multiplayer">Multiplayer</a><br/><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="http://www.horusheresylegions.com/" target="_blank">Official</a><br/><a href="https://www.facebook.com/HorusLegions" target="_blank">Facebook</a><br/><a href="https://twitter.com/HorusLegions" target="_blank">Twitter</a><br/><a href="https://play.google.com/store/apps/details?id=com.Everguild.HorusHeresy" target="_blank">iPhone</a><br/><a href="https://www.reddit.com/r/HorusHeresyLegions" target="_blank">Reddit</a><br/><a href="https://play.google.com/store/apps/details?id=com.Everguild.HorusHeresy&hl=en_US" target="_blank">Android</a><br/><a href="https://store.steampowered.com/app/1031140/The_Horus_Heresy_Legions/" target="_blank">Steam</a><br/><a href="https://www.twitch.tv/directory/game/The%20Horus%20Heresy:%20Legions" target="_blank">Twitch</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<h2 class="bb_tag"><strong>A BRUTAL CARD GAME BASED ON WARHAMMER: THE HORUS HERESY!</strong></h2>Enter the Age of Darkness! Grab your bolter, build an unstoppable deck, and take part in the civil war that plunged the Empire of Mankind into turmoil. Collect all the major armies of the era, from the Space Marines Legions to the forces of Mars and the minions of Chaos, each with unique mechanics and fighting styles. Fight in the most important battles of the Horus Heresy as you make your way to Terra. Your actions shape the evolution of the game, so get ready to make history!<h2 class="bb_tag"><strong>========================= GAME MECHANICS =========================</strong></h2><h2 class="bb_tag">CHOOSE FROM OVER 100 LEGENDARY WARLORDS</h2><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1031140/extras/4th_anniversary_2.gif?t=1727081095" /><br>Your warlord leads your army from the front. There are dozens to choose from, each with unique abilities, special cards and dramatic voice lines. Your selection will determine your options and influence your strategy and your path to victory. Will you stay loyal and defend the Imperium of Mankind, or join the traitor forces of the Warmaster? Choose your allegiance!<h2 class="bb_tag">BUILD THE STRONGEST DECK FOR YOUR ARMY</h2><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1031140/extras/card_inicio_2.gif?t=1727081095" /><br>Choose your favourite army from among all the major factions of the Horus Heresy. Discover the different Astartes Legions, the Custodes and Sisters of Silence fighting for the Imperium, the Knight Houses and other servants of the Omnissiah, as well as the Daemons of the Ruinstorm and other minions of Chaos. Enjoy the stunning artwork. With over 1,300 cards to choose from, the possibilities are endless!<h2 class="bb_tag">MASTER DEEP MECHANICS, TAILORED TO THE LORE OF EACH ARMY</h2><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1031140/extras/blood_angels.gif?t=1727081095" /><br>Each army features distinct traits representing its unique approach to war. From the complex tactics of the Emperor’s Children seeking a perfect turn to the straightforward and bloody approach of the World Eaters, each match-up tells a different story. Find the one that fits your style!<h2 class="bb_tag"><strong>========================== GAME MODES ==========================</strong></h2><h2 class="bb_tag">RANKED MODE: CAN YOU BECOME THE WARMASTER?</h2><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1031140/extras/rank_to_the_top_2.gif?t=1727081095" /><br>Ascend through the major battlegrounds of the Horus Heresy, from Isstvan to Calth. Finally, reach Terra and fight to become the Warmaster! Prove your mettle in monthly seasons to earn big rewards and exclusive card backs to showcase your dominance.<h2 class="bb_tag">SINGLE-PLAYER CAMPAIGNS: DISCOVER THE LORE AND KICK-START YOUR COLLECTION</h2><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1031140/extras/BATTLE_2.gif?t=1727081095" /><br>Relive key battles from the best-selling novels and prove yourself in the major clashes between Loyalists and Traitors across the galaxy. Start with a deck of 15 cards and face a series of enemies of rising difficulty. Unlock new warlords, cards and upgrades along the way, as you get ready to face an epic final enemy!<h2 class="bb_tag">DRAFT MODE: TIME-LIMITED ARENAS BASED ON FAMOUS BATTLES FROM THE LORE</h2><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1031140/extras/gameplay.gif?t=1727081095" /><br>Prove your drafting skills in time-limited scenarios based on major battles from the Horus Heresy. Each event features different warlords, including event-exclusive ones. Earn individual rewards and help your Lodge dominate the event leaderboard! Furthermore, your victories contribute points to either the loyalists or traitors, depending on which warlord you play as. The outcome of each event determines which new content will be added to the game!<h2 class="bb_tag"><strong>=================== OTHER NOTEWORTHY FEATURES ===================</strong></h2><h2 class="bb_tag">JOIN A LODGE WITH OTHER PLAYERS</h2>Team up with players from all over the galaxy with the lodge system. Enjoy a private chat room to share deck-lists, strategy tips and play practice matches to get ready for the battle. Rank to the top of the event’s leaderboard to win amazing rewards and take part in community-led lodge tournaments!<h2 class="bb_tag">FULLY CROSS-PLATFORM ACROSS DESKTOP AND MOBILE</h2>Register your account to play seamless from multiple devices. Enjoy a long session of competitive matches from your home, or step in for a quick practice match from your mobile device while on the go. Your full collection and progress goes with you!<br><br><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1031140/extras/singleplayer_warlords_2.gif?t=1727081095" /><h2 class="bb_tag">COMMUNICATE ACROSS THE GALAXY</h2>Take part in a global chat room with all other players from across the Galaxy. Tapping on any message will automatically translate it to your own language, allowing you to communicate with humans and xenos alike.<h2 class="bb_tag">ENDLESS ACHIEVEMENTS AND CHALLENGES</h2>There are hundreds of milestones and achievements to complete, guiding you through the early stages of the game and providing long-term goals to aim for even for the most veteran players.<br><br><br><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1031140/extras/Achievements_2.gif?t=1727081095" />
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

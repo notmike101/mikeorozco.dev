@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>HAWKED</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+  height: 48px;
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+	height: 48px;
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, #24282f, rgba(100,100,100,0.73))">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button> HAWKED</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descending_name_ascending.html#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descending_name_ascending.html#quicklink-3/6/2024">3/6/2024</a> 19:13:41</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descending_name_ascending.html#quicklink-3/6/2024">3/6/2024</a> 19:14:10</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default%20list%20text_source_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascending_name_ascending.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-11/30/2023">11/30/2023</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Adventure">Adventure</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Shooter">Shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-MY.GAMES">MY.GAMES</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-MY.GAMES">MY.GAMES</a><br/><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-The 4 Winds Entertainment">The 4 Winds Entertainment</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Battle Royale">Battle Royale</a><br/><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Co-Operative">Co-Operative</a><br/><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Multiplayer">Multiplayer</a><br/><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://store.steampowered.com/app/1955960/HAWKED" target="_blank">Steam</a><br/><a href="https://playhawked.com/" target="_blank">Official</a><br/><a href="https://twitter.com/PlayHAWKED" target="_blank">Twitter</a><br/><a href="https://www.instagram.com/playhawked" target="_blank">Instagram</a><br/><a href="https://www.twitch.tv/directory/game/Hawked" target="_blank">Twitch</a><br/><a href="https://www.youtube.com/@playHAWKED" target="_blank">YouTube</a><br/><a href="https://discord.gg/hawked" target="_blank">Discord</a><br/><a href="https://www.reddit.com/r/playhawked/" target="_blank">Reddit</a><br/><a href="https://hawked.fandom.com/" target="_blank">Wikia</a><br/><a href="https://www.facebook.com/HAWKEDGame/" target="_blank">Facebook</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<img src="https://cdn.akamai.steamstatic.com/steam/apps/1955960/extras/hawked_logo.png?t=1708346258" /><br>Embark on the ultimate treasure hunt in HAWKED, a free-to-play online Extraction Shooter full of daring adventures, boundless exploration, and all-out PvPvE action in pursuit of ancient treasures.<br><br>Adventure through a mysterious world where roguish Renegades battle monsters — and each other — to reclaim powerful relics from a lost civilization. Time to flip the page on your Renegade origin story!<br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1955960/extras/01_OUTGUN_EN.png?t=1708346258" /><br>Play solo or team up in 2- or 3-player squads as you set out on the ultimate treasure hunt. But stay frosty – you’re not alone! Fight hordes of monstrous Disciples and outwit rival Renegades in explosive PvPvE combat. Switch up your loadout to suit the heist at hand, with a fully loaded arsenal of firearms and superpowered abilities at your disposal.<br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1955960/extras/1_OUTGUN.gif?t=1708346258" /><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1955960/extras/02_EXPLORE_EN.png?t=1708346258" /><br>Traverse X-Isle, a world lush with verdant vistas, dense jungles, gorgeous beaches, and no shortage of ancient ruins to raid. Get around with your trusty Traverser and Hoverboard, and make new discoveries as you explore every corner of this mysterious paradise… just watch out for Disciples, deadly traps, and other Renegades.<br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1955960/extras/2_EXPLORE.gif?t=1708346258" /><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1955960/extras/03_RECLAIM_EN.png?t=1708346258" /><br>Your goal is to solve puzzles, retrieve enough Glyphs to unlock the Treasury, and then claim the shimmering Artifact that lies within. Take it to an Extraction Point (along with any other treasures you’ve unearthed) for the ultimate payday. Artifacts can even be upgraded as part of your loadout — enhance and wield them to unlock game-changing new powers!<br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1955960/extras/3_ARTIFACT.gif?t=1708346258" /><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1955960/extras/04_RENEGADE_EN.png?t=1708346258" /><br>Create your Renegade and make your mark on X-Isle. You can experiment with different playstyles by combining a variety of weapons, Exo and Ward Gear, Artifacts, and Boosters in your loadout.  Some items can even grant unique abilities and powers! Wanna hunt in style? Change your look by unlocking hundreds of customization options like Avatars, Outfits, Color Schemes, Weapon Skins, cosmetics for equipment, and decorations for your Quarters.<br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1955960/extras/4_RENEGADE.gif?t=1708346258" /><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/1955960/extras/05_FORTUNE_EN.png?t=1708346258" /><br>HAWKED’s story unfolds in Issues, free seasonal events packed with gripping questlines, special missions, and exclusive rewards to earn from the Renegade Pass. Join the ranks of the adventurers guild GRAIL as a Renegade. Work alongside your allied rogues and rapscallions aboard the Riftwake. Witness X-Isle change and evolve as new threats rise, alliances shift, and adventure calls. This story is just beginning, and you’re at the heart of it! <br><br><table><tr><th><img src="https://cdn.akamai.steamstatic.com/steam/apps/1955960/extras/5_FORTUNE.gif?t=1708346258" /><h2 class="bb_tag">FORTUNE FAVORS THE BAD</h2><br><a href="https://steamcommunity.com/linkfilter/?u=https%3A%2F%2Fwww.facebook.com%2FHAWKEDGame%2F" target="_blank" rel=" noopener"  ><img src="https://cdn.akamai.steamstatic.com/steam/apps/1955960/extras/footer_facebook.png?t=1708346258" /></a> <a href="https://steamcommunity.com/linkfilter/?u=https%3A%2F%2Finstagram.com%2Fplayhawked" target="_blank" rel=" noopener"  ><img src="https://cdn.akamai.steamstatic.com/steam/apps/1955960/extras/footer_instagram.png?t=1708346258" /></a> <a href="https://www.youtube.com/@playHAWKED" target="_blank" rel=""  ><img src="https://cdn.akamai.steamstatic.com/steam/apps/1955960/extras/footer_youtube.png?t=1708346258" /></a> <a href="https://steamcommunity.com/linkfilter/?u=https%3A%2F%2Fwww.twitch.tv%2FPlayHawked" target="_blank" rel=" noopener"  ><img src="https://cdn.akamai.steamstatic.com/steam/apps/1955960/extras/footer_twitch.png?t=1708346258" /></a> <a href="https://steamcommunity.com/linkfilter/?u=https%3A%2F%2Fdiscord.gg%2Fhawked" target="_blank" rel=" noopener"  ><img src="https://cdn.akamai.steamstatic.com/steam/apps/1955960/extras/footer_discord.png?t=1708346258" /></a> <a href="https://steamcommunity.com/linkfilter/?u=https%3A%2F%2Ftiktok.com%2F%40playhawked" target="_blank" rel=" noopener"  ><img src="https://cdn.akamai.steamstatic.com/steam/apps/1955960/extras/footer_tiktok.png?t=1708346258" /></a> <a href="https://www.reddit.com/r/hawked/" target="_blank" rel=""  ><img src="https://cdn.akamai.steamstatic.com/steam/apps/1955960/extras/footer_reddit.png?t=1708346258" /></a> <a href="https://steamcommunity.com/linkfilter/?u=https%3A%2F%2Fx.com%2Fplayhawked" target="_blank" rel=" noopener"  ><img src="https://cdn.akamai.steamstatic.com/steam/apps/1955960/extras/footer_x-twitter.png?t=1708346258" /></a><br><br><a href="https://steamcommunity.com/linkfilter/?u=https%3A%2F%2Fplayhawked.com" target="_blank" rel=" noopener"  ><img src="https://cdn.akamai.steamstatic.com/steam/apps/1955960/extras/footer_playhawked.png?t=1708346258" /></a></th></tr></table>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

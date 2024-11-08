@@ -1,0 +1,363 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Solasta: Crown of the Magister</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+  height: 48px;
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+	height: 48px;
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, #24282f, rgba(100,100,100,0.73))">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button> Solasta: Crown of the Magister</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descending_name_ascending.html#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descending_name_ascending.html#quicklink-10/2/2024">10/2/2024</a> 20:50:41</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descending_name_ascending.html#quicklink-10/2/2024">10/2/2024</a> 20:51:42</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascending_name_ascending.html#quicklink-Gog">Gog</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default%20list%20text_source_ascending_name_ascending.html#quicklink-GOG">GOG</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascending_name_ascending.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-10/20/2020">10/20/2020</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-73">73</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-78">78</a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Adventure">Adventure</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Role-playing (RPG)">Role-playing (RPG)</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Strategy">Strategy</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Tactical">Tactical</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Turn-based strategy (TBS)">Turn-based strategy (TBS)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Tactical Adventures">Tactical Adventures</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Tactical Adventures">Tactical Adventures</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Co-Operative">Co-Operative</a><br/><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Multiplayer">Multiplayer</a><br/><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://store.steampowered.com/app/1096530" target="_blank">Steam</a><br/><a href="https://www.solasta-game.com/" target="_blank">Official</a><br/><a href="https://www.facebook.com/TacticalAdventuresGames" target="_blank">Facebook</a><br/><a href="https://twitter.com/tct_adventures" target="_blank">Twitter</a><br/><a href="https://www.instagram.com/tacticaladventures" target="_blank">Instagram</a><br/><a href="https://www.youtube.com/channel/UCgU90lGTUhVtkFS6p4sSUew" target="_blank">YouTube</a><br/><a href="https://www.gog.com/game/solasta_crown_of_the_magister" target="_blank">GOG</a><br/><a href="https://discord.gg/uu8utaF" target="_blank">Discord</a><br/><a href="https://www.twitch.tv/directory/game/Solasta%3A%20Crown%20of%20the%20Magister" target="_blank">Twitch</a><br/><a href="https://en.wikipedia.org/wiki/Solasta:_Crown_of_the_Magister" target="_blank">Wikipedia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<h4>True to the Tabletop</h4><p><i><b>Wizards of the Coast</b></i> granted <i><b>Tactical Adventures</b></i> a license to use the <b>Dungeons and Dragons SRD 5.1 Ruleset</b>, further anchoring our will to make the most faithful video game adaptation with the Tabletop Ruleset and craft the game you are hoping for!
+<br>
+
+<br>
+<img src="https://items.gog.com/solasta_crown_of_the_magister/srd.png" />
+<br>
+
+<br>
+<b><i>Solasta: Crown of the Magister</i></b> brings back the thrill, tactics, and deep storytelling of tabletop games. As you play, you'll feel yourself reaching for your dice and miniatures. It's time to dive into the world of Solasta. <b>Roll for initiative!</b></p>
+<br>
+<h4>Free Content Update with the release of Lost Valley</h4><ul class="bb_ul"><li>Online Multiplayer Co-op is now available: Compatible with both official CotM & Lost Valley campaigns, Primal Calling content as well as Custom Campaigns made with the Dungeon Maker! 
+<br>
+</li><li>Spellcasting Chants: Your spellcasters are no longer mute when casting spells, and we’ve added an additional spellcasting animation to boot! (you can turn off chants in the option menu)
+<br>
+</li><li>Crafting Feats: Tired of having to pick specific background in order to craft potions and magic items? We’ve added two feats to solve that problem! 
+<br>
+</li><li>Surprise System Overhaul: Now more faithful to the tabletop rules with individual perception checks for each surprised enemy, making fights more even!
+<br>
+</li><li>New Quest, Dialog & Custom Loot Table Systems added to the Dungeon Maker, helping creators to make even better and Custom Campaigns!</li></ul>
+<br>
+<a href="https://discord.com/invite/uu8utaF" target="_blank" rel="noopener"  ><img src="https://items.gog.com/solasta_crown_of_the_magister/Join_Discord_2.png" /></a>
+<br>
+
+<br>
+<i>Created and written by lifelong fans of Pen & Paper RPGs, comes Solasta: Crown of the Magister.</i>
+<br>
+
+<br>
+<video muted preload="auto" loop autoplay="autoplay" style="margin: auto;display:block;width:100%">
+  <source src="https://items.gog.com/solasta_crown_of_the_magister/mp4/IntroGifv3.gif.mp4" type="video/mp4"></video><h4>Bring the authentic Tabletop gaming experience to your PC!</h4>Roll for initiative, take attacks of opportunity, manage player location and the verticality of the battle field. Set yourself up for the finishing strike and possibly roll a natural 20 at that key moment of battle.​
+<br>
+
+<br>
+
+<br>
+In Solasta, you take control of four heroes, each with unique skills that complement one another. Every hero expresses themselves in the adventure, making each action and dialog choice a dynamic part to the story. Players will create their heroes just as they would in a pen-and-paper game by choosing their race, class, personality and rolling for their stats.​
+<br>
+
+<br>
+You make the choices, dice decide your destiny.
+<br>
+
+<br>
+<video muted preload="auto" loop autoplay="autoplay" style="margin: auto;display:block;width:100%">
+  <source src="https://items.gog.com/solasta_crown_of_the_magister/mp4/TeamGifv3.gif.mp4" type="video/mp4"></video><h4>Key Features:</h4><ul class="bb_ul"><li><b>An Epic Team Adventure</b> 
+<br>
+Discover the shattered world of Solasta: explore ruins and dungeons for legendary treasures, learn the truth of an age-old cataclysm - and stop it from happening again. 
+<br>
+
+<br>
+Create your very own party of adventurers with our Character Creation Tool in the classic tabletop RPG tradition. Breathe life into your heroes, and see their personalities reflected in their dialogue. Tailor your squad to your preferred strategy and maximize your party's abilities. The choice is yours.
+<br>
+
+<br>
+</li><li><b>Discover a Mysterious & Dynamic World</b>
+<br>
+Delve into long forgotten dungeons to unearth ancient artifacts, but stay watchful of light and darkness: many dangers hide in the dark, but a light can attract monsters. Some enemies have darkvision, some may flee from your torch... Successful adventurers will learn to use it to their advantage. 
+<br>
+
+<br>
+Fight monsters in squad-level, turn-based, tactical combat. Solasta's dynamic environment offers some interesting tactical options. Bridges can collapse, leaving enemies stranded and vulnerable. Walls and columns can be pushed over - on top of your foes, if you do it right. The world is your playground.
+<br>
+
+<br>
+</li><li><b>Prepare to Think in Three Dimensions</b> 
+<br>
+The dungeons in Solasta are more than flat game-boards. Climb, jump, or fly around obstacles. Evade or surprise foes from above or below. Push them into chasms or drop things on their heads. Position yourself on high grounds to start the fight with an advantage. 
+<br>
+
+<br>
+Size also matters. Escape through narrow passages where bigger enemies won't fit and crawl through tunnels to find secret areas. Take advantage of the environment to find cover suited to your own size. Watch out, though - the monsters are also thinking vertically.
+<br>
+
+<br>
+</li><li><b>Dungeon Maker</b>
+<br>
+In Solasta, the adventure does not stop after the campaign is over. Unleash your creativity and craft your own dungeons to play and share with friends with the snap of a finger using the in-game Dungeon Maker! From the room layout, monster composition and treasure the party will find – down to the decoration and lighting of each room or the music track playing – everything is decided by you.
+<br>
+
+<br>
+Note that the Dungeon Maker is a work in progress and will keep being improved as time goes by, so look forward to more Dungeon Maker features in the future!</li></ul><h4>Solasta Free Content Update with the release of Primal Calling</h4><b>To celebrate the release of the Primal Calling DLC, we're releasing a free content update for all our players</b> - including a much anticipated higher level cap!
+<br>
+
+<br>
+<ul class="bb_ul"><li>Level cap increased from level 10 to level 12, unlocking new class features as well as level 6 spells
+<br>
+</li><li>Scars and Facial Paints customization options in character creation
+<br>
+</li><li>Tired of playing through the tutorial? You can now skip it!
+<br>
+</li><li>Rebalanced (harder!) fight at the end of the campaign - prepare for a challenge!
+<br>
+</li><li>New Town Exterior & Town Interior Environments for the Dungeon Maker
+<br>
+</li><li>New Campaign Creator Feature, allowing custom dungeons to be bundled together into a campaign with custom monsters, custom NPCs & merchants and custom items!</li></ul>
+<br>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

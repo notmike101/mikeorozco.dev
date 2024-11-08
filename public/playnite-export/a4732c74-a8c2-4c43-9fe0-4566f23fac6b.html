@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Galactic Glitch: Prologue</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+  height: 48px;
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+	height: 48px;
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, #24282f, rgba(100,100,100,0.73))">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button> Galactic Glitch: Prologue</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descending_name_ascending.html#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descending_name_ascending.html#quicklink-1/1/2024">1/1/2024</a> 17:16:43</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descending_name_ascending.html#quicklink-1/1/2024">1/1/2024</a> 17:25:00</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default%20list%20text_source_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascending_name_ascending.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-12/31/2023">12/31/2023</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Arcade">Arcade</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Shooter">Shooter</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Crunchy Leaf Games">Crunchy Leaf Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Crunchy Leaf Games">Crunchy Leaf Games</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="http://www.crunchyleafgames.com" target="_blank">Official</a><br/><a href="https://twitter.com/CrunchyLeafGame" target="_blank">Twitter</a><br/><a href="https://discord.gg/cyw4UPq" target="_blank">Discord</a><br/><a href="https://www.youtube.com/user/CrunchyLeafGames" target="_blank">YouTube</a><br/><a href="https://www.facebook.com/CrunchyLeafGames" target="_blank">Facebook</a><br/><a href="https://www.twitch.tv/directory/game/Galactic%20Glitch" target="_blank">Twitch</a><br/><a href="https://store.steampowered.com/app/1536620/Galactic_Glitch_Infinitys_Edge/" target="_blank">Steam</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					Galactic Glitch: Prologue is a  <strong>stand-alone Action-Roguelike</strong> game with physics-based combat. It has its own self-contained storyline, and will take about 3-6 hours to complete. <br><br>The brainchild of an all-knowing AI, SIREN, you are the ultimate killing machine - forged from the neural DNA of humanity’s best warriors. Will you help her escape, or will you die trying?<br><br><strong>What does Galactic Glitch: Prologue include?</strong><br><ul class="bb_ul"><li>Experience a stand-alone storyline and meta-progression, that will take between 3-6 hours to complete.<br></li><li>Two Fully featured Levels: Fight through unique enemies and environments, while testing your skills against a challenging final boss.<br></li><li>Unleash Your Power in Multiple Challenge Modes: Put your abilities to the test in our frenetic challenge modes.<br></li><li>Discover NG+ Modes: Want more of a challenge? We've added three game-altering NG+ modes that add new enemies and up the ante.</li></ul><br><strong>What is Galactic Glitch: Prologue not?</strong><br><ul class="bb_ul"><li>This is not a demo for Infinity's Edge. Although the naming is &quot;Prologue&quot;, this is a fully self-contained game with its own storyline and meta-progression, and a prequel to the story Infinity's Edge.<br></li><li>None of the content or meta-progression of this game will carry over to Galactic Glitch: Infinity's Edge.<br></li><li>This game has different mechanics and gameplay from Galactic Glitch: Infinity's Edge. If you want to experience Galactic Glitch: Infinity's Edge, you can play the demo today!</li></ul><br><a href="https://store.steampowered.com/app/1536620" target="_blank" rel=""  id="dynamiclink_2" >https://store.steampowered.com/app/1536620</a><br><br>Head out on a journey that will take you across the universe. Fight in bubbles of glitched spacetime, use the environment to your advantage, leverage physics, unlock new power-ups and tear your enemies to pieces as you chase a single goal: destroying everything in your path!<br><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/640160/extras/jump1.gif?t=1697175233" /><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/640160/extras/Explore_Header.png?t=1697175233" /><br><br>The world of Galactic Glitch is an intricate net of interconnecting paths. Venture through a constantly evolving web of star systems and explore freely as you chart your unique path through the cosmos. <br><br>Explore, loot and fight your way through hostile space. Unlock new paths, upgrade your ship with new weapons and abilities, hone your skills, and destroy anyone that stands in your way. The choice is yours: will you play the prudent explorer or go all out with crazy powers and upgrades?<br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/640160/extras/divider.png?t=1697175233" /><br><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/640160/extras/wall_bounce_2.gif?t=1697175233" /><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/640160/extras/Physical_Combat_Header.png?t=1697175233" /><br><br>Galactic Glitch is built on a unique tactical and physical combat system. Wield a powerful gravity gun and use it to manipulate the battlefield. Leverage gravity to get the upper hand and unleash the power of physics against your unsuspecting foes. <br><br>Tactics are the only way to survive your journey across the galaxy. Bounce your enemies off of walls, hurl asteroids at them, stop missiles mid-flight and reshape the battlefield. Strategically dismantle foes piece by piece, exploiting their weak spots while avoiding their heavily armored defenses and special attacks. <br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/640160/extras/divider.png?t=1697175233" /><br><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/640160/extras/grab_throw_fancybeam_unlock_gate.gif?t=1697175233" /><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/640160/extras/Fight_your_own_way_header.png?t=1697175233" /><br><br>Galactic Glitch is a game where smarts easily beat firepower. Customize your approach to each fight, uncovering hidden secrets and valuable items across your journeys. Unlock new powers with each run, learn from your mistakes and experiment with creative combinations to become the ultimate destruction machine!<br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/640160/extras/divider.png?t=1697175233" /><br><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/640160/extras/destroyBreaker1.gif?t=1697175233" /><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/640160/extras/features.png?t=1697175233" /><br><br><ul class="bb_ul">    <li><strong>2D Space-Roguelite</strong> - Experience exhilarating twin-stick shooter gameplay combined with the endless replayability of a rogue-lite and the heart-pounding challenge of permadeath<br>    </li><li><strong>Physics-based Combat</strong> - Wield a powerful gravity gun to manipulate the battlefield, hurl massive asteroids, and turn your enemies' own missiles against them<br>    </li><li><strong>Multi-Part Enemies</strong> - Strategically dismantle foes piece by piece, exploiting their weak spots while avoiding their heavily armored defenses<br>    </li><li><strong>Dynamic Exploration</strong> - Venture into a constantly evolving, glitched world of star systems, uncovering hidden secrets and valuable items as you chart your unique path through the cosmos<br>    </li><li><strong>Abilities and Items</strong> - Customize your approach with diverse upgrade paths in each run. Unlock new Powers and experiment with creative combinations to craft your ultimate build</li></ul><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/640160/extras/divider.png?t=1697175233" /><br><br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/640160/extras/Header_-_Sign_up_for_beta.png?t=1697175233" /><br><br>Sign up for the beta now!<br><br><a href="https://steamcommunity.com/linkfilter/?u=https%3A%2F%2Fwww.galacticglitch.space%2F" target="_blank" rel=" noopener"  >https://www.galacticglitch.space/</a><br><br>Get the newest updates about the upcoming beta and how to participate.<br><br><img src="https://cdn.akamai.steamstatic.com/steam/apps/640160/extras/divider.png?t=1697175233" />
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
