@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Daily OVR Free</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+  height: 48px;
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+	height: 48px;
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, #24282f, rgba(100,100,100,0.73))">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button> Daily OVR Free</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descending_name_ascending.html#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descending_name_ascending.html#quicklink-1/20/2025">1/20/2025</a> 2:32:03</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descending_name_ascending.html#quicklink-1/20/2025">1/20/2025</a> 2:32:16</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default%20list%20text_source_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascending_name_ascending.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-"></a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<strong>Daily OVR Free is a free version of Daily OVR. It provides minimum essential overlay features. We think it would benefit a lot of VR users! :)<br>If you like Daily OVR Free and want to use advanced features, you can consider purchasing Daily OVR.</strong><br><br><strong><h2 class="bb_tag">What is Daily OVR?</h2></strong><br>Do you want to use your desktop/window apps during VR gameplay? For example, you can play VRChat and see your Twitch chat window. Daily OVR is the best SteamVR Overlay(OVR) solution! And it supports Oculus, Vive/Viveport/Cosmos/MR(Mixed Reality)/Index! <br><br>Here is the beginner tutorial: <br><br><br><strong><h2 class="bb_tag">Differences between Free and Paid</h2></strong><br><ul class="bb_ul"><li> Free version only supports up to 2 opened overlays. (Paid version can support more numbers)<br></li><li> Limited numbers (2) of switch programs on the QuickSwitch panel. If you want to switch more programs, you have to close the overlay and reopen it.<br></li><li> Only one entry of My Favorites<br></li><li> Only one CustomApp <br></li><li> You can only bind an overlay to the RIGHT controller. (cannot bind to the left controller, HMD, tracker)</li></ul><br><strong><h2 class="bb_tag">_,.-'~'-.,__,.-'~'-.,__,. Features .,__,.-'~'-.,__,.-'~'-.,_</h2></strong><br><ul class="bb_ul"><li> The most user-friendly OVR UI.<br></li><li> Mirror your favorite Windows applications into VR game.<br></li><li> Mirror the desktop or monitors.<br></li><li> Support up to 5 overlays. <br></li><li> QuickSwitch let you quickly switch among programs.<br></li><li> Save the frequently used settings to &quot;My Favorites.&quot;<br></li><li> Adjust the size, transparency, and placement of overlays and keep your settings for next time.<br></li><li> Easily launch the virtual keyboard on the overlay toolbar.<br></li><li> Overlay FPS adjustment on the overlay toolbar.<br></li><li> Bind the overlay to different controllers or the HMD.<br><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1153510/extras/dailyvr_en_tutorial_26_toolbar.png?t=1584463674" /><br></li><li> Support Oculus &amp; Windows MR &amp; Index (through SteamVR)<br></li><li> VR Phone Notification Pop-up.<br>  Daily OVR allows you to bring your Android phone notification into the VR view; you won't miss important messages anymore.<br>    - Phone calling notification<br>    - SMS<br>    - WhatsApp<br>    - LINE<br></li><li> Support SteamVR 2.0 Input. (You can customize button settings yourself!)<br></li><li> ML Object detection and display (Ex: keyboard, mouse, cat, dog, cup, person) (Note: Vive &amp; Vive Pro only)<br></li><li> A handy VR keyboard<br></li><li> A Clock widget</li></ul><br>You have to download Android app: Daily OVR to enable &quot;Mobile phone notification.&quot;<br>Scan the QR code below and download Daily OVR app on Google Play now!<br><br><strong><h2 class="bb_tag">_,.-'~'-.,__,.-'~'-.,__,. FAQ .,__,.-'~'-.,__,.-'~'-.,_</h2></strong><br><br><strong><u><h2 class="bb_tag">Daily OVR doesn't work in some games. For example, Elite dangerous, PokerStarVR ...etc</h2></u></strong><br>The issue is caused by Elite Dangerous tries to run in Oculus SDK mode, and Daily OVR doesn't support Oculus SDK. There is a workaround to force it to run in SteamVR mode, but it doesn't work every game (ED, PokerStarVR are OK). You may have controller issues. The possible problem is the game developer didn't think that users will forcibly use SteamVR to play the game; they didn't design the controller mapping correctly. You can search &quot;daily ovr q&amp;a&quot; on Google to see the steps.<br><br><strong><u><h2 class="bb_tag">How many overlays can I open?</h2></u></strong><br>You can open up to 5 overlays. But it depends on your PC's performance. If performance is terrible, you could try:<br><ul class="bb_ul"><li> Close the overlays<br></li><li> Set lower FPS value</li></ul><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1153510/extras/dailyvr_en_tutorial_29_02_toolbar.png?t=1584463674" /><br><br><strong><u><h2 class="bb_tag">The button mappings of controllers are not good. Can I change it?</h2></u></strong><br>Daily OVR supports SteamVR 2.0 Input. You can customize button settings yourself.<br><br><strong><u><h2 class="bb_tag">I don't like the big icon/logo! Can I make it disappear?</h2></u></strong><br>Yes, you can hide the icon by long-pressing a button. See below:<br><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1153510/extras/logoshowhide_en_tutorial_10_mode.png?t=1584463674" /><br><br><strong><u><h2 class="bb_tag">I cannot see/move my mouse pointer on some apps!</h2></u></strong><br>Some apps run as administrator permission. When Daily OVR doesn't run as the same permission, it cannot access to those apps.<br>You have to check &quot;Run this program as an administrator&quot; on DailyVRLauncher.exe Properties.<br><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1153510/extras/administrator_permission.png?t=1584463674" /><br><br><strong><u><h2 class="bb_tag">My Firefox screen is blank!</h2></u></strong><br>You have two options:<br>1. You have to disable the hardware acceleration of Firefox. See below:<br><img class="bb_img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1153510/extras/firefox_blank.png?t=1584463674" /><br>2. Use CustomApp instead<br><br><strong>Join Daily OVR Discord and share your feedback with us!</strong>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
