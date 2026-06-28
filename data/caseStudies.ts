@@ -93,41 +93,6 @@ export const caseStudies: CaseStudy[] = [
     socialImage: '/images/og-default.png',
     visual: 'pack3d',
   },
-  // {
-  //   slug: 'iframe-sandbox-runtime',
-  //   title: 'iframe-sandbox-runtime',
-  //   shortTitle: 'Sandbox runtime',
-  //   summary: 'A small browser runtime for isolating untrusted interface code while exposing an intentionally controlled DOM surface.',
-  //   problem: 'Applications that execute independently supplied interface code need lifecycle management and isolation without forcing every host application to rebuild the same iframe orchestration layer.',
-  //   role: 'Package author — runtime design, public API, lifecycle behavior, demo application, documentation, and package distribution.',
-  //   constraints: [
-  //     'Browser-only execution with explicit DOM and iframe requirements',
-  //     'Named sandbox instances need predictable creation, lookup, replacement, and teardown',
-  //     'Host access must be controlled and limitations must be documented accurately',
-  //     'The abstraction must remain small enough to understand and integrate',
-  //   ],
-  //   decisions: [
-  //     'Designed a narrow lifecycle API around create, run, retrieve, and destroy operations.',
-  //     'Used iframe boundaries for runtime isolation and optional access to the host target.',
-  //     'Documented that the package is a constrained runtime helper—not a hardened boundary for hostile third-party code.',
-  //     'Kept the demo coupled to source during development so behavior can be exercised directly.',
-  //   ],
-  //   outcomes: [
-  //     'Published a reusable browser package with an intentionally small integration surface.',
-  //     'Made sandbox ownership and cleanup explicit through named instances and lifecycle methods.',
-  //     'Provides a focused foundation for modular interface systems that need runtime separation.',
-  //   ],
-  //   stack: ['JavaScript', 'Vite', 'iframe sandboxing', 'npm'],
-  //   repository: 'https://github.com/notmike101/iframe-sandbox-runtime',
-  //   status: 'Open source',
-  //   featured: true,
-  //   publishedAt: '2026-06-12',
-  //   updatedAt: '2026-06-24',
-  //   seoTitle: 'iframe-sandbox-runtime — Browser Isolation Case Study',
-  //   seoDescription: 'Design and API decisions behind a browser-only iframe runtime for isolated interface code and controlled host interaction.',
-  //   socialImage: '/images/og-default.png',
-  //   visual: 'sandbox',
-  // },
 ];
 
 export const additionalProjects = [

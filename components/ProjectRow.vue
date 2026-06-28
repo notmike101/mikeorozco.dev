@@ -12,7 +12,6 @@ defineProps<{
     <ProjectVisual class="project-visual" :project="project" />
     <div class="project-copy">
       <div class="project-meta">
-        <!-- span>{{ project.status }}</span -->
         <span>{{ project.stack.slice(0, 3).join(' · ') }}</span>
       </div>
       <h3 class="project-title">{{ project.title }}</h3>
