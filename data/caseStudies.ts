@@ -120,6 +120,24 @@ export const additionalProjects = [
     repository: 'https://github.com/notmike101/vite-plugin-cloudflared',
     tags: ['TypeScript', 'Vite', 'Cloudflare'],
   },
+  {
+    title: 'Obsidian Azure Blob Sync',
+    description: 'An open-source Obsidian plugin that synchronizes your vault to Azure Blob Storage for free cross-device access across Windows and Android.',
+    repository: 'https://github.com/notmike101/obsidian-azure-blob-sync',
+    tags: ['TypeScript', 'Electron', 'Azure'],
+  },
+  {
+    title: 'iframe-sandbox-runtime',
+    description: 'An npm package that creates named, isolated iframe sandboxes for executing untrusted UI code with controlled DOM access to a host surface.',
+    repository: 'https://github.com/notmike101/iframe-sandbox-runtime',
+    tags: ['JavaScript', 'npm', 'Browser Security'],
+  },
+  {
+    title: 'ARC Raiders Discord Bot',
+    description: 'A Dockerized TypeScript bot that serves game data from the MetaForge API through slash commands, with Redis caching and autocomplete.',
+    repository: 'https://github.com/notmike101/discord-bot-arc-raiders-info',
+    tags: ['TypeScript', 'Discord.js', 'Redis', 'Docker'],
+  },
 ];
 
 export const getCaseStudy = (slug: string) => caseStudies.find((study) => study.slug === slug);
