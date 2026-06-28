@@ -1,42 +1,36 @@
-# Nuxt 3 Minimal Starter
+# mikeorozco.dev
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Personal portfolio for Mike Orozco, built with Nuxt 3 and statically deployed to GitHub Pages.
 
-## Setup
+## Requirements
 
-Make sure to install the dependencies:
+- Node.js 22.12 or newer
+- pnpm 11.9.0
 
-```bash
-# yarn
-yarn install
+Corepack will use the pinned pnpm version from `package.json`:
 
-# npm
-npm install
-
-# pnpm
+```powershell
+corepack enable
 pnpm install
 ```
 
-## Development Server
+## Development
 
-Start the development server on `http://localhost:3000`
-
-```bash
-npm run dev
+```powershell
+pnpm dev
 ```
 
-## Production
+The local site is available at `http://localhost:3000`.
 
-Build the application for production:
+## Production validation
 
-```bash
-npm run build
+```powershell
+pnpm typecheck
+pnpm generate
 ```
 
-Locally preview production build:
+The generated static site is written to `.output/public`. GitHub Actions runs the same command before deploying to GitHub Pages.
 
-```bash
-npm run preview
-```
+## Content model
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Featured work and case-study metadata are defined in `data/caseStudies.ts`. The same records drive homepage project rows, case-study routes, structured data, and the XML sitemap.

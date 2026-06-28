@@ -1,0 +1,16 @@
+{
+  "name": "Mike Orozco — Senior Software Engineer & Web Architect",
+  "short_name": "Mike Orozco",
+  "description": "Portfolio of Mike Orozco, Senior Software Engineer and Web Architect.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f6f2",
+  "theme_color": "#315d73",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

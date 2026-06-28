@@ -1,23 +1,28 @@
 {
   "name": "nuxt-app",
   "private": true,
+  "packageManager": "pnpm@11.9.0",
+  "engines": {
+    "node": ">=22.12.0",
+    "pnpm": ">=11.9.0"
+  },
   "scripts": {
     "build": "nuxi build",
     "dev": "nuxi dev",
     "generate": "nuxi generate",
+    "typecheck": "nuxi typecheck",
     "preview": "nuxi preview",
     "preview-generated": "pnpx serve ./dist",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.4.0",
-    "@fortawesome/free-solid-svg-icons": "^6.4.0",
-    "@fortawesome/vue-fontawesome": "^3.0.3"
+    "@fontsource/ibm-plex-sans": "^5.2.8",
+    "@fontsource/ibm-plex-serif": "^5.2.7"
   },
   "devDependencies": {
-    "@nuxtjs/google-fonts": "^3.0.0",
     "@nuxtjs/tailwindcss": "^6.6.7",
     "nuxt": "^3.4.3",
-    "nuxt-icon": "^0.4.0"
+    "typescript": "^5.9.3",
+    "vue-tsc": "^3.3.5"
   }
 }
