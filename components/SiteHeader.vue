@@ -15,7 +15,6 @@ const isActive = (path: string) => route.path === path || (path === '/#work' && 
       <nav aria-label="Primary navigation" class="primary-nav">
         <NuxtLink to="/#work" :aria-current="isActive('/#work') ? 'page' : undefined">Work</NuxtLink>
         <NuxtLink to="/#capabilities">Capabilities</NuxtLink>
-        <NuxtLink to="/#about">About</NuxtLink>
         <NuxtLink to="/contact" :aria-current="isActive('/contact') ? 'page' : undefined">Contact</NuxtLink>
       </nav>
 
