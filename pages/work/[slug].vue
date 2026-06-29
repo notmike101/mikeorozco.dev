@@ -59,7 +59,7 @@ useHead({
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
-          { '@type': 'ListItem', position: 2, name: 'Selected work', item: `${siteUrl}/#work` },
+          { '@type': 'ListItem', position: 2, name: 'Past work', item: `${siteUrl}/#work` },
           { '@type': 'ListItem', position: 3, name: project.title, item: canonical },
         ],
       }),

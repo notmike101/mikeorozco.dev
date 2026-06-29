@@ -6,7 +6,7 @@
         <p class="muted">Senior Software Engineer &amp; Web Architect</p>
       </div>
       <nav aria-label="Footer navigation" class="footer-links">
-        <NuxtLink to="/#work">Selected work</NuxtLink>
+        <NuxtLink to="/#work">Past work</NuxtLink>
         <NuxtLink to="/contact">Contact</NuxtLink>
         <a href="https://github.com/notmike101" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://www.linkedin.com/in/mikeoroz" target="_blank" rel="noopener noreferrer">LinkedIn</a>

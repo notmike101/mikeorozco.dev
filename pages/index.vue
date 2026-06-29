@@ -96,7 +96,7 @@ useHead({
             I design scalable web platforms, immersive 3D experiences, and secure systems &mdash; combining hands-on engineering with architecture and technical leadership.
           </p>
           <div class="hero-actions">
-            <a class="button-primary" href="#work">View selected work</a>
+            <a class="button-primary" href="#work">View past work</a>
             <NuxtLink class="button-secondary" to="/contact">Contact me</NuxtLink>
           </div>
         </div>
@@ -152,7 +152,7 @@ useHead({
     <section id="work" class="work-section" aria-labelledby="work-title">
       <div class="page-container">
         <header>
-          <h3>Selected work</h3>
+          <h3>Past work</h3>
           <h2 id="work-title" class="section-title">Systems built for scale, clarity, and longevity.</h2>
           <p class="lede">
             A closer look at the engineering decisions behind enterprise platforms and focused open-source tools.
