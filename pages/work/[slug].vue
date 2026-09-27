@@ -88,8 +88,7 @@ const relatedProjects = caseStudies.filter((item) => item.slug !== project.slug)
 
     <section class="page-container case-section case-overview" aria-labelledby="overview-title">
       <div>
-        <p class="eyebrow">Overview</p>
-        <h2 id="overview-title" class="section-title">The system behind the outcome.</h2>
+        <h2 id="overview-title" class="section-title">Overview</h2>
       </div>
       <div class="case-prose">
         <h3>Problem</h3>
@@ -108,8 +107,7 @@ const relatedProjects = caseStudies.filter((item) => item.slug !== project.slug)
     <section class="case-detail-section" aria-labelledby="constraints-title">
       <div class="page-container case-section">
         <div>
-          <p class="eyebrow">Constraints</p>
-          <h2 id="constraints-title" class="section-title">What the architecture had to respect.</h2>
+          <h2 id="constraints-title" class="section-title">Constraints</h2>
         </div>
         <ol class="numbered-list">
           <li v-for="(constraint, index) in project.constraints" :key="constraint">
@@ -122,8 +120,7 @@ const relatedProjects = caseStudies.filter((item) => item.slug !== project.slug)
 
     <section class="page-container case-section" aria-labelledby="decisions-title">
       <div>
-        <p class="eyebrow">Decisions</p>
-        <h2 id="decisions-title" class="section-title">How the system was shaped.</h2>
+        <h2 id="decisions-title" class="section-title">Decisions</h2>
       </div>
       <ol class="numbered-list">
         <li v-for="(decision, index) in project.decisions" :key="decision">
@@ -136,8 +133,7 @@ const relatedProjects = caseStudies.filter((item) => item.slug !== project.slug)
     <section class="case-detail-section" aria-labelledby="outcomes-title">
       <div class="page-container case-section">
         <div>
-          <p class="eyebrow">Outcomes</p>
-          <h2 id="outcomes-title" class="section-title">What changed as a result.</h2>
+          <h2 id="outcomes-title" class="section-title">Outcomes</h2>
         </div>
         <ol class="numbered-list outcomes-list">
           <li v-for="(outcome, index) in project.outcomes" :key="outcome">
