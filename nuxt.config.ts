@@ -1,3 +1,5 @@
+import { caseStudies } from './data/caseStudies';
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   ssr: true,
@@ -34,8 +36,7 @@ export default defineNuxtConfig({
       routes: [
         '/',
         '/contact',
-        '/work/immersive-product-platform',
-        '/work/pack3d',
+        ...caseStudies.map((project) => `/work/${project.slug}`),
         '/sitemap.xml',
       ],
     },

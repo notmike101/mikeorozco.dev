@@ -12,6 +12,7 @@ defineProps<{
     <ProjectVisual class="project-visual" :project="project" />
     <div class="project-copy">
       <div class="project-meta">
+        <span>{{ project.status }}</span>
         <span>{{ project.stack.slice(0, 3).join(' · ') }}</span>
       </div>
       <h3 class="project-title">{{ project.title }}</h3>
@@ -19,7 +20,7 @@ defineProps<{
       <ul>
         <li v-for="outcome in project.outcomes.slice(0, 2)" :key="outcome">{{ outcome }}</li>
       </ul>
-      <NuxtLink class="text-link" :to="`/work/${project.slug}`">
+      <NuxtLink class="text-link" :to="`/work/${project.slug}`" :aria-label="`Read the case study: ${project.title}`">
         Read the case study <span aria-hidden="true">→</span>
       </NuxtLink>
     </div>
@@ -42,10 +43,12 @@ defineProps<{
 
   & .project-visual {
     flex: 0 0 55%;
+    width: 100%;
   }
 
   & .project-copy {
     flex: 1;
+    min-width: 0;
   }
 
   @media screen and (max-width: 1000px) {
