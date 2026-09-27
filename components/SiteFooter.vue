@@ -3,7 +3,7 @@
     <div class="page-container footer-grid">
       <div>
         <p class="footer-name">Mike Orozco</p>
-        <p class="muted">Senior Software Engineer &amp; Web Architect</p>
+        <p class="muted">Senior Software Engineer | Frontend Architecture &amp; Developer Tooling</p>
       </div>
       <nav aria-label="Footer navigation" class="footer-links">
         <NuxtLink to="/#work">Past work</NuxtLink>

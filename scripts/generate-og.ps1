@@ -40,13 +40,13 @@ try {
 
   $graphics.DrawString('MIKE OROZCO  ·  TEXAS, USA', $eyebrowFont, $accentBrush, 126, 105)
   $graphics.DrawString('Senior software engineer', $titleFont, $inkBrush, 120, 177)
-  $graphics.DrawString('& web architect.', $titleFont, $inkBrush, 120, 249)
-  $graphics.DrawString('Scalable platforms  ·  Immersive 3D  ·  Secure systems', $subtitleFont, $mutedBrush, 126, 358)
+  $graphics.DrawString('Frontend architecture', $titleFont, $inkBrush, 120, 249)
+  $graphics.DrawString('Developer tooling  ·  Interactive web applications', $subtitleFont, $mutedBrush, 126, 358)
 
   $graphics.FillRectangle($accentSoftBrush, 767, 426, 278, 76)
   $graphics.DrawRectangle([System.Drawing.Pen]::new($accent, 2), 767, 426, 278, 76)
-  $graphics.DrawString('Architecture', $cardTitleFont, $inkBrush, 788, 441)
-  $graphics.DrawString('Implementation  ·  Leadership', $cardTextFont, $mutedBrush, 790, 475)
+  $graphics.DrawString('13+ years', $cardTitleFont, $inkBrush, 788, 441)
+  $graphics.DrawString('Web & software development', $cardTextFont, $mutedBrush, 790, 475)
   $graphics.FillEllipse($accentBrush, 1039, 118, 16, 16)
 
   $bitmap.Save($output, [System.Drawing.Imaging.ImageFormat]::Png)

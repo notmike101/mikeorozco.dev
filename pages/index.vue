@@ -5,30 +5,30 @@ import { defaultDescription, defaultSocialImage, defaultTitle, siteUrl } from '~
 const featuredProjects = caseStudies.filter((project) => project.featured);
 
 const proofPoints = [
-  { value: '12+', label: 'Years building production systems' },
-  { value: '50+', label: 'Applications and platforms delivered' },
+  { value: '13+', label: 'Years in web and software development' },
+  { value: '50+', label: 'Custom client solutions delivered' },
 ];
 
 const capabilities = [
   {
     number: '01',
-    title: 'Architecture & system design',
-    description: 'Modular frontend systems, event-driven services, integration boundaries, technical standards, and pragmatic tradeoff analysis.',
+    title: 'Frontend architecture & authoring tools',
+    description: 'Reusable browser runtimes and Vue authoring interfaces that let content teams configure product tours and sales demos.',
   },
   {
     number: '02',
-    title: 'Immersive web engineering',
-    description: 'High-performance product experiences built with Three.js, Babylon.js, WebGL, Vue, React, and TypeScript.',
+    title: 'Interactive web applications',
+    description: 'Product tours and virtual sales demos built with Three.js, Babylon.js, Vue, React, and TypeScript.',
   },
   {
     number: '03',
-    title: 'Backend, cloud & delivery',
-    description: 'Node.js and Python services, REST and GraphQL APIs, SQL and NoSQL data, Azure, Docker, Cloudflare, and CI/CD.',
+    title: 'Backend, cloud & performance',
+    description: 'Node.js APIs, data integrations, Azure migrations, Cloudflare delivery, Docker, and CI/CD.',
   },
   {
     number: '04',
-    title: 'Security & technical leadership',
-    description: 'Vulnerability remediation, secure design, code review, developer mentorship, documentation, and workflow improvement.',
+    title: 'Developer tooling & technical leadership',
+    description: 'Codex plugins for engineering workflows and a local MCP usage-reporting prototype, alongside code review, security remediation, and mentorship.',
   },
 ];
 
@@ -50,7 +50,7 @@ useSeoMeta({
   ogImage: defaultSocialImage,
   ogImageWidth: 1200,
   ogImageHeight: 630,
-  ogImageAlt: 'Mike Orozco, Senior Software Engineer and Web Architect',
+  ogImageAlt: 'Mike Orozco, Senior Software Engineer in Frontend Architecture and Developer Tooling',
   twitterCard: 'summary_large_image',
   twitterTitle: defaultTitle,
   twitterDescription: defaultDescription,
@@ -74,9 +74,9 @@ useHead({
           '@id': `${siteUrl}/#person`,
           name: 'Mike Orozco',
           url: siteUrl,
-          jobTitle: 'Senior Software Engineer and Web Architect',
+          jobTitle: 'Senior Software Engineer | Frontend Architecture & Developer Tooling',
           homeLocation: { '@type': 'Place', name: 'Texas, USA' },
-          knowsAbout: ['Web architecture', 'TypeScript', 'Immersive web', 'Three.js', 'Babylon.js', 'Application security'],
+          knowsAbout: ['Frontend architecture', 'Vue authoring tools', 'TypeScript', 'Immersive web', 'Developer tooling', 'Application security'],
           sameAs: ['https://github.com/notmike101', 'https://www.linkedin.com/in/mikeoroz'],
         },
       }),
@@ -91,9 +91,9 @@ useHead({
       <div class="page-container">
         <div class="hero-copy">
           <p class="eyebrow" style="margin: 0;">Mike Orozco &bullet; Texas, USA</p>
-          <h1 class="display-title">Senior software engineer &amp; web architect.</h1>
+          <h1 class="display-title">Senior software engineer.</h1>
           <p class="lede">
-            I design scalable web platforms, immersive 3D experiences, and secure systems &mdash; combining hands-on engineering with architecture and technical leadership.
+            I build frontend systems, Vue authoring tools, and developer tools for product teams. My work spans interactive 3D experiences, client software, performance, and technical leadership.
           </p>
           <div class="hero-actions">
             <a class="button-primary" href="#work">View past work</a>
@@ -116,9 +116,9 @@ useHead({
       <div class="page-container">
         <header>
           <h3>Experience &amp; recognition</h3>
-          <h2 id="experience-title" class="section-title">Architecture stays useful when teams can operate it.</h2>
+          <h2 id="experience-title" class="section-title">Enterprise products, client software, and web performance</h2>
           <p class="lede">
-            My work spans enterprise engineering, independent consulting, frontend performance, cloud migration, security, and team enablement.
+            I work across implementation, architecture, developer tools, security, and technical guidance, with hands-on ownership from design through maintenance.
           </p>
         </header>
         <div class="experience-copy">
@@ -127,21 +127,28 @@ useHead({
               <span>2022—Present</span>
               <div>
                 <h3>Senior Software Engineer, Immersive Technologies</h3>
-                <p>Architecture and implementation for enterprise 3D platforms, shared tooling, secure delivery practices, and developer mentorship.</p>
+                <p>Led development of the 3D Product Tour, built Vue authoring and configuration tools, and collaborated on the shared runtime. Developed a team Codex plugin marketplace and a local MCP usage-reporting prototype.</p>
               </div>
             </article>
             <article>
               <span>2013—Present</span>
               <div>
                 <h3>Independent Web &amp; Software Engineer</h3>
-                <p>More than 50 production systems delivered across consulting and product engagements, frequently with end-to-end technical ownership.</p>
+                <p>Delivered 50+ custom web and software solutions across client engagements, often owning architecture, implementation, deployment, and support.</p>
               </div>
             </article>
             <article>
-              <span>Recognition</span>
+              <span>2019—2021</span>
               <div>
-                <h3>Achievement and innovation awards</h3>
-                <p>Recognized for leadership on a flagship immersive product platform and foundational technical solutions.</p>
+                <h3>Web Developer, Monrovia Plants</h3>
+                <p>Azure migration improved website response time by approximately 20%. A separate Cloudflare integration reduced average page load times by approximately 30%.</p>
+              </div>
+            </article>
+            <article>
+              <span>2022</span>
+              <div>
+                <h3>Thermo Fisher Scientific awards</h3>
+                <p>Outstanding Achievement for the 3D Product Tour and an Innovation Award for foundational technical solutions.</p>
               </div>
             </article>
           </div>
@@ -153,9 +160,9 @@ useHead({
       <div class="page-container">
         <header>
           <h3>Past work</h3>
-          <h2 id="work-title" class="section-title">Systems built for scale, clarity, and longevity.</h2>
+          <h2 id="work-title" class="section-title">Selected engineering work</h2>
           <p class="lede">
-            A closer look at the engineering decisions behind enterprise platforms and focused open-source tools.
+            The 3D Product Tour at Thermo Fisher Scientific and Pack3D, an open-source desktop optimizer.
           </p>
         </header>
         <ProjectRow
@@ -171,7 +178,7 @@ useHead({
       <div class="page-container">
         <header>
           <h3>Capabilities</h3>
-          <h2 id="capabilities-title" class="section-title">Broad enough to connect the system. Focused enough to improve it.</h2>
+          <h2 id="capabilities-title" class="section-title">What I build and maintain</h2>
         </header>
         <div class="capability-grid">
           <article v-for="capability in capabilities" :key="capability.number">
@@ -186,7 +193,7 @@ useHead({
       <div class="page-container">
         <header>
           <h3>Open source &amp; research</h3>
-          <h2 id="labs-title" class="section-title">Smaller systems, explored in public.</h2>
+          <h2 id="labs-title" class="section-title">Open-source tools and research projects</h2>
         </header>
         <div class="labs-list">
           <article v-for="project in additionalProjects" :key="project.title">
@@ -230,7 +237,7 @@ useHead({
           <h2 id="contact-title" class="section-title">Hiring for a senior role or planning a complex project?</h2>
         </header>
         <div class="contact-copy">
-          <p>Share the role, problem, or system you're working through. I'll respond with the most useful next step.</p>
+          <p>Share the role or project, the current challenge, and what kind of engineering help you need.</p>
           <NuxtLink class="button-primary" to="/contact">Choose a contact path</NuxtLink>
         </div>
       </div>

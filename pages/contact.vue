@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { absoluteUrl, defaultSocialImage, siteUrl } from '~/utils/site';
 
-const title = 'Contact Mike Orozco — Software Engineering & Architecture';
-const description = 'Contact Mike Orozco about senior software engineering opportunities, web architecture, immersive 3D systems, or consulting projects.';
+const title = 'Contact Mike Orozco — Frontend Architecture & Developer Tooling';
+const description = 'Contact Mike Orozco about senior engineering roles or consulting for custom software, SaaS products, web development, and frontend architecture.';
 const canonical = absoluteUrl('/contact');
 
 const emailHref = (subject: string) => `mailto:me@mikeorozco.dev?subject=${encodeURIComponent(subject)}`;
@@ -46,21 +46,21 @@ useHead({
   <div class="page-container contact-page">
     <header class="contact-intro">
       <p class="eyebrow">Contact</p>
-      <h1 class="display-title">Start with the context that matters.</h1>
+      <h1 class="display-title">Contact me about a role or project</h1>
       <p class="lede">
-        Choose the path that best fits the conversation. Both options open a direct email with a useful subject line—no form account or data collection involved.
+        Choose hiring or consulting below. Each link opens an email with a subject line already filled in.
       </p>
     </header>
 
     <section class="contact-options" aria-label="Contact options">
       <article>
         <h2>Hiring opportunity</h2>
-        <p>For senior engineering, architecture, immersive-web, platform, or technical leadership roles.</p>
+        <p>For senior engineering roles involving frontend architecture, interactive web applications, developer tooling, or technical leadership.</p>
         <a class="button-primary" :href="emailHref('Senior engineering opportunity')">Discuss an opportunity</a>
       </article>
       <article>
         <h2>Consulting project</h2>
-        <p>For architecture reviews, complex web platforms, 3D experiences, security work, or focused implementation.</p>
+        <p>For custom software, SaaS products, web development, architecture reviews, or focused implementation.</p>
         <a class="button-primary" :href="emailHref('Consulting project inquiry')">Discuss a project</a>
       </article>
     </section>
