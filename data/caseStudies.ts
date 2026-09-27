@@ -16,7 +16,7 @@ export interface CaseStudy {
   reflection: string;
   stack: string[];
   repository?: string;
-  status: 'Enterprise work' | 'Open source' | 'Internal tooling' | 'Independent application';
+  status: 'Enterprise work' | 'Open source' | 'Internal tooling' | 'Independent application' | 'In development';
   featured: boolean;
   publishedAt: string;
   updatedAt: string;
@@ -438,6 +438,146 @@ export const caseStudies: CaseStudy[] = [
     links: [
       { label: 'Architecture and dated validation records', href: 'https://github.com/notmike101/meal-mind/blob/main/docs/HANDOFF.md' },
       { label: 'Planning rules in the implementation', href: 'https://github.com/notmike101/meal-mind/blob/main/services/api/src/services/planning.ts' },
+    ],
+  },
+  {
+    slug: 'zcode-desktop-extensions',
+    title: 'ZCode Desktop Extensions',
+    shortTitle: 'ZCode Extensions',
+    summary: 'An AI-generated, independent extension host for the ZCode desktop app, with a typed SDK, managed updates, and recovery tooling.',
+    problem: 'Adding capabilities to a desktop application without a native extension system creates a maintenance problem: the integration must coexist with the original application, survive changes to its installation, and give users a way to recover when something fails. ZCode Desktop Extensions explores that problem through an external host, a defined extension contract, and explicit installation and update workflows.',
+    role: 'Independent project owner. The repository credits GPT-5.6 Sol with generating the entire implementation. This case study describes the resulting integration architecture and operational boundaries; the project is not affiliated with or endorsed by ZCode.',
+    details: [
+      {
+        title: 'Preserve the application behind the integration',
+        paragraphs: [
+          'The installation retains the original vendor application archive and introduces a small loader. The loader starts the extension host before importing the preserved application. Extension code and persistent state live outside the vendor installation, separating the added functionality from the application it extends.',
+          'If the host fails to start, the loader records the error and still attempts to launch the original application. A guardian watches for vendor updates and can reapply the loader after the application exits. Backups and repair tooling support recovery when that integration needs attention.',
+          'The design is update-resistant, with a clear compatibility limit. Changes to Electron behavior, application navigation, or private APIs can require corresponding changes in the host. The documented Windows integration is an independently maintained compatibility layer, not a promise that every future vendor release will work unchanged.',
+        ],
+      },
+      {
+        title: 'Give extensions an explicit lifecycle',
+        paragraphs: [
+          'Extensions use a manifest, main-process and renderer entry points, and a published TypeScript SDK. The host handles installation, enabling, disabling, reloading, and recoverable removal. Cleanup hooks let an extension release resources when it is deactivated, while namespaced messaging separates its communication from other extensions.',
+          'The SDK exposes application capabilities through typed interfaces, including workspace context, sessions, tasks, model discovery, and interface slots. Manifest validation rejects malformed declarations and entry points that escape the extension directory. These checks make the installation contract concrete before an extension is activated.',
+          'Capability declarations govern access to SDK features. They do not create a security sandbox: extensions are trusted code with the host process’s file and process access. That distinction is part of the extension model and matters when deciding what to install.',
+        ],
+      },
+      {
+        title: 'Treat updates as recoverable operations',
+        paragraphs: [
+          'Catalog downloads use HTTPS, declared sizes, and SHA-256 checks alongside compatibility and bundle-path validation. Updates are staged for the next launch, preserving extension data and retaining recoverable bundles. Activation failure can trigger rollback instead of leaving a partially activated replacement as the only available version.',
+          'The host also provides doctor, repair, safe-launch, and uninstall operations. Installation changes require the application to be closed, and normal removal preserves user data. These operational paths give an installed extension system a way to be maintained after the initial successful launch.',
+        ],
+      },
+      {
+        title: 'Exercise the host with a scheduling extension',
+        paragraphs: [
+          'A separately released ZCode Scheduler extension exercised the host by creating ordinary, persistent tasks through the native task bridge. It used five-field cron expressions and IANA time zones, with explicit choices for overlapping runs and bounded execution history. Scheduled work appeared in the normal task interface.',
+          'The extension remains available for ZCode 3.3.6–3.5.1 and is retired on 3.5.2 and newer, where native automation and scheduling replace it. On supported older versions, ZCode must stay open and missed runs are skipped. Both limits define its useful scope: an application-level integration that filled a gap until the vendor supplied the feature.',
+        ],
+      },
+    ],
+    outcomes: [
+      'Published an independent extension host, TypeScript SDK, and extension development documentation.',
+      'Implemented installation, staged updates, rollback, and recovery workflows around the preserved vendor application.',
+      'Exercised the extension model with a separately released scheduler that creates native ZCode tasks.',
+    ],
+    reflection: 'The useful result is a maintained integration contract: what an extension can call, when it starts and stops, what an update changes, and how a user recovers. The repository’s AI-generation attribution is explicit. Evaluating the project therefore means inspecting those contracts and their implementation, including the trust boundary and dependency on upstream application behavior.',
+    stack: ['TypeScript', 'Electron', 'Node.js', 'IPC', 'npm'],
+    repository: 'https://github.com/notmike101/zcode-extensions',
+    status: 'Open source',
+    featured: false,
+    publishedAt: '2026-09-27',
+    updatedAt: '2026-09-27',
+    seoTitle: 'ZCode Desktop Extensions — Case Study | Mike Orozco',
+    seoDescription: 'An independent, AI-generated extension host with a typed SDK, lifecycle management, recoverable updates, and explicit compatibility boundaries.',
+    socialImage: '/images/og-default.png',
+    flow: {
+      title: 'Extend an installed app with a recovery path',
+      steps: [
+        { title: 'Preserve the app', description: 'Retain the vendor archive and introduce a small startup loader.' },
+        { title: 'Start the host', description: 'Load extension services before importing the original application.' },
+        { title: 'Activate extensions', description: 'Use validated manifests, typed APIs, and lifecycle cleanup.' },
+        { title: 'Update & recover', description: 'Stage replacements, preserve data, and retain rollback paths.' },
+      ],
+      caption: 'An independent integration with the vendor application. Extensions are trusted code; SDK capabilities do not provide a security sandbox.',
+    },
+    links: [
+      { label: 'Host architecture and operational guide', href: 'https://github.com/notmike101/zcode-extensions#readme' },
+      { label: 'Extension development contract', href: 'https://github.com/notmike101/zcode-extensions/blob/main/docs/extension-development.md' },
+      { label: 'ZCode Scheduler extension', href: 'https://github.com/notmike101/zcode-scheduler' },
+    ],
+  },
+  {
+    slug: 'wildly-unqualified',
+    title: 'Wildly Unqualified',
+    shortTitle: 'Wildly Unqualified',
+    summary: 'A cooperative wildlife-photography game in development, combining a WebGPU browser client, authoritative multiplayer simulation, and persistent outings.',
+    problem: 'A cooperative wildlife-documentary game needs more than a rendered reserve. Players must share the same animals, physical world, and outing state while each client presents a responsive camera and interface. Wildly Unqualified brings those responsibilities together, with an additional requirement: a group should be able to save its outing and run the server without the development toolchain.',
+    role: 'Independent game project — work across the browser client, authoritative server, shared world contracts, persistence, and release workflow. The current repository describes a generated-reserve development build with gameplay acceptance still incomplete.',
+    details: [
+      {
+        title: 'Give the shared world one authority',
+        paragraphs: [
+          'The Node.js server owns multiplayer sessions, simulation, persistence, and gameplay rules. Clients send commands over the network, while shared contracts define the messages and their validation. Physics, scoring, and animal decisions belong with the authoritative state that all players must agree on.',
+          'The browser client handles presentation: rendering, scene lifetime, interpolation, photo capture, interface state, and audio. This separation lets each player see a responsive view of the reserve while the server remains responsible for the common outing. It also provides a practical boundary for diagnosing whether a problem belongs to simulation, transport, or presentation.',
+        ],
+      },
+      {
+        title: 'Separate world generation from asset delivery',
+        paragraphs: [
+          'The client uses TypeScript, Three.js, and WebGPU, with shared modules for world generation, collision, and geometry. The current development build centers on a generated forest reserve. Animal navigation and decision-making live on the simulation side, where they can affect the shared world consistently.',
+          'Original Blender assets and versioned exports are kept distinct from the files delivered to the browser. That separation preserves the authoring workflow while giving the application a defined set of runtime assets. It also keeps changes to a source asset from being confused with a complete, tested delivery change.',
+          'The browser needs WebGPU support. The packaged server has different requirements: it can run without a GPU, Blender, Vite, or the development dependencies. Keeping those requirements separate makes hosting the outing a smaller operational task than building or rendering the game.',
+        ],
+      },
+      {
+        title: 'Make an outing safe to stop and resume',
+        paragraphs: [
+          'Room admission distinguishes host authority from guest invitations, and host credentials remain private. Server configuration separates public web assets from room credentials, world state, photos, and backups. Path-overlap checks help prevent private session data from becoming part of the publicly served directory.',
+          'Saving is part of the session lifecycle. Save-and-stop waits for persistence; if the final save fails, the room pauses so the problem can be repaired and the save retried. Restarting restores the outing in a paused state. These behaviors address the moment when a group expects its progress to survive leaving the session.',
+          'Save validation and schema versions also constrain upgrades. Older prototype and MVP saves are incompatible with the current development format, so the operational guidance keeps runtime versions and their data together during migration. An available backup is useful only when its matching runtime and restore procedure are understood.',
+        ],
+      },
+      {
+        title: 'Package a server and verify the experience separately',
+        paragraphs: [
+          'The portable release combines the compiled web client with an explicit allowlist of server and shared runtime files, plus package and lock files. It excludes tests, browser source, authoring files, and private save data. Packaging checks reject missing runtime imports and symbolic links in web output, and the builder refuses to overwrite an existing destination.',
+          'Those checks establish what can be shipped and started. The development records separately track browser startup, multiplayer scenarios, camera behavior, and the rest of the outing loop. Successful compilation or a two-player connection is useful evidence, but gameplay acceptance remains its own unfinished part of the project.',
+        ],
+      },
+    ],
+    outcomes: [
+      'Built a multiplayer development foundation with a WebGPU client and authoritative Node.js simulation.',
+      'Implemented persistent outings, separate host and guest admission, and documented save recovery behavior.',
+      'Created a portable server packaging workflow while retaining explicit, incomplete gameplay acceptance work.',
+    ],
+    reflection: 'This project connects real-time presentation to state that must remain consistent and recoverable. The engineering story includes how the game runs, what belongs in a release, and what evidence is still needed for the intended cooperative experience. It remains in development; the architecture and operating procedures are inspectable results, while a complete outing is still an acceptance target.',
+    stack: ['TypeScript', 'Three.js', 'WebGPU', 'Node.js', 'WebSocket', 'Blender'],
+    repository: 'https://github.com/notmike101/wildly-unqualified',
+    status: 'In development',
+    featured: false,
+    publishedAt: '2026-09-27',
+    updatedAt: '2026-09-27',
+    seoTitle: 'Wildly Unqualified — Multiplayer Game Case Study | Mike Orozco',
+    seoDescription: 'A cooperative wildlife-photography game in development: WebGPU presentation, authoritative multiplayer state, persistent outings, and portable server delivery.',
+    socialImage: '/images/og-default.png',
+    flow: {
+      title: 'One outing, shared state, individual views',
+      steps: [
+        { title: 'Join a room', description: 'Host and guest admission bring players into the same outing.' },
+        { title: 'Simulate together', description: 'The server owns animals, physics, scoring, and shared state.' },
+        { title: 'Explore & photograph', description: 'Each browser renders the reserve and handles its camera and UI.' },
+        { title: 'Save & resume', description: 'Persist the outing and restore it paused for a later session.' },
+      ],
+      caption: 'A conceptual view of system responsibilities. Clients exchange commands and state with the server throughout play; gameplay acceptance remains incomplete.',
+    },
+    links: [
+      { label: 'Development status and project overview', href: 'https://github.com/notmike101/wildly-unqualified#readme' },
+      { label: 'Server operation and save recovery', href: 'https://github.com/notmike101/wildly-unqualified/blob/main/docs/SERVER.md' },
+      { label: 'Runtime architecture and maintenance guide', href: 'https://github.com/notmike101/wildly-unqualified/blob/main/docs/MAINTAINING.md' },
     ],
   },
 ];
