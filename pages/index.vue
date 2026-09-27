@@ -3,6 +3,7 @@ import { additionalProjects, caseStudies } from '~/data/caseStudies';
 import { defaultDescription, defaultSocialImage, defaultTitle, siteUrl } from '~/utils/site';
 
 const featuredProjects = caseStudies.filter((project) => project.featured);
+const moreProjects = caseStudies.filter((project) => !project.featured);
 
 const proofPoints = [
   { value: '13+', label: 'Years in web and software development' },
@@ -162,7 +163,7 @@ useHead({
           <h3>Past work</h3>
           <h2 id="work-title" class="section-title">Selected engineering work</h2>
           <p class="lede">
-            The 3D Product Tour at Thermo Fisher Scientific and Pack3D, an open-source desktop optimizer.
+            Enterprise platforms, independent applications, and tools that make complex work easier to build and maintain.
           </p>
         </header>
         <ProjectRow
@@ -171,6 +172,19 @@ useHead({
           :project="project"
           :reverse="index % 2 === 1"
         />
+        <div class="more-work" aria-labelledby="more-work-title">
+          <h3 id="more-work-title">More engineering stories</h3>
+          <div class="more-work-grid">
+            <article v-for="project in moreProjects" :key="project.slug">
+              <p class="eyebrow">{{ project.status }}</p>
+              <h4>{{ project.title }}</h4>
+              <p>{{ project.summary }}</p>
+              <NuxtLink class="text-link" :to="`/work/${project.slug}`" :aria-label="`Read the case study: ${project.title}`">
+                Read the case study <span aria-hidden="true">→</span>
+              </NuxtLink>
+            </article>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -415,6 +429,52 @@ useHead({
       line-height: 1.3;
       text-transform: uppercase;
     }
+  }
+}
+
+.more-work {
+  margin-top: 2rem;
+}
+
+.more-work > h3 {
+  margin-bottom: 1rem;
+  font-family: "IBM Plex Serif", Georgia, serif;
+  font-size: 1.4rem;
+}
+
+.more-work-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.more-work-grid article {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.more-work-grid h4 {
+  margin: 0;
+  font-family: "IBM Plex Serif", Georgia, serif;
+  font-size: 1.65rem;
+  line-height: 1.25;
+}
+
+.more-work-grid p:not(.eyebrow) {
+  color: var(--muted);
+}
+
+.more-work-grid .text-link {
+  margin-top: auto;
+}
+
+@media (max-width: 760px) {
+  .more-work-grid {
+    grid-template-columns: 1fr;
   }
 }
 
