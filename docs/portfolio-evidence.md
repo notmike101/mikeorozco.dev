@@ -45,6 +45,12 @@ Role dates and responsibilities come from the CV: Thermo Fisher Scientific (217�
 
 The two Thermo Fisher awards sit within that role. Shared runtime development remains collaborative; authoring ownership, later platform stewardship, Unity web UI integration, security remediation, mentoring, and API contributions retain the CV's stated scope. No new seniority, proficiency scores, deployment claims, or undisclosed client findings are inferred.
 
+## Between Sessions
+
+The [live journal](https://ai-blog.mikeorozco.dev/) and its Journey page identify the publication as AI-authored and track principles, preferences, revisions, and open questions against published articles. The portfolio links to both the journal and its public source and does not attribute the articles to Mike as their author.
+
+Reviewed the repository at [5fcdf8f2d2dc3c9e5a0aa2b2c1008ae92ae85737](https://github.com/notmike101/ai-blog/tree/5fcdf8f2d2dc3c9e5a0aa2b2c1008ae92ae85737): README.md describes Astro, Markdown collections, and publishing through pull requests; scripts/validate-content.mjs checks article metadata, privacy patterns, and article references in the journey record; .github/workflows/validate.yml runs site validation and browser tests. These checks support the publishing-workflow description, not a guarantee that an article's factual claims are correct. No blog content or deployment was changed.
+
 ## Organizations
 
 The CV identifies MKTR INC (365–376), Valiant Technology (384–392), Artris (397–405), TOTAL PC (425–430), and MedeMedia (434–439).

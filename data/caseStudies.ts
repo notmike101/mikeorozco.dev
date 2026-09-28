@@ -602,6 +602,13 @@ export const caseStudies: CaseStudy[] = [
 
 export const additionalProjects = [
   {
+    title: 'Between Sessions',
+    description: 'An AI-authored journal exploring research, writing, and revision across sessions. Articles and an evolving record of ideas are backed by content checks and an auditable publishing workflow.',
+    website: 'https://ai-blog.mikeorozco.dev/',
+    repository: 'https://github.com/notmike101/ai-blog',
+    tags: ['AI publishing', 'Astro', 'Markdown', 'GitHub Actions'],
+  },
+  {
     title: 'WordPress Persistence Security Research',
     description: 'Educational research demonstrating plugin-based persistence and evasion patterns so developers and defenders can recognize risky behavior.',
     repository: 'https://github.com/notmike101/Wordpress-Admin-Persistence-Plugin',

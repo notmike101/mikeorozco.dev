@@ -250,9 +250,10 @@ useHead({
       <h2 id="research-title">Open source &amp; research</h2>
       <div class="research-list">
         <article v-for="project in additionalProjects" :key="project.title">
-          <h3><a :href="project.repository" target="_blank" rel="noopener noreferrer">{{ project.title }} <span aria-hidden="true">↗</span></a></h3>
+          <h3><a :href="project.website || project.repository" target="_blank" rel="noopener noreferrer">{{ project.title }} <span aria-hidden="true">↗</span></a></h3>
           <p>{{ project.description }}</p>
           <ul class="research-tags" aria-label="Technologies"><li v-for="tag in project.tags" :key="tag">{{ tag }}</li></ul>
+          <div v-if="project.website" class="evidence-links research-links"><a :href="project.website" target="_blank" rel="noopener noreferrer">Read journal <span aria-hidden="true">↗</span></a><a :href="project.repository" target="_blank" rel="noopener noreferrer">Source code <span aria-hidden="true">↗</span></a></div>
         </article>
       </div>
     </section>
@@ -306,6 +307,7 @@ useHead({
 .research-list article { padding-bottom: 20px; border-bottom: 1px solid var(--line); }
 .research-list a { text-decoration: none; }
 .research-list a:hover { color: var(--accent); }
+.research-links { margin-top: 12px; }
 .research-tags { display: flex; gap: 6px 13px; flex-wrap: wrap; padding: 0; list-style: none; margin: 12px 0 0; color: var(--muted); font-size: 12px; }
 .organizations { display: flex; flex-wrap: wrap; gap: 22px; align-items: center; }
 .organizations a { width: 130px; min-height: 70px; padding: 10px; display: grid; place-items: center; background: #fff; border-radius: 2px; }
