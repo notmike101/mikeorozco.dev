@@ -47,7 +47,21 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "source": {
         "label": "View manifest",
         "url": "https://www.thermofisher.com/content/dam/LifeTech/virtual/vanquish-core-hplc/vanquish-core-35.json"
-      }
+      },
+      "diagram": [
+        {
+          "label": "Instrument model",
+          "detail": "Vanquish_Core_v2.glb"
+        },
+        {
+          "label": "Explore the product",
+          "detail": "7 views · 28 hotspots"
+        },
+        {
+          "label": "Product actions",
+          "detail": "2 calls to action"
+        }
+      ]
     }
   ],
   "monrovia-web-platform": [
@@ -354,70 +368,10 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
   ],
   "quire": [
     {
-      "id": "adapters",
-      "label": "Session adapters",
-      "description": "Adapters read Codex, Claude Code, ZCode, or Oh My Pi records and return one shaped conversation format for the publishing CLI.",
-      "caption": "Public source",
-      "code": {
-        "file": "cli/src/harness/types.ts",
-        "line": 50,
-        "text": "export interface HarnessAdapter {\n  name: 'zcode' | 'claude-code' | 'codex' | 'omp';\n  // Adapters whose loadSession id is an exact input path (not a discovered\n  // session id) set this so resolveSession rethrows their specific\n  // fail-closed diagnostics instead of masking them as \"session not found\".\n  preserveDirectLoadError?: boolean;\n  listSessions(): Promise<HarnessSessionInfo[]>;\n  resolveCurrent(): Promise<HarnessSessionInfo>;\n  loadSession(id: string): Promise<ShapedSession>;\n}"
-      },
-      "source": {
-        "label": "View source",
-        "url": "https://github.com/notmike101/quire/blob/f335236f77198d35f279e52cc21077ee473d5c90/cli/src/harness/types.ts#L50-L59"
-      }
-    },
-    {
-      "id": "redaction",
-      "label": "Ingestion redaction",
-      "description": "The server redacts message parts and conversation metadata before the result can be stored.",
-      "caption": "Public source",
-      "code": {
-        "file": "server/src/redact/prepare.ts",
-        "line": 317,
-        "text": "  const summary: Record<string, number> = {};\n  const add = (counts: Record<string, number>): void => {\n    for (const [k, v] of Object.entries(counts)) summary[k] = (summary[k] ?? 0) + v;\n  };\n  const redacted = session.messages.map((m) => ({ ...m, parts: m.parts.map((p) => redactPart(p, preset, add)) }));\n  const meta: Record<string, unknown> = { title: session.title };\n  redactMetaField(session.title, preset, add, meta, 'title');\n  redactMetaField(session.model, preset, add, meta, 'model');\n  redactMetaField(session.provider, preset, add, meta, 'provider');"
-      },
-      "source": {
-        "label": "View source",
-        "url": "https://github.com/notmike101/quire/blob/f335236f77198d35f279e52cc21077ee473d5c90/server/src/redact/prepare.ts#L317-L325"
-      }
-    },
-    {
-      "id": "sealed-storage",
-      "label": "Sealed conversation storage",
-      "description": "Redacted pages are compressed, sealed with AES-GCM, and stored as ciphertext in Postgres. The server handles the content key during upload.",
-      "caption": "Public source",
-      "code": {
-        "file": "server/src/share-v2/crypto.ts",
-        "line": 7,
-        "text": "async function importKey(key: Uint8Array) {\n  return subtle.importKey('raw', key as BufferSource, { name: 'AES-GCM' }, false, ['encrypt', 'decrypt']);\n}\nexport async function sealBlob(key: Uint8Array, shareId: string, kind: BlobKind, seq: number, value: unknown): Promise<Uint8Array> {\n  const plain = gzipSync(Buffer.from(JSON.stringify(value), 'utf8'));\n  const nonce = randomBytes(12);\n  const cipher = await subtle.encrypt({ name: 'AES-GCM', iv: nonce as BufferSource, additionalData: blobAad(shareId, kind, seq) as BufferSource }, await importKey(key), plain as BufferSource);\n  return layoutBlob(nonce, new Uint8Array(cipher));\n}"
-      },
-      "source": {
-        "label": "View source",
-        "url": "https://github.com/notmike101/quire/blob/f335236f77198d35f279e52cc21077ee473d5c90/server/src/share-v2/crypto.ts#L7-L15"
-      }
-    },
-    {
-      "id": "access-gate",
-      "label": "Share access controls",
-      "description": "The public API requires a ready share, checks expiration, and validates the unlock cookie when the owner set a password.",
-      "caption": "Public source",
-      "code": {
-        "file": "server/src/api/public-v2.ts",
-        "line": 30,
-        "text": "async function gate(c: Context, db: Db, config: Config): Promise<V2PublicShareState | Response> {\n  const shareId = c.req.param('shareId') ?? '';\n  const state = await getV2PublicShareState(db, shareId);\n  if (!state || state.state !== 'ready') return notFound(c);\n  if (state.expiresAt && new Date(state.expiresAt).getTime() <= Date.now()) return expired(c);\n  if (state.passwordHash) {\n    const value = parseCookie(c.req.header('cookie'), unlockCookieName(shareId));\n    if (!verifyUnlockCookie(config.unlockSecret, shareId, value)) return needsPassword(c);\n  }\n  return state;\n}"
-      },
-      "source": {
-        "label": "View source",
-        "url": "https://github.com/notmike101/quire/blob/f335236f77198d35f279e52cc21077ee473d5c90/server/src/api/public-v2.ts#L30-L40"
-      }
-    },
-    {
       "id": "browser-reader",
-      "label": "Browser conversation reader",
-      "description": "The Vue viewer uses the link-fragment key to decrypt returned pages, then renders messages, code, and tool output with incremental loading.",
-      "caption": "Public source",
+      "label": "Conversation reader",
+      "description": "Read a shared coding session as a conversation. Jump between prompts, open tool results, and read formatted explanations. The browser decrypts the content using the link key.",
+      "caption": "Conversation reader · sample session",
       "code": {
         "file": "web/src/share-v2/crypto.ts",
         "line": 10,
@@ -426,15 +380,130 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "source": {
         "label": "View source",
         "url": "https://github.com/notmike101/quire/blob/f335236f77198d35f279e52cc21077ee473d5c90/web/src/share-v2/crypto.ts#L10-L18"
-      }
+      },
+      "image": "/images/quire-conversation.png"
+    },
+    {
+      "id": "adapters",
+      "label": "Session adapters",
+      "description": "Adapters read Codex, Claude Code, ZCode, or Oh My Pi records and return one shaped conversation format for the publishing CLI.",
+      "caption": "How it works",
+      "code": {
+        "file": "cli/src/harness/types.ts",
+        "line": 50,
+        "text": "export interface HarnessAdapter {\n  name: 'zcode' | 'claude-code' | 'codex' | 'omp';\n  // Adapters whose loadSession id is an exact input path (not a discovered\n  // session id) set this so resolveSession rethrows their specific\n  // fail-closed diagnostics instead of masking them as \"session not found\".\n  preserveDirectLoadError?: boolean;\n  listSessions(): Promise<HarnessSessionInfo[]>;\n  resolveCurrent(): Promise<HarnessSessionInfo>;\n  loadSession(id: string): Promise<ShapedSession>;\n}"
+      },
+      "source": {
+        "label": "View source",
+        "url": "https://github.com/notmike101/quire/blob/f335236f77198d35f279e52cc21077ee473d5c90/cli/src/harness/types.ts#L50-L59"
+      },
+      "diagram": [
+        {
+          "label": "Choose a session",
+          "detail": "Codex, Claude Code, ZCode, or Oh My Pi"
+        },
+        {
+          "label": "Prepare the conversation",
+          "detail": "One format for messages and tool results"
+        },
+        {
+          "label": "Publish deliberately",
+          "detail": "Create a share only when requested"
+        }
+      ]
+    },
+    {
+      "id": "redaction",
+      "label": "Ingestion redaction",
+      "description": "The server redacts message parts and conversation metadata before the result can be stored.",
+      "caption": "How it works",
+      "code": {
+        "file": "server/src/redact/prepare.ts",
+        "line": 317,
+        "text": "  const summary: Record<string, number> = {};\n  const add = (counts: Record<string, number>): void => {\n    for (const [k, v] of Object.entries(counts)) summary[k] = (summary[k] ?? 0) + v;\n  };\n  const redacted = session.messages.map((m) => ({ ...m, parts: m.parts.map((p) => redactPart(p, preset, add)) }));\n  const meta: Record<string, unknown> = { title: session.title };\n  redactMetaField(session.title, preset, add, meta, 'title');\n  redactMetaField(session.model, preset, add, meta, 'model');\n  redactMetaField(session.provider, preset, add, meta, 'provider');"
+      },
+      "source": {
+        "label": "View source",
+        "url": "https://github.com/notmike101/quire/blob/f335236f77198d35f279e52cc21077ee473d5c90/server/src/redact/prepare.ts#L317-L325"
+      },
+      "diagram": [
+        {
+          "label": "Uploaded conversation",
+          "detail": "Messages, tool output, and metadata"
+        },
+        {
+          "label": "Remove sensitive content",
+          "detail": "Apply server-side redaction rules"
+        },
+        {
+          "label": "Prepared share",
+          "detail": "Store the redacted result"
+        }
+      ]
+    },
+    {
+      "id": "sealed-storage",
+      "label": "Sealed conversation storage",
+      "description": "Redacted pages are compressed, sealed with AES-GCM, and stored as ciphertext in Postgres. The server handles the content key during upload.",
+      "caption": "How it works",
+      "code": {
+        "file": "server/src/share-v2/crypto.ts",
+        "line": 7,
+        "text": "async function importKey(key: Uint8Array) {\n  return subtle.importKey('raw', key as BufferSource, { name: 'AES-GCM' }, false, ['encrypt', 'decrypt']);\n}\nexport async function sealBlob(key: Uint8Array, shareId: string, kind: BlobKind, seq: number, value: unknown): Promise<Uint8Array> {\n  const plain = gzipSync(Buffer.from(JSON.stringify(value), 'utf8'));\n  const nonce = randomBytes(12);\n  const cipher = await subtle.encrypt({ name: 'AES-GCM', iv: nonce as BufferSource, additionalData: blobAad(shareId, kind, seq) as BufferSource }, await importKey(key), plain as BufferSource);\n  return layoutBlob(nonce, new Uint8Array(cipher));\n}"
+      },
+      "source": {
+        "label": "View source",
+        "url": "https://github.com/notmike101/quire/blob/f335236f77198d35f279e52cc21077ee473d5c90/server/src/share-v2/crypto.ts#L7-L15"
+      },
+      "diagram": [
+        {
+          "label": "Redacted conversation",
+          "detail": "Split into compressed pages"
+        },
+        {
+          "label": "Encrypt each page",
+          "detail": "AES-GCM with a content key"
+        },
+        {
+          "label": "Stored share",
+          "detail": "Encrypted content in PostgreSQL"
+        }
+      ]
+    },
+    {
+      "id": "access-gate",
+      "label": "Share access controls",
+      "description": "The public API requires a ready share, checks expiration, and validates the unlock cookie when the owner set a password.",
+      "caption": "Password protection · sample share",
+      "code": {
+        "file": "server/src/api/public-v2.ts",
+        "line": 30,
+        "text": "async function gate(c: Context, db: Db, config: Config): Promise<V2PublicShareState | Response> {\n  const shareId = c.req.param('shareId') ?? '';\n  const state = await getV2PublicShareState(db, shareId);\n  if (!state || state.state !== 'ready') return notFound(c);\n  if (state.expiresAt && new Date(state.expiresAt).getTime() <= Date.now()) return expired(c);\n  if (state.passwordHash) {\n    const value = parseCookie(c.req.header('cookie'), unlockCookieName(shareId));\n    if (!verifyUnlockCookie(config.unlockSecret, shareId, value)) return needsPassword(c);\n  }\n  return state;\n}"
+      },
+      "source": {
+        "label": "View source",
+        "url": "https://github.com/notmike101/quire/blob/f335236f77198d35f279e52cc21077ee473d5c90/server/src/api/public-v2.ts#L30-L40"
+      },
+      "image": "/images/quire-password.png"
     }
   ],
   "pack3d": [
     {
+      "id": "comparison-view",
+      "label": "Original and output comparison",
+      "description": "Inspect the original and optimized model side by side. Synchronized cameras and file-size displays make it easier to judge the result.",
+      "caption": "Application screenshot",
+      "image": "/images/pack3d-screenshot.png",
+      "source": {
+        "label": "View implementation",
+        "url": "https://github.com/notmike101/pack3d/blob/6d15c8950d4bb325022ea9553e85471468b2b039/packages/renderer/src/App.vue#L197-L205"
+      }
+    },
+    {
       "id": "desktop-controls",
       "label": "Desktop job controls",
       "description": "The Vue interface loads a GLTF or GLB file and remembers independent geometry, texture, and Draco options in the Electron application.",
-      "caption": "Public source",
+      "caption": "How it works",
       "code": {
         "file": "packages/renderer/src/App.vue",
         "line": 27,
@@ -443,13 +512,27 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "source": {
         "label": "View source",
         "url": "https://github.com/notmike101/pack3d/blob/6d15c8950d4bb325022ea9553e85471468b2b039/packages/renderer/src/App.vue#L27-L38"
-      }
+      },
+      "diagram": [
+        {
+          "label": "Choose a model",
+          "detail": "Open a GLTF or GLB file"
+        },
+        {
+          "label": "Choose optimizations",
+          "detail": "Geometry, textures, and Draco controls"
+        },
+        {
+          "label": "Start a job",
+          "detail": "Remember settings between runs"
+        }
+      ]
     },
     {
       "id": "packing-worker",
       "label": "Packing worker",
       "description": "Electron sends each job to a worker thread. GLTF Transform coordinates geometry cleanup, texture resizing, Basis/toktx encoding, and Draco compression.",
-      "caption": "Public source",
+      "caption": "How it works",
       "code": {
         "file": "packages/main/index.ts",
         "line": 107,
@@ -458,41 +541,29 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "source": {
         "label": "View source",
         "url": "https://github.com/notmike101/pack3d/blob/6d15c8950d4bb325022ea9553e85471468b2b039/packages/main/index.ts#L107-L118"
-      }
-    },
-    {
-      "id": "comparison-view",
-      "label": "Original and output comparison",
-      "description": "Two Babylon.js model views share camera movement and show each file size so users can inspect the result with the same viewpoint.",
-      "caption": "Application screenshot",
-      "image": "/images/pack3d-screenshot.png",
-      "source": {
-        "label": "View implementation",
-        "url": "https://github.com/notmike101/pack3d/blob/6d15c8950d4bb325022ea9553e85471468b2b039/packages/renderer/src/App.vue#L197-L205"
-      }
+      },
+      "diagram": [
+        {
+          "label": "Model input",
+          "detail": "Geometry, materials, and textures"
+        },
+        {
+          "label": "Background worker",
+          "detail": "Cleanup, resize, and compression"
+        },
+        {
+          "label": "Optimized output",
+          "detail": "Progress updates and file-size results"
+        }
+      ]
     }
   ],
   "mealmind": [
     {
-      "id": "recipe-catalog",
-      "label": "CookLang recipe catalog",
-      "description": "The API parses CookLang recipe documents from Postgres into ingredients, instructions, timers, and serving information. Local recipe files are a legacy import source.",
-      "caption": "Public source",
-      "code": {
-        "file": "services/api/src/recipes.ts",
-        "line": 31,
-        "text": "function parseDocument(document: RecipeDocument, servings?: number) {\n  const base = parseRecipeCooklang(document.cooklang, documentPath(document));\n  if (servings === undefined || servings === base.defaultServings) return base;\n  return parseRecipeCooklang(\n    document.cooklang,\n    documentPath(document),\n    servings / base.defaultServings,\n    base.defaultServings,\n  );\n}"
-      },
-      "source": {
-        "label": "View source",
-        "url": "https://github.com/notmike101/meal-mind/blob/d9a0524533b2551af0b680f7a7a7fd83b0e7c846/services/api/src/recipes.ts#L31-L40"
-      }
-    },
-    {
       "id": "planning-workspace",
       "label": "Weekly planning workspace",
-      "description": "The Nuxt/Vue workspace lets users choose recipes, add meals to dates, adjust servings, skip days, and review the plan.",
-      "caption": "Public source",
+      "description": "Build a week of meals, change recipes, adjust servings, and skip days in one editable workspace.",
+      "caption": "Weekly planner · sample data",
       "code": {
         "file": "apps/web/app/components/plan/SelectionWorkspace.vue",
         "line": 171,
@@ -501,13 +572,30 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "source": {
         "label": "View source",
         "url": "https://github.com/notmike101/meal-mind/blob/d9a0524533b2551af0b680f7a7a7fd83b0e7c846/apps/web/app/components/plan/SelectionWorkspace.vue#L171-L179"
-      }
+      },
+      "image": "/images/mealmind-planning.png"
+    },
+    {
+      "id": "recipe-catalog",
+      "label": "Recipe library",
+      "description": "Browse recipes and open their ingredients, instructions, and serving controls. CookLang documents in PostgreSQL supply the structured recipe data.",
+      "caption": "Recipe details · sample data",
+      "code": {
+        "file": "services/api/src/recipes.ts",
+        "line": 31,
+        "text": "function parseDocument(document: RecipeDocument, servings?: number) {\n  const base = parseRecipeCooklang(document.cooklang, documentPath(document));\n  if (servings === undefined || servings === base.defaultServings) return base;\n  return parseRecipeCooklang(\n    document.cooklang,\n    documentPath(document),\n    servings / base.defaultServings,\n    base.defaultServings,\n  );\n}"
+      },
+      "source": {
+        "label": "View source",
+        "url": "https://github.com/notmike101/meal-mind/blob/d9a0524533b2551af0b680f7a7a7fd83b0e7c846/services/api/src/recipes.ts#L31-L40"
+      },
+      "image": "/images/mealmind-recipe.png"
     },
     {
       "id": "planning-api",
       "label": "Plan validation and state",
       "description": "Fastify services own plan changes. Generated meals must fit the requested week and meal count and reference recipes that exist in the catalog.",
-      "caption": "Public source",
+      "caption": "How it works",
       "code": {
         "file": "services/api/src/services/planning.ts",
         "line": 54,
@@ -516,13 +604,27 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "source": {
         "label": "View source",
         "url": "https://github.com/notmike101/meal-mind/blob/d9a0524533b2551af0b680f7a7a7fd83b0e7c846/services/api/src/services/planning.ts#L54-L60"
-      }
+      },
+      "diagram": [
+        {
+          "label": "Meal choices",
+          "detail": "Recipes, dates, and servings"
+        },
+        {
+          "label": "Check the plan",
+          "detail": "Known recipes, valid week, expected count"
+        },
+        {
+          "label": "Save a valid plan",
+          "detail": "Draft, committed, active, or completed"
+        }
+      ]
     },
     {
       "id": "ai-provider",
       "label": "AI provider adapter",
       "description": "A server-side client connects to the configured OpenAI-compatible provider; credentials come from the environment and responses pass schema validation.",
-      "caption": "Public source",
+      "caption": "How it works",
       "code": {
         "file": "packages/ai/src/client.ts",
         "line": 19,
@@ -531,13 +633,27 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "source": {
         "label": "View source",
         "url": "https://github.com/notmike101/meal-mind/blob/d9a0524533b2551af0b680f7a7a7fd83b0e7c846/packages/ai/src/client.ts#L19-L25"
-      }
+      },
+      "diagram": [
+        {
+          "label": "Planning request",
+          "detail": "Preferences and available recipes"
+        },
+        {
+          "label": "Configured model",
+          "detail": "Local or remote compatible provider"
+        },
+        {
+          "label": "Suggested meals",
+          "detail": "Checked before being accepted"
+        }
+      ]
     },
     {
       "id": "shopping-list",
-      "label": "Shopping list preparation",
+      "label": "Shopping list",
       "description": "Meal ingredients are scaled to selected servings and pantry staples are removed before the shopping workflow creates and stores the list.",
-      "caption": "Public source",
+      "caption": "Shopping list · sample data",
       "code": {
         "file": "packages/domain/src/shopping.ts",
         "line": 20,
@@ -546,13 +662,14 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "source": {
         "label": "View source",
         "url": "https://github.com/notmike101/meal-mind/blob/d9a0524533b2551af0b680f7a7a7fd83b0e7c846/packages/domain/src/shopping.ts#L20-L28"
-      }
+      },
+      "image": "/images/mealmind-shopping.png"
     },
     {
       "id": "mcp-adapter",
       "label": "MCP access",
       "description": "MCP tools and resources call the same REST API used by the web app. They can inspect recipes and plans or request an editable plan.",
-      "caption": "Public source",
+      "caption": "How it works",
       "code": {
         "file": "services/mcp/src/app.ts",
         "line": 498,
@@ -561,15 +678,29 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "source": {
         "label": "View source",
         "url": "https://github.com/notmike101/meal-mind/blob/d9a0524533b2551af0b680f7a7a7fd83b0e7c846/services/mcp/src/app.ts#L498-L507"
-      }
+      },
+      "diagram": [
+        {
+          "label": "Agent request",
+          "detail": "Read recipes or create a plan"
+        },
+        {
+          "label": "Shared application API",
+          "detail": "The same rules used by the website"
+        },
+        {
+          "label": "Editable plan",
+          "detail": "Continue in the normal interface"
+        }
+      ]
     }
   ],
   "zcode-desktop-extensions": [
     {
       "id": "vendor-loader",
-      "label": "Preserved vendor application",
+      "label": "Application startup",
       "description": "The installer backs up the vendor ASAR and moves it beside a small managed loader, allowing the original application to remain available.",
-      "caption": "Public source",
+      "caption": "How it works",
       "code": {
         "file": "src/cli/installer.ts",
         "line": 86,
@@ -578,13 +709,27 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "source": {
         "label": "View source",
         "url": "https://github.com/notmike101/zcode-extensions/blob/31c20d79ad21f46e9c734a70195c5daecee53500/src/cli/installer.ts#L86-L97"
-      }
+      },
+      "diagram": [
+        {
+          "label": "Preserve the original",
+          "detail": "Back up the vendor application"
+        },
+        {
+          "label": "Load extensions",
+          "detail": "Start the extension host"
+        },
+        {
+          "label": "Open ZCode",
+          "detail": "Keep the original app available"
+        }
+      ]
     },
     {
       "id": "extension-host",
       "label": "Extension lifecycle host",
       "description": "The host loads each declared entrypoint, requires an activate function, and tracks disposables for cleanup when extensions stop or reload.",
-      "caption": "Public source",
+      "caption": "How it works",
       "code": {
         "file": "src/host/plugin-manager.ts",
         "line": 282,
@@ -593,13 +738,27 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "source": {
         "label": "View source",
         "url": "https://github.com/notmike101/zcode-extensions/blob/31c20d79ad21f46e9c734a70195c5daecee53500/src/host/plugin-manager.ts#L282-L293"
-      }
+      },
+      "diagram": [
+        {
+          "label": "Install an extension",
+          "detail": "Read its manifest and entrypoint"
+        },
+        {
+          "label": "Activate it",
+          "detail": "Start the declared functionality"
+        },
+        {
+          "label": "Stop or reload",
+          "detail": "Clean up tracked resources"
+        }
+      ]
     },
     {
       "id": "typed-sdk",
       "label": "Typed SDK and UI slots",
       "description": "The SDK describes declared and granted capabilities plus supported UI contribution slots, connecting extensions to the desktop app through an explicit contract.",
-      "caption": "Public source",
+      "caption": "How it works",
       "code": {
         "file": "sdk/index.ts",
         "line": 224,
@@ -608,13 +767,27 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "source": {
         "label": "View source",
         "url": "https://github.com/notmike101/zcode-extensions/blob/31c20d79ad21f46e9c734a70195c5daecee53500/sdk/index.ts#L224-L233"
-      }
+      },
+      "diagram": [
+        {
+          "label": "Extension",
+          "detail": "Declare required capabilities"
+        },
+        {
+          "label": "Typed SDK",
+          "detail": "Workspace, sessions, tasks, and UI slots"
+        },
+        {
+          "label": "Desktop interface",
+          "detail": "Contribute supported controls"
+        }
+      ]
     },
     {
       "id": "update-recovery",
       "label": "Recoverable updates",
       "description": "Verified bundles are staged for launch. If activation fails, the host restores the prior bundle and activates it again while preserving extension data.",
-      "caption": "Public source",
+      "caption": "How it works",
       "code": {
         "file": "src/host/plugin-manager.ts",
         "line": 350,
@@ -623,13 +796,27 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "source": {
         "label": "View source",
         "url": "https://github.com/notmike101/zcode-extensions/blob/31c20d79ad21f46e9c734a70195c5daecee53500/src/host/plugin-manager.ts#L350-L360"
-      }
+      },
+      "diagram": [
+        {
+          "label": "Stage an update",
+          "detail": "Verify the replacement bundle"
+        },
+        {
+          "label": "Activate on launch",
+          "detail": "Keep extension data"
+        },
+        {
+          "label": "Recover if needed",
+          "detail": "Restore the previous working bundle"
+        }
+      ]
     },
     {
       "id": "native-tasks",
       "label": "Native task bridge",
       "description": "Extensions can create ordinary persistent ZCode tasks through the desktop service. The separately released Scheduler exercised this bridge on supported older ZCode versions.",
-      "caption": "Public source",
+      "caption": "How it works",
       "code": {
         "file": "src/protocol/task-service.ts",
         "line": 153,
@@ -638,7 +825,21 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "source": {
         "label": "View source",
         "url": "https://github.com/notmike101/zcode-extensions/blob/31c20d79ad21f46e9c734a70195c5daecee53500/src/protocol/task-service.ts#L153-L163"
-      }
+      },
+      "diagram": [
+        {
+          "label": "Extension request",
+          "detail": "Task mode and configuration"
+        },
+        {
+          "label": "Native task service",
+          "detail": "Create a persistent ZCode task"
+        },
+        {
+          "label": "Normal task interface",
+          "detail": "Work appears with other app tasks"
+        }
+      ]
     }
   ]
 };

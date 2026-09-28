@@ -16,11 +16,14 @@ for (const project of caseStudies) {
   assert.equal(new Set(parts.map(part => part.id)).size, parts.length, 'Component IDs must be unique');
   for (const part of parts) {
     assert.ok(part.label && part.description && part.caption, 'Components need readable context');
-    assert.equal(Number(!!part.image) + Number(!!part.code) + Number(!!part.diagram), 1, 'Each component needs one concrete visual');
+    assert.equal(Number(!!part.image) + Number(!!part.diagram), 1, 'Every component must communicate visually without requiring code');
     if (part.image) assert.ok(existsSync(resolve(output, part.image.slice(1))), `Missing component image: ${part.image}`);
     if (part.code) assert.ok(part.code.text.trim() && part.code.file && part.code.line > 0 && part.source?.url.startsWith('https://'), 'Source excerpts need content and attribution');
     if (part.diagram) assert.ok(part.diagram.length > 1 && part.diagram.every(node => node.label && node.detail), 'Diagrams must describe actual responsibilities');
   }
+}
+for (const slug of ['quire', 'mealmind', 'pack3d']) {
+  assert.ok(projectLayers[slug][0].image, `${slug} must lead with its real interface`);
 }
 for (const logo of ['mktr.png', 'valiant.svg']) assert.ok(existsSync(resolve(output, 'images', logo)), `Missing organization logo: ${logo}`);
 

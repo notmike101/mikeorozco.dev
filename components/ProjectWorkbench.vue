@@ -66,7 +66,13 @@ const onProjectClick = (event: MouseEvent, slug: string) => {
             <header><h3 id="component-title">{{ layer.label }}</h3><span>{{ layer.caption }}</span></header>
             <ProjectLayerGraphic :artwork="layer" />
             <p>{{ layer.description }}</p>
-            <a v-if="layer.source" class="text-link" :href="layer.source.url" target="_blank" rel="noopener noreferrer">{{ layer.source.label }} ↗</a>
+            <details v-if="layer.code" :key="`${project.slug}-${layer.id}`" class="source-detail">
+              <summary>View implementation</summary>
+              <div class="source-file">{{ layer.code.file }}</div>
+              <pre tabindex="0" :aria-label="layer.code.file"><code><span v-for="(line, i) in layer.code.text.split('\n')" :key="i" class="code-line"><span class="line-number" aria-hidden="true">{{ layer.code.line + i }}</span><span>{{ line || ' ' }}</span></span></code></pre>
+              <a v-if="layer.source" class="text-link" :href="layer.source.url" target="_blank" rel="noopener noreferrer">{{ layer.source.label }} ↗</a>
+            </details>
+            <a v-else-if="layer.source" class="text-link" :href="layer.source.url" target="_blank" rel="noopener noreferrer">{{ layer.source.label }} ↗</a>
           </section>
         </div>
         <aside class="project-inspector" aria-label="Project overview">
@@ -111,6 +117,14 @@ const onProjectClick = (event: MouseEvent, slug: string) => {
 .component-detail > :deep(.layer-artwork) { border: 1px solid var(--line); }
 .component-detail p { margin: 14px 0 8px; font-size: 13px; line-height: 1.65; color: var(--muted); }
 .component-detail a { font-size: 12px; }
+.source-detail { margin-top: 16px; border: 1px solid var(--line); background: var(--canvas); }
+.source-detail summary { padding: 10px 12px; cursor: pointer; font-size: 12px; color: var(--muted); }
+.source-file { padding: 12px; border-block: 1px solid var(--line); font: 11px/1.5 monospace; color: var(--muted); overflow-wrap: anywhere; }
+.source-detail pre { margin: 0; padding: 15px 12px 15px 0; overflow: auto; font: 12px/1.8 Consolas, monospace; tab-size: 2; }
+.code-line { display: flex; white-space: pre-wrap; overflow-wrap: anywhere; }
+.code-line > span:last-child { min-width: 0; }
+.line-number { flex: 0 0 43px; padding-right: 13px; color: var(--muted); text-align: right; user-select: none; }
+.source-detail > a { margin: 0 12px 12px; }
 .project-inspector { min-width: 0; padding: 20px; border-left: 1px solid var(--line); font-size: 13px; line-height: 1.65; }
 .project-inspector h3 { margin: 0 0 9px; font-size: 12px; color: var(--muted); font-weight: 400; }
 .project-inspector p { margin: 0; }

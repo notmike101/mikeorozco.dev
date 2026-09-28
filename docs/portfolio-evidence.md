@@ -20,7 +20,15 @@ Every displayed excerpt in data/projectLayers.ts includes its filename, original
 | MealMind | d9a0524533b2551af0b680f7a7a7fd83b0e7c846 | Catalog, planning workspace, validation, AI adapter, shopping, MCP |
 | ZCode Extensions | 31c20d79ad21f46e9c734a70195c5daecee53500 | Vendor loader, lifecycle host, typed SDK, recovery, native tasks |
 
-Pack3D uses the existing application screenshot. The other personal components use selectable source text instead of invented application screens. Quire's source confirms server-side ingestion and sealing despite contradictory README wording. MealMind's current API reads CookLang documents from PostgreSQL; local recipe files are a legacy import source. Only that stale storage claim was corrected in the case study. ZCode's AI-generation attribution and Scheduler version limits are retained.
+Pack3D uses the existing application screenshot. Quire and MealMind now lead with captured interfaces. Every component has a screenshot or a plain-language responsibility diagram; exact public source remains available in a closed-by-default implementation disclosure. Quire's source confirms server-side ingestion and sealing despite contradictory README wording. MealMind's current API reads CookLang documents from PostgreSQL; local recipe files are a legacy import source. Only that stale storage claim was corrected in the case study. ZCode's AI-generation attribution and Scheduler version limits are retained.
+
+### Interface captures
+
+Captured from the actual source revisions above on 2026-09-27, using temporary local checkouts and synthetic data. No UI was reconstructed, no real conversations or recipe libraries were used, and no live provider was called.
+
+- **Quire:** the unchanged production-built Vue viewer renders a synthetic conversation through a temporary loopback fixture server. Its encrypted responses use the real protocol envelope and the public test-vector key from [web/test/v2-helpers.ts](https://github.com/notmike101/quire/blob/f335236f77198d35f279e52cc21077ee473d5c90/web/test/v2-helpers.ts). The second capture is the real password gate with surrounding context cropped. Sample messages and their test-result text are demonstration content, not a claim that those example changes or tests ran.
+- **MealMind:** the unchanged frontend uses the repository's [deterministic mock API](https://github.com/notmike101/meal-mind/blob/d9a0524533b2551af0b680f7a7a7fd83b0e7c846/tests/mocks/web-api.ts). Captures show the seven-meal weekly draft, recipe details, and shopping progress. The fixture has no recipe photos, so its normal fallback remains visible. Development tooling was disabled for capture.
+- The workbench and case-study captions identify sample data. Screenshots can be opened at full size. These are frontend captures, not fresh full-stack or production validation.
 
 ## Resume and local source
 
@@ -38,4 +46,4 @@ The CV identifies MKTR INC (365–376), Valiant Technology (384–392), Artris (
 - Artris, TOTAL PC, and MedeMedia appear as text because no defensible matching logo was found. No substitute marks were invented.
 - Existing organization marks were retained. Katz Law is an existing portfolio client entry, not a resume-backed employment claim.
 
-LinkedIn's public response did not expose employment history; the resume/CV and current source are the evidence for these changes. No repository clones were needed. Source review does not constitute fresh runtime validation of the featured projects.
+LinkedIn's public response did not expose employment history; the resume/CV and current source are the evidence for these changes. Source review does not constitute fresh runtime validation of the featured projects; the interface captures above have their own documented validation scope.

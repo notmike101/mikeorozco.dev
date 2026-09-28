@@ -156,6 +156,14 @@ export const caseStudies: CaseStudy[] = [
     seoTitle: 'Quire — Session Sharing Case Study | Mike Orozco',
     seoDescription: 'Designing a coding-session publishing workflow with adapters, server-side redaction, encrypted storage, and a readable Vue viewer.',
     socialImage: '/images/og-default.png',
+    image: {
+      src: '/images/quire-conversation.png',
+      alt: 'Quire conversation viewer showing a synthetic coding session, collapsible tool results, and message navigation',
+      width: 1280,
+      height: 720,
+      href: '/images/quire-conversation.png',
+      label: 'Quire conversation viewer · sample session',
+    },
     flow: {
       title: 'From a local session to a shared conversation',
       steps: [
@@ -427,6 +435,14 @@ export const caseStudies: CaseStudy[] = [
     seoTitle: 'MealMind — Meal Planning Case Study | Mike Orozco',
     seoDescription: 'Connecting AI-assisted suggestions to recipes, validated meal plans, shopping lists, and shared web and MCP application behavior.',
     socialImage: '/images/og-default.png',
+    image: {
+      src: '/images/mealmind-planning.png',
+      alt: 'MealMind weekly planner showing a seven-day meal plan and editing controls with sample recipe data',
+      width: 1280,
+      height: 720,
+      href: '/images/mealmind-planning.png',
+      label: 'MealMind weekly planner · sample data',
+    },
     flow: {
       title: 'From recipes to a plan you can use',
       steps: [
