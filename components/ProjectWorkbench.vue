@@ -88,9 +88,9 @@ const onProjectClick = (event: MouseEvent, slug: string) => {
 
 <style scoped>
 .workbench { display: grid; grid-template-columns: 196px minmax(0, 1fr); border-block: 1px solid var(--line); scroll-margin-top: 6rem; }
-.project-index { background: var(--rail); border-right: 1px solid var(--line); }
+.project-index { display: flex; flex-direction: column; min-height: 0; background: var(--rail); border-right: 1px solid var(--line); }
 .index-label { margin: 0; padding: 22px 18px 16px; color: var(--muted); font-size: 13px; }
-.project-list { max-height: min(680px, calc(100dvh - 180px)); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+.project-list { flex: 1; min-height: 0; contain: size; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
 .project-list a { display: block; padding: 14px 18px; border-bottom: 1px solid var(--line); border-left: 2px solid transparent; text-decoration: none; }
 .project-list a:hover { background: var(--hover); }
 .project-list a[aria-current] { background: var(--accent-soft); border-left-color: var(--accent); }
