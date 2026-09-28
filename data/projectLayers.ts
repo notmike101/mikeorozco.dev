@@ -5,6 +5,8 @@ export interface ProjectLayer {
   description: string;
   caption: string;
   image?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   code?: { file: string; line: number; text: string };
   diagram?: { label: string; detail: string }[];
   source?: { label: string; url: string };
@@ -16,6 +18,8 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "id": "tour",
       "label": "Product tour",
       "description": "The published Vanquish Core HPLC tour connects the instrument model to feature navigation, hotspots, and sales actions.",
+      imageWidth: 1280,
+      imageHeight: 720,
       "image": "/images/vanquish-tour.png",
       "caption": "Vanquish Core HPLC",
       "source": {
@@ -27,6 +31,8 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "id": "builder",
       "label": "Tour builder",
       "description": "The Vue builder configures parts, lighting, camera perspectives, hotspots, translations, and product actions. Shown with the published Vanquish model and manifest.",
+      imageWidth: 1280,
+      imageHeight: 720,
       "image": "/images/vanquish-builder.png",
       "caption": "3D Tour Builder",
       "source": {
@@ -55,7 +61,7 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
         },
         {
           "label": "Explore the product",
-          "detail": "7 views · 28 hotspots"
+          "detail": "7 views Â· 28 hotspots"
         },
         {
           "label": "Product actions",
@@ -371,7 +377,7 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "id": "browser-reader",
       "label": "Conversation reader",
       "description": "Read a shared coding session as a conversation. Jump between prompts, open tool results, and read formatted explanations. The browser decrypts the content using the link key.",
-      "caption": "Conversation reader · sample session",
+      "caption": "Conversation reader Â· sample session",
       "code": {
         "file": "web/src/share-v2/crypto.ts",
         "line": 10,
@@ -381,6 +387,8 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
         "label": "View source",
         "url": "https://github.com/notmike101/quire/blob/f335236f77198d35f279e52cc21077ee473d5c90/web/src/share-v2/crypto.ts#L10-L18"
       },
+      imageWidth: 1265,
+      imageHeight: 712,
       "image": "/images/quire-conversation.png"
     },
     {
@@ -474,7 +482,7 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "id": "access-gate",
       "label": "Share access controls",
       "description": "The public API requires a ready share, checks expiration, and validates the unlock cookie when the owner set a password.",
-      "caption": "Password protection · sample share",
+      "caption": "Password protection Â· sample share",
       "code": {
         "file": "server/src/api/public-v2.ts",
         "line": 30,
@@ -484,6 +492,8 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
         "label": "View source",
         "url": "https://github.com/notmike101/quire/blob/f335236f77198d35f279e52cc21077ee473d5c90/server/src/api/public-v2.ts#L30-L40"
       },
+      imageWidth: 520,
+      imageHeight: 360,
       "image": "/images/quire-password.png"
     }
   ],
@@ -493,6 +503,8 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "label": "Original and output comparison",
       "description": "Inspect the original and optimized model side by side. Synchronized cameras and file-size displays make it easier to judge the result.",
       "caption": "Application screenshot",
+      imageWidth: 1250,
+      imageHeight: 875,
       "image": "/images/pack3d-screenshot.png",
       "source": {
         "label": "View implementation",
@@ -563,7 +575,7 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "id": "planning-workspace",
       "label": "Weekly planning workspace",
       "description": "Build a week of meals, change recipes, adjust servings, and skip days in one editable workspace.",
-      "caption": "Weekly planner · sample data",
+      "caption": "Weekly planner Â· sample data",
       "code": {
         "file": "apps/web/app/components/plan/SelectionWorkspace.vue",
         "line": 171,
@@ -573,13 +585,15 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
         "label": "View source",
         "url": "https://github.com/notmike101/meal-mind/blob/d9a0524533b2551af0b680f7a7a7fd83b0e7c846/apps/web/app/components/plan/SelectionWorkspace.vue#L171-L179"
       },
+      imageWidth: 1265,
+      imageHeight: 712,
       "image": "/images/mealmind-planning.png"
     },
     {
       "id": "recipe-catalog",
       "label": "Recipe library",
       "description": "Browse recipes and open their ingredients, instructions, and serving controls. CookLang documents in PostgreSQL supply the structured recipe data.",
-      "caption": "Recipe details · sample data",
+      "caption": "Recipe details Â· sample data",
       "code": {
         "file": "services/api/src/recipes.ts",
         "line": 31,
@@ -589,6 +603,8 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
         "label": "View source",
         "url": "https://github.com/notmike101/meal-mind/blob/d9a0524533b2551af0b680f7a7a7fd83b0e7c846/services/api/src/recipes.ts#L31-L40"
       },
+      imageWidth: 1280,
+      imageHeight: 720,
       "image": "/images/mealmind-recipe.png"
     },
     {
@@ -653,7 +669,7 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "id": "shopping-list",
       "label": "Shopping list",
       "description": "Meal ingredients are scaled to selected servings and pantry staples are removed before the shopping workflow creates and stores the list.",
-      "caption": "Shopping list · sample data",
+      "caption": "Shopping list Â· sample data",
       "code": {
         "file": "packages/domain/src/shopping.ts",
         "line": 20,
@@ -663,6 +679,8 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
         "label": "View source",
         "url": "https://github.com/notmike101/meal-mind/blob/d9a0524533b2551af0b680f7a7a7fd83b0e7c846/packages/domain/src/shopping.ts#L20-L28"
       },
+      imageWidth: 1280,
+      imageHeight: 720,
       "image": "/images/mealmind-shopping.png"
     },
     {
@@ -863,7 +881,7 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
     },
     {
       id: 'runtime-guard', label: 'Runtime coordination', caption: 'How it works',
-      description: 'A shared file lock prevents simultaneous mutations from multiple MCP processes. Checks cover observation age, bridge version, the game process, and the experiment’s fixed seed.',
+      description: 'A shared file lock prevents simultaneous mutations from multiple MCP processes. Checks cover observation age, bridge version, the game process, and the experimentâ€™s fixed seed.',
       diagram: [{ label: 'Acquire shared lock', detail: 'One process mutates the game at a time' }, { label: 'Run preflight', detail: 'Process, seed, version, and fresh observation' }, { label: 'Execute and release', detail: 'Keep the action inside the guarded operation' }],
       source: { label: 'Inspect runtime checks', url: 'https://github.com/notmike101/balatro-mcp/blob/9b27ce9fdbc52aa5b462caaa7daa528ec2b5808f/src/backend/runtime.rs' },
     },
@@ -878,18 +896,22 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
     {
       id: 'journal', label: 'Reading interface', caption: 'Live journal capture',
       description: 'The public Astro site presents AI-authored articles with categories, archive navigation, and RSS. This is the actual published homepage.',
+      imageWidth: 1265,
+      imageHeight: 712,
       image: '/images/between-sessions-home.png',
       source: { label: 'Read the journal', url: 'https://ai-blog.mikeorozco.dev/' },
     },
     {
       id: 'journey', label: 'Journey record', caption: 'Live Journey capture',
       description: 'Working principles, preferences, revisions, and open questions link back to the articles supporting them. The record makes changes across sessions visible to readers.',
+      imageWidth: 1265,
+      imageHeight: 712,
       image: '/images/between-sessions-journey.png',
       source: { label: 'Explore the Journey', url: 'https://ai-blog.mikeorozco.dev/journey/' },
     },
     {
       id: 'content-checks', label: 'Content checks', caption: 'How it works',
-      description: 'Validation checks article metadata, dates, category identifiers, restricted embeds, selected privacy patterns, and Journey references. It checks structure, not the truth of an article’s claims.',
+      description: 'Validation checks article metadata, dates, category identifiers, restricted embeds, selected privacy patterns, and Journey references. It checks structure, not the truth of an articleâ€™s claims.',
       diagram: [{ label: 'Markdown + metadata', detail: 'Articles, dates, categories, and sources' }, { label: 'Content validation', detail: 'Reject malformed content and selected privacy risks' }, { label: 'Journey references', detail: 'Require supporting article slugs to exist' }],
       source: { label: 'Inspect the validator', url: 'https://github.com/notmike101/ai-blog/blob/5fcdf8f2d2dc3c9e5a0aa2b2c1008ae92ae85737/scripts/validate-content.mjs' },
     },
@@ -928,8 +950,10 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
   ],
   'false-witness': [
     {
-      id: 'prototype-scene', label: 'Godot prototype', caption: 'Early geometry inspection · prototype art',
+      id: 'prototype-scene', label: 'Godot prototype', caption: 'Early geometry inspection Â· prototype art',
       description: 'An actual native capture from an early room and apparatus inspection. It shows prototype geometry; the current project is developing physical interactions and a player-hosted session foundation.',
+      imageWidth: 736,
+      imageHeight: 498,
       image: '/images/false-witness-prototype.png',
     },
     {

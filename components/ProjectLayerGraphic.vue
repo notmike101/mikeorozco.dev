@@ -5,9 +5,9 @@ defineProps<{ artwork: ProjectLayer; compact?: boolean }>();
 
 <template>
   <div :class="['layer-artwork', { compact }]" :aria-hidden="compact || undefined">
-    <img v-if="artwork.image && compact" :src="artwork.image" alt="" loading="lazy" />
+    <img v-if="artwork.image && compact" :src="artwork.image" :width="artwork.imageWidth" :height="artwork.imageHeight" alt="" loading="lazy" />
     <a v-else-if="artwork.image" class="screenshot-link" :href="artwork.image" target="_blank" rel="noopener noreferrer" :aria-label="`Enlarge ${artwork.label} screenshot`">
-      <img :src="artwork.image" :alt="artwork.caption" loading="eager" />
+      <img :src="artwork.image" :width="artwork.imageWidth" :height="artwork.imageHeight" :alt="artwork.caption" loading="eager" />
       <span>Enlarge screenshot ↗</span>
     </a>
     <div v-else class="component-diagram" :aria-label="artwork.caption">

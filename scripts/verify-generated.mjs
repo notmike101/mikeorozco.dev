@@ -27,7 +27,10 @@ for (const project of caseStudies) {
   for (const part of parts) {
     assert.ok(part.label && part.description && part.caption, 'Components need readable context');
     assert.equal(Number(!!part.image) + Number(!!part.diagram), 1, 'Every component must communicate visually without requiring code');
-    if (part.image) assert.ok(existsSync(resolve(output, part.image.slice(1))), `Missing component image: ${part.image}`);
+    if (part.image) {
+      assert.ok(existsSync(resolve(output, part.image.slice(1))), `Missing component image: ${part.image}`);
+      assert.ok(part.imageWidth > 0 && part.imageHeight > 0, `Reserve image dimensions: ${part.image}`);
+    }
     if (part.code) assert.ok(part.code.text.trim() && part.code.file && part.code.line > 0 && part.source?.url.startsWith('https://'), 'Source excerpts need content and attribution');
     if (part.diagram) assert.ok(part.diagram.length > 1 && part.diagram.every(node => node.label && node.detail), 'Diagrams must describe actual responsibilities');
   }

@@ -9,6 +9,7 @@ const route = useRoute();
 const router = useRouter();
 const selectedSlug = useState('portfolio-project', () => caseStudies[0]!.slug);
 const selectedLayer = ref(0);
+const hydrated = ref(false);
 const projectList = ref<HTMLElement>();
 let navigationResize: ResizeObserver | undefined;
 
@@ -27,6 +28,7 @@ const selectProject = (slug: string) => {
   else router.replace({ query: { ...route.query, project: slug }, hash: '' });
 };
 onMounted(() => {
+  hydrated.value = true;
   watch(() => route.query.project, slug => {
     if (typeof slug === 'string' && getCaseStudy(slug)) {
       selectedSlug.value = slug;
@@ -57,15 +59,20 @@ const onProjectClick = (event: MouseEvent, slug: string) => {
           <strong>{{ item.shortTitle }}</strong><small>{{ item.status }}</small>
         </a>
       </nav>
-      <select class="mobile-projects" aria-label="Projects" :value="project.slug" @change="selectProject(($event.target as HTMLSelectElement).value)">
+      <select :disabled="!hydrated" class="mobile-projects" aria-label="Projects" :value="project.slug" @change="selectProject(($event.target as HTMLSelectElement).value)">
         <option v-for="item in caseStudies" :key="item.slug" :value="item.slug">{{ item.title }}</option>
       </select>
+      <details class="mobile-project-links">
+        <summary>Browse all projects</summary>
+        <nav aria-label="All case studies">
+          <a v-for="item in caseStudies" :key="item.slug" :href="caseStudyPath(item.slug)">{{ item.title }}</a>
+        </nav>
+      </details>
     </aside>
     <div class="project-studio">
-      <header class="project-heading">
-        <div><p>{{ project.status }}</p><component :is="caseStudy ? 'h1' : 'h2'" id="project-title">{{ project.title }}</component></div>
-        <NuxtLink v-if="!caseStudy" class="button-primary" :to="caseStudyPath(project.slug)">Case study</NuxtLink>
-        <NuxtLink v-else class="button-secondary" :to="{ path: '/', query: { project: project.slug }, hash: '#work' }">← Back to project</NuxtLink>
+      <header v-if="!caseStudy" class="project-heading">
+        <div><p>{{ project.status }}</p><h2 id="project-title">{{ project.title }}</h2></div>
+        <NuxtLink class="button-primary" :to="caseStudyPath(project.slug)">Case study</NuxtLink>
       </header>
       <slot v-if="caseStudy" />
       <div v-else class="project-desk">
@@ -111,7 +118,7 @@ const onProjectClick = (event: MouseEvent, slug: string) => {
 .project-list strong, .project-list small { display: block; }
 .project-list strong { font-size: 14px; font-weight: 500; line-height: 1.4; }
 .project-list small { font-size: 12px; color: var(--muted); margin-top: 4px; }
-.mobile-projects { display: none; }
+.mobile-projects, .mobile-project-links { display: none; }
 .project-studio { min-width: 0; }
 .project-heading { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 22px 26px; border-bottom: 1px solid var(--line); }
 .project-heading p { margin: 0 0 5px; color: var(--muted); font-size: 12px; }
@@ -162,6 +169,9 @@ const onProjectClick = (event: MouseEvent, slug: string) => {
   .project-index { padding: 12px 18px; border-right: 0; border-bottom: 1px solid var(--line); }
   .index-label, .project-list { display: none; }
   .mobile-projects { display: block; width: 100%; padding: 11px; background: var(--canvas); color: var(--ink); border: 1px solid var(--line); font-size: 16px; }
+  .mobile-project-links { display: block; font-size: 14px; }
+  .mobile-project-links summary { padding: 12px 0; cursor: pointer; }
+  .mobile-project-links a { display: block; padding: 10px 0; text-underline-offset: 3px; }
   .project-heading { padding: 19px 18px; flex-wrap: wrap; gap: 14px; }
   .project-canvas { padding: 15px 14px; }
   .project-inspector { display: block; padding: 20px 18px; }
