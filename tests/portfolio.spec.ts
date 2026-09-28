@@ -80,7 +80,7 @@ test('static host preserves redirects and useful 404 responses', async ({ reques
 });
 
 for (const colorScheme of ['light', 'dark'] as const) {
-  for (const path of ['/', ...caseStudies.map(project => `/work/${project.slug}/`)]) {
+  for (const path of ['/', ...caseStudies.map(project => `/work/${project.slug}/`), '/contact/', '/missing-page/']) {
     test(`accessibility ${colorScheme} ${path}`, async ({ page }) => {
       await page.emulateMedia({ colorScheme });
       await page.goto(path);

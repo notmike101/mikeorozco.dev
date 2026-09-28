@@ -1,6 +1,7 @@
-name: Deploy to GH Pages
+name: Validate and deploy portfolio
 
 on:
+  pull_request:
   push:
     branches:
        - main
@@ -9,11 +10,9 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: "pages"
+  group: "portfolio-${{ github.event.pull_request.number || github.ref }}"
   cancel-in-progress: false
 
 jobs:
@@ -50,7 +49,7 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Type-check application
         run: pnpm run typecheck
@@ -58,12 +57,34 @@ jobs:
       - name: Generate static HTML
         run: pnpm run generate
 
+      - name: Verify generated content and metadata
+        run: pnpm test
+
+      - name: Install browser for validation
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Verify accessibility, reading extraction, and navigation
+        run: pnpm test:browser
+
+      - name: Preserve browser failure traces
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-test-results
+          path: test-results/
+          if-no-files-found: ignore
+
       - name: Upload artifacts
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./.output/public
 
   deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
