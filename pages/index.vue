@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { additionalProjects, caseStudies } from '~/data/caseStudies';
+import { additionalProjects } from '~/data/caseStudies';
 import { defaultDescription, defaultSocialImage, defaultTitle, siteUrl } from '~/utils/site';
 
-const featuredProjects = caseStudies.filter((project) => project.featured);
-const moreProjects = caseStudies.filter((project) => !project.featured);
+const emailHref = (subject: string) => `mailto:me@mikeorozco.dev?subject=${encodeURIComponent(subject)}`;
 
 const proofPoints = [
   { value: '13+', label: 'Years in web and software development' },
@@ -12,30 +11,149 @@ const proofPoints = [
 
 const capabilities = [
   {
-    number: '01',
-    title: 'Frontend architecture & authoring tools',
-    description: 'Reusable browser runtimes and Vue authoring interfaces that let content teams configure product tours and sales demos.',
+    title: 'Frontend architecture',
+    description: 'Reusable component systems, content-authoring tools, and responsive applications across web, desktop, and mobile.',
+    skills: ['TypeScript', 'JavaScript', 'Vue', 'React', 'Nuxt', 'Web Components', 'Electron', 'React Native'],
+    links: [{ label: 'MealMind', href: '/work/mealmind' }, { label: 'ZCode Extensions', href: '/work/zcode-desktop-extensions' }],
   },
   {
-    number: '02',
-    title: 'Interactive web applications',
-    description: 'Product tours and virtual sales demos built with Three.js, Babylon.js, Vue, React, and TypeScript.',
+    title: 'Interactive 3D & authoring',
+    description: 'Product tours, virtual sales demos, shared browser runtimes, and editors that turn content into interactive experiences.',
+    skills: ['Three.js', 'Babylon.js', 'WebGL', 'Unity web UI', 'JSON manifests'],
+    links: [{ label: '3D Product Tour', href: '/work/immersive-product-platform' }],
   },
   {
-    number: '03',
-    title: 'Backend, cloud & performance',
-    description: 'Node.js APIs, data integrations, Azure migrations, Cloudflare delivery, Docker, and CI/CD.',
+    title: 'Backend & data integration',
+    description: 'API design, data models, and integration layers connecting applications to databases and external services. Recent contributions also include Java/Spring Boot APIs.',
+    skills: ['Node.js', 'Python', 'REST', 'GraphQL', 'SOAP', 'PostgreSQL', 'MySQL', 'MongoDB', 'SQLite'],
+    links: [{ label: 'Quire', href: '/work/quire' }, { label: 'Monrovia', href: '/work/monrovia-web-platform' }],
   },
   {
-    number: '04',
-    title: 'Developer tooling & technical leadership',
-    description: 'Codex plugins for engineering workflows and a local MCP usage-reporting prototype, alongside code review, security remediation, and mentorship.',
+    title: 'Cloud & delivery',
+    description: 'Cloud migrations, containerized applications, deployment pipelines, and ongoing service operation, from client hosting to enterprise infrastructure.',
+    skills: ['Microsoft Azure', 'AWS', 'Docker', 'Cloudflare', 'GitHub Actions', 'CI/CD'],
+    links: [{ label: 'Monrovia', href: '/work/monrovia-web-platform' }],
+  },
+  {
+    title: 'Performance engineering',
+    description: 'Browser preloading, API caching, CDN delivery, and 3D asset optimization, with attention to loading time, runtime cost, and visual quality.',
+    skills: ['Caching', 'Load balancing', 'Preloading', 'Asset compression'],
+    links: [{ label: 'Pack3D', href: '/work/pack3d' }, { label: 'Monrovia', href: '/work/monrovia-web-platform' }],
+  },
+  {
+    title: 'Developer tools & AI workflows',
+    description: 'Plugins, CLI helpers, and integrations for planning, implementation, testing, and review. Local prototypes explore LangGraph orchestration and A2A agent communication.',
+    skills: ['Codex', 'MCP', 'Jira', 'Confluence', 'Figma', 'LangChain'],
+    links: [{ label: 'Engineering Marketplace', href: '/work/engineering-workflow-tooling' }, { label: 'ZCode Extensions', href: '/work/zcode-desktop-extensions' }],
+  },
+  {
+    title: 'Application security',
+    description: 'Vulnerability investigation, reproducible findings, and practical fixes. Work spans enterprise remediation, confidential client assessments, and independent research.',
+    skills: ['Secure coding', 'Penetration testing', 'Impact analysis', 'Responsible reporting'],
+    links: [{ label: 'Quire', href: '/work/quire' }, { label: 'Security research', href: '/#research' }],
+  },
+  {
+    title: 'Technical leadership & consulting',
+    description: 'Architecture and code review, developer mentoring, requirements clarification, and delivery ownership. Explain technical decisions to clients and cross-functional teams.',
+    skills: ['Architecture reviews', 'Mentoring', 'Technical documentation', 'Client consulting'],
+    links: [{ label: '3D Product Tour', href: '/work/immersive-product-platform' }],
+  },
+];
+
+const experience = [
+  {
+    company: 'Thermo Fisher Scientific',
+    role: 'Developer III (Senior Software Engineer)',
+    period: 'Sep 2022 — Present',
+    scope: 'Immersive Technologies · Digital Engineering',
+    highlights: [
+      'Led the 3D Product Tour and built Vue authoring tools for tours and sales demos. Collaborated on the shared Three.js/Babylon.js runtime and later took on broader stewardship of the ecosystem.',
+      'Built a templated, sandboxed web interface for Unity experiences, with asynchronous loading and HTML-based authoring.',
+      'Created and maintained a Codex plugin marketplace for engineering workflows, including Jira, Confluence, and Figma integrations. Built a local MCP usage-reporting prototype.',
+      'Remediated persistent XSS, SQL injection, and denial-of-service issues. Reviewed architecture and code, mentored developers, and contributed Java/Spring Boot endpoints and service refactoring across teams.',
+    ],
+    recognition: 'Outstanding Achievement for the 3D Product Tour · Innovation Award for foundational technical solutions',
+    links: [{ label: '3D Product Tour', href: '/work/immersive-product-platform' }, { label: 'Engineering Marketplace', href: '/work/engineering-workflow-tooling' }],
+  },
+  {
+    company: 'Independent Consulting',
+    role: 'Freelance Web & Software Developer',
+    period: 'Jan 2013 — Present',
+    scope: 'Client engagements across e-commerce, healthcare, legal services, and education',
+    highlights: [
+      'Delivered 50+ custom web and software solutions, often as the sole engineer from discovery and architecture through implementation, deployment, and ongoing support.',
+      'Built frontend and backend applications with React, Vue, Node.js, Python, and SQL. Managed multiple engagements and explained technical trade-offs to nontechnical clients.',
+      'Performed confidential application-security assessments and penetration testing, with reproducible findings, impact analysis, and remediation guidance.',
+    ],
+  },
+  {
+    company: 'Monrovia Plants',
+    role: 'Web Developer',
+    period: 'Apr 2019 — Oct 2021',
+    scope: 'Web infrastructure · Backend integration · Community products',
+    highlights: [
+      'Migrated web services to Azure, reducing hosting costs and improving website response time by approximately 20%. A separate Cloudflare integration reduced average page load times by approximately 30%.',
+      'Designed a unified Node.js API over SOAP services, MySQL, and external data, using caching, load balancing, and modular services.',
+      'Built a Nuxt and Docker community application with server-side rendering and plant recommendations, partnering with marketing and IT.',
+    ],
+    links: [{ label: 'Monrovia infrastructure', href: '/work/monrovia-web-platform' }],
+  },
+  {
+    company: 'MKTR INC',
+    role: 'UI/UX Programmer',
+    period: 'Jun 2018 — Dec 2018',
+    scope: 'E-commerce SaaS · Web and mobile',
+    highlights: [
+      'Led the Vue frontend and reusable component library for a SaaS product serving online retailers. Integrated its REST API with error handling and logging.',
+      'Built a cross-platform React Native application and incorporated design and user-testing feedback into the interfaces.',
+    ],
+  },
+];
+
+const earlierExperience = [
+  {
+    company: 'Valiant Technology',
+    role: 'Technical Support Technician',
+    period: 'Jul 2017 — May 2018',
+    description: 'Diagnosed workstation, network, and server issues across client environments. Managed approximately 200 support tickets per month and automated recurring support tasks.',
+  },
+  {
+    company: 'Artris',
+    role: 'Frontend Web Developer',
+    period: 'Aug 2015 — Dec 2016',
+    description: 'Maintained a JavaScript performance library using page preloading and caching. Built the company website and demonstrated the library against real sites.',
+  },
+  {
+    company: 'InTouch Marketing LLC',
+    role: 'Frontend Developer',
+    period: 'Jan 2015 — Sep 2015',
+    description: 'Led development and maintenance across 30+ client websites. Built WordPress themes and plugins, HubSpot templates, and managed virtual-server environments.',
+  },
+  {
+    company: 'TOTAL PC',
+    role: 'On-Site Technician',
+    period: 'May 2014 — Jan 2015',
+    description: 'Provided hardware and software troubleshooting, system setup, hardware replacement, and data-recovery assistance for residential and business customers.',
+  },
+  {
+    company: 'MedeMedia',
+    role: 'Web Developer',
+    period: 'Nov 2013 — Feb 2014',
+    description: 'Led a small web-development team, coordinated deployments, built administrative interfaces, and collaborated on an online reading and content-sharing platform.',
+  },
+  {
+    company: 'Yuba-Sutter Chamber of Commerce',
+    role: 'Marketing & Technical Intern',
+    period: 'Sep 2012 — Mar 2013',
+    description: 'Created web marketing assets and newsletter templates, maintained business data, and helped migrate the organization to an updated database.',
   },
 ];
 
 const organizations = [
   { name: 'Thermo Fisher Scientific', logo: '/images/thermofisher.svg', url: 'https://www.thermofisher.com' },
   { name: 'Monrovia', logo: '/images/monrovia.svg', url: 'https://www.monrovia.com' },
+  { name: 'MKTR INC', logo: '/images/mktr.png', url: 'https://www.mktr.co/', dark: true },
+  { name: 'Valiant Technology', logo: '/images/valiant.svg', url: 'https://thevaliantway.com/', dark: true },
   { name: 'InTouch Marketing', logo: '/images/intouch-marketing.png', url: 'https://intouch-marketing.com' },
   { name: 'Katz Law', logo: '/images/katzlaw.png', url: 'https://www.katzlaw.com' },
   { name: 'Yuba-Sutter Chamber of Commerce', logo: '/images/yuba-sutter-chamber-of-commerce.png', url: 'https://www.yubasutterchamber.com' },
@@ -85,600 +203,151 @@ useHead({
   ],
 });
 </script>
-
 <template>
-  <div class="content-wrapper">
-    <section class="hero">
-      <div class="page-container">
-        <div class="hero-copy">
-          <p class="eyebrow" style="margin: 0;">Mike Orozco &bullet; Texas, USA</p>
-          <h1 class="display-title">Senior software engineer.</h1>
-          <p class="lede">
-            I build frontend systems, Vue authoring tools, and developer tools for product teams. My work spans interactive 3D experiences, client software, performance, and technical leadership.
-          </p>
-          <div class="hero-actions">
-            <a class="button-primary" href="#work">View past work</a>
-            <NuxtLink class="button-secondary" to="/contact">Contact me</NuxtLink>
+  <div class="page-container portfolio-home">
+    <section class="portfolio-intro">
+      <div><p class="location">Texas, USA</p><h1>Senior software engineer</h1></div>
+      <div>
+        <p class="intro-copy">I build frontend systems, Vue authoring tools, and developer tools for product teams. My work spans interactive 3D experiences, client software, performance, and technical leadership.</p>
+        <div class="career-highlights" aria-label="Career highlights">
+          <p v-for="point in proofPoints" :key="point.label"><strong>{{ point.value }}</strong><span>{{ point.label }}</span></p>
+        </div>
+      </div>
+    </section>
+    <ProjectWorkbench />
+    <section id="capabilities" class="portfolio-section" aria-labelledby="capabilities-title">
+      <h2 id="capabilities-title">Capabilities</h2>
+      <div class="capability-grid">
+        <article v-for="capability in capabilities" :key="capability.title">
+          <h3>{{ capability.title }}</h3>
+          <p>{{ capability.description }}</p>
+          <ul class="capability-skills" :aria-label="`${capability.title} skills`"><li v-for="skill in capability.skills" :key="skill">{{ skill }}</li></ul>
+          <div class="evidence-links"><NuxtLink v-for="link in capability.links" :key="link.href" :to="link.href">{{ link.label }} <span aria-hidden="true">↗</span></NuxtLink></div>
+        </article>
+      </div>
+    </section>
+    <section id="experience" class="portfolio-section" aria-labelledby="experience-title">
+      <h2 id="experience-title">Experience</h2>
+      <div class="experience-list">
+        <article v-for="job in experience" :key="job.company" class="experience-entry">
+          <span class="experience-period">{{ job.period }}</span>
+          <div>
+            <h3>{{ job.company }}</h3>
+            <p class="experience-role">{{ job.role }}</p>
+            <p class="experience-scope">{{ job.scope }}</p>
+            <ul class="experience-highlights"><li v-for="highlight in job.highlights" :key="highlight">{{ highlight }}</li></ul>
+            <p v-if="job.recognition" class="experience-recognition"><span>Awards</span>{{ job.recognition }}</p>
+            <div v-if="job.links" class="evidence-links"><NuxtLink v-for="link in job.links" :key="link.href" :to="link.href">{{ link.label }} <span aria-hidden="true">↗</span></NuxtLink></div>
           </div>
-        </div>
+        </article>
+        <h3 class="earlier-title">Earlier experience</h3>
+        <article v-for="job in earlierExperience" :key="job.company" class="experience-entry earlier-entry">
+          <span class="experience-period">{{ job.period }}</span>
+          <div><h4>{{ job.company }}</h4><p class="experience-role">{{ job.role }}</p><p>{{ job.description }}</p></div>
+        </article>
       </div>
     </section>
-
-    <section aria-label="Career highlights" class="proof-section">
-      <div class="page-container proof-grid">
-        <div v-for="point in proofPoints" :key="point.label" class="proof-item">
-          <strong>{{ point.value }}</strong>
-          <span>{{ point.label }}</span>
-        </div>
+    <section id="research" class="portfolio-section" aria-labelledby="research-title">
+      <h2 id="research-title">Open source &amp; research</h2>
+      <div class="research-list">
+        <article v-for="project in additionalProjects" :key="project.title">
+          <h3><a :href="project.repository" target="_blank" rel="noopener noreferrer">{{ project.title }} <span aria-hidden="true">↗</span></a></h3>
+          <p>{{ project.description }}</p>
+          <ul class="research-tags" aria-label="Technologies"><li v-for="tag in project.tags" :key="tag">{{ tag }}</li></ul>
+        </article>
       </div>
     </section>
-
-    <section id="experience" class="experience-section" aria-labelledby="experience-title">
-      <div class="page-container">
-        <header>
-          <h3>Experience &amp; recognition</h3>
-          <h2 id="experience-title" class="section-title">Enterprise products, client software, and web performance</h2>
-          <p class="lede">
-            I work across implementation, architecture, developer tools, security, and technical guidance, with hands-on ownership from design through maintenance.
-          </p>
-        </header>
-        <div class="experience-copy">
-          <div class="experience-list">
-            <article>
-              <span>2022—Present</span>
-              <div>
-                <h3>Senior Software Engineer, Immersive Technologies</h3>
-                <p>Led development of the 3D Product Tour, built Vue authoring and configuration tools, and collaborated on the shared runtime. Developed a team Codex plugin marketplace and a local MCP usage-reporting prototype.</p>
-              </div>
-            </article>
-            <article>
-              <span>2013—Present</span>
-              <div>
-                <h3>Independent Web &amp; Software Engineer</h3>
-                <p>Delivered 50+ custom web and software solutions across client engagements, often owning architecture, implementation, deployment, and support.</p>
-              </div>
-            </article>
-            <article>
-              <span>2019—2021</span>
-              <div>
-                <h3>Web Developer, Monrovia Plants</h3>
-                <p>Azure migration improved website response time by approximately 20%. A separate Cloudflare integration reduced average page load times by approximately 30%.</p>
-              </div>
-            </article>
-            <article>
-              <span>2022</span>
-              <div>
-                <h3>Thermo Fisher Scientific awards</h3>
-                <p>Outstanding Achievement for the 3D Product Tour and an Innovation Award for foundational technical solutions.</p>
-              </div>
-            </article>
-          </div>
-        </div>
+    <section class="portfolio-section" aria-labelledby="organizations-title">
+      <h2 id="organizations-title">Organizations I've supported</h2>
+      <div class="organizations">
+        <a v-for="organization in organizations" :key="organization.name" :href="organization.url" :class="{ 'dark-logo': organization.dark }" target="_blank" rel="noopener noreferrer" :aria-label="organization.name"><img :src="organization.logo" :alt="organization.name" loading="lazy" /></a>
+        <p class="other-organizations">Artris <span>·</span> TOTAL PC <span>·</span> MedeMedia</p>
       </div>
     </section>
-
-    <section id="work" class="work-section" aria-labelledby="work-title">
-      <div class="page-container">
-        <header>
-          <h3>Past work</h3>
-          <h2 id="work-title" class="section-title">Selected engineering work</h2>
-          <p class="lede">
-            Enterprise platforms, independent applications, and tools that make complex work easier to build and maintain.
-          </p>
-        </header>
-        <ProjectRow
-          v-for="(project, index) in featuredProjects"
-          :key="project.slug"
-          :project="project"
-          :reverse="index % 2 === 1"
-        />
-        <div class="more-work" aria-labelledby="more-work-title">
-          <h3 id="more-work-title">More engineering stories</h3>
-          <div class="more-work-grid">
-            <article v-for="project in moreProjects" :key="project.slug">
-              <p class="eyebrow">{{ project.status }}</p>
-              <h4>{{ project.title }}</h4>
-              <p>{{ project.summary }}</p>
-              <NuxtLink class="text-link" :to="`/work/${project.slug}`" :aria-label="`Read the case study: ${project.title}`">
-                Read the case study <span aria-hidden="true">→</span>
-              </NuxtLink>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="capabilities" class="capability-section" aria-labelledby="capabilities-title">
-      <div class="page-container">
-        <header>
-          <h3>Capabilities</h3>
-          <h2 id="capabilities-title" class="section-title">What I build and maintain</h2>
-        </header>
-        <div class="capability-grid">
-          <article v-for="capability in capabilities" :key="capability.number">
-            <h3>{{ capability.title }}</h3>
-            <p>{{ capability.description }}</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="research" class="labs-section" aria-labelledby="labs-title">
-      <div class="page-container">
-        <header>
-          <h3>Open source &amp; research</h3>
-          <h2 id="labs-title" class="section-title">Open-source tools and research projects</h2>
-        </header>
-        <div class="labs-list">
-          <article v-for="project in additionalProjects" :key="project.title">
-            <h3>{{ project.title }}</h3>
-            <p>{{ project.description }}</p>
-            <div class="tag-row">
-              <span v-for="tag in project.tags" :key="tag">{{ tag }}</span>
-            </div>
-            <a class="text-link" :href="project.repository" target="_blank" rel="noopener noreferrer">
-              View repository <span aria-hidden="true">↗</span>
-            </a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="organizations-section" aria-labelledby="organizations-title">
-      <div class="page-container">
-        <header>
-          <h3 id="organizations-title">Organizations I've supported</h3>
-        </header>
-        <div class="organization-grid">
-          <a
-            v-for="organization in organizations"
-            :key="organization.name"
-            :href="organization.url"
-            target="_blank"
-            rel="noopener noreferrer"
-            :aria-label="organization.name"
-          >
-            <img :src="organization.logo" :alt="organization.name" loading="lazy" />
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="contact-section" aria-labelledby="contact-title">
-      <div class="page-container contact-grid">
-        <header>
-          <h3>Start a conversation</h3>
-          <h2 id="contact-title" class="section-title">Hiring for a senior role or planning a complex project?</h2>
-        </header>
-        <div class="contact-copy">
-          <p>Share the role or project, the current challenge, and what kind of engineering help you need.</p>
-          <NuxtLink class="button-primary" to="/contact">Choose a contact path</NuxtLink>
-        </div>
+    <section id="contact" class="portfolio-section contact-section" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact</h2>
+      <div class="contact-options">
+        <article>
+          <h3>Hiring opportunity</h3>
+          <p>For senior engineering roles involving frontend architecture, interactive web applications, developer tooling, or technical leadership.</p>
+          <a class="button-secondary" :href="emailHref('Senior engineering opportunity')">Discuss an opportunity</a>
+        </article>
+        <article>
+          <h3>Consulting project</h3>
+          <p>For custom software, SaaS products, web development, architecture reviews, or focused implementation.</p>
+          <a class="button-secondary" :href="emailHref('Consulting project inquiry')">Discuss a project</a>
+        </article>
       </div>
     </section>
   </div>
 </template>
 
 <style scoped>
-.content-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  padding: 15px 0;
+.portfolio-intro { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 42px; padding: 34px 26px; align-items: center; }
+.location { font-size: 12px; color: var(--muted); margin: 0 0 12px; }
+.portfolio-intro h1 { font-size: clamp(36px, 3.5vw, 48px); line-height: 1.05; letter-spacing: -1.9px; font-weight: 500; margin: 0; max-width: 14ch; }
+.intro-copy { margin: 0; max-width: 78ch; font-size: 15px; line-height: 1.65; }
+.career-highlights { display: flex; gap: 26px; margin-top: 22px; }
+.career-highlights p { display: flex; align-items: baseline; gap: 9px; margin: 0; }
+.career-highlights strong { font-size: 23px; font-weight: 500; letter-spacing: -.8px; }
+.career-highlights span { font-size: 12px; color: var(--muted); }
+.portfolio-section { padding: 30px 26px; display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 26px; border-bottom: 1px solid var(--line); }
+.portfolio-section > h2 { font-size: 22px; font-weight: 500; letter-spacing: -.5px; line-height: 1.25; margin: 0; }
+.portfolio-section h3 { margin: 0; font-size: 16px; font-weight: 500; line-height: 1.4; }
+.portfolio-section p { color: var(--muted); font-size: 14px; line-height: 1.65; margin: 6px 0 0; }
+.capability-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 34px; }
+.capability-grid article { display: flex; flex-direction: column; min-width: 0; border-top: 1px solid var(--line); padding-top: 16px; }
+.capability-skills { display: flex; flex-wrap: wrap; gap: 6px 8px; list-style: none; margin: 14px 0 16px; padding: 0; }
+.capability-skills li { padding: 3px 7px; background: var(--rail); border: 1px solid var(--line); font-size: 11px; line-height: 1.5; }
+.evidence-links { display: flex; flex-wrap: wrap; gap: 7px 18px; font-size: 12px; }
+.evidence-links a { color: var(--accent); text-underline-offset: 3px; }
+.capability-grid .evidence-links { margin-top: auto; }
+.experience-entry { display: grid; grid-template-columns: 145px minmax(0, 1fr); gap: 24px; padding: 24px 0; border-top: 1px solid var(--line); }
+.experience-entry:first-child { padding-top: 0; border: 0; }
+.experience-entry:last-child { padding-bottom: 0; }
+.experience-period { font-size: 12px; color: var(--muted); padding-top: 3px; }
+.portfolio-section .experience-role { color: var(--ink); font-size: 14px; margin-top: 4px; }
+.portfolio-section .experience-scope { font-size: 12px; margin-top: 3px; }
+.experience-highlights { margin: 16px 0; padding-left: 16px; list-style: disc; color: var(--muted); font-size: 14px; line-height: 1.65; }
+.experience-highlights li + li { margin-top: 9px; }
+.experience-highlights li::marker { color: var(--accent); }
+.portfolio-section .experience-recognition { margin: 16px 0; padding: 12px 14px; background: var(--accent-soft); font-size: 12px; color: var(--ink); }
+.experience-recognition > span { display: block; color: var(--accent); margin-bottom: 4px; font-weight: 500; }
+.portfolio-section .earlier-title { padding: 8px 0 16px; font-size: 13px; color: var(--muted); }
+.earlier-entry { padding-block: 18px; }
+.earlier-entry h4 { margin: 0; font-size: 15px; font-weight: 500; line-height: 1.4; }
+.earlier-entry .experience-role { font-size: 12px; }
+.earlier-entry p:last-child { font-size: 13px; }
+.research-list { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 34px; }
+.research-list article { padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+.research-list article:nth-last-child(-n + 2) { border-bottom: 0; }
+.research-list a { text-decoration: none; }
+.research-list a:hover { color: var(--accent); }
+.research-tags { display: flex; gap: 6px 13px; flex-wrap: wrap; padding: 0; list-style: none; margin: 12px 0 0; color: var(--muted); font-size: 12px; }
+.organizations { display: flex; flex-wrap: wrap; gap: 22px; align-items: center; }
+.organizations a { width: 130px; min-height: 70px; padding: 10px; display: grid; place-items: center; background: #fff; border-radius: 2px; }
+.organizations img { display: block; max-height: 42px; max-width: 110px; object-fit: contain; }
+.organizations a.dark-logo { background: #242833; }
+.other-organizations { flex-basis: 100%; margin: 0 !important; }
+.other-organizations span { padding-inline: 10px; }
+.contact-section { border-bottom: 0; }
+.contact-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 34px; min-width: 0; }
+.contact-options article { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }
+.contact-options p { margin-bottom: 18px; }
+.contact-options .button-secondary { margin-top: auto; font-size: 13px; }
+@media (max-width: 920px) {
+  .portfolio-intro { grid-template-columns: 250px minmax(0, 1fr); gap: 24px; }
+  .career-highlights { gap: 16px; }
+  .career-highlights p { display: block; }
+  .career-highlights span { display: block; }
 }
-
-.section-intro {
-  margin-bottom: clamp(1rem, 1vh, 4rem);
-
-  & .lede {
-    margin-top: 1.5rem;
-  }
-}
-
-.hero {
-  padding-top: clamp(3rem, 1vh, 8rem);
-
-  & .hero-copy {
-    align-self: flex-start;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    height: 100%;
-  }
-
-  & .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-top: auto;
-  }
-
-  @media screen and (max-width: 767px) {
-    & .hero-actions {
-      flex-direction: column;
-    }
-  }
-}
-
-.proof-section {
-  border-block: 1px solid var(--line);
-
-  & .proof-grid {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-    @media screen and (max-width: 767px) {
-      flex-direction: column;
-    }
-
-    & .proof-item {
-      flex: 1;
-      padding: 2rem clamp(1rem, 3vw, 2rem);
-      border-left: 1px solid var(--line);
-
-      @media screen and (max-width: 767px) {
-        border-left: 0;
-        border-right: 1px solid var(--line);
-        border-top: 1px solid var(--line);
-      }
-
-      &:last-child {
-        border-right: 1px solid var(--line);
-      }
-
-      & strong,
-      & span {
-        display: block;
-      }
-    
-      & strong {
-        font-family: "IBM Plex Serif", Georgia, serif;
-        font-size: 2.25rem;
-        font-weight: 500;
-        line-height: 1;
-      }
-
-      & span {
-        margin-top: 0.75rem;
-        color: var(--muted);
-        font-size: 0.8125rem;
-        line-height: 1.5;
-      }
-    }
-  }
-}
-
-.experience-section {
-  border-block: 1px solid var(--line);
-  padding-block: clamp(3rem, 1vh, 8rem);
-  background-color: var(--surface);
-
-  & header {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-bottom: 15px;
-
-    & h3 {
-      color: var(--accent);
-      font-size: 0.8125rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      line-height: 1.3;
-      text-transform: uppercase;
-    }
-  }
-
-  & .experience-list {
-    & article {
-      display: flex;
-      flex-direction: row;
-      gap: 1.5rem;
-      padding-block: 1.5rem;
-      border-top: 1px solid var(--line);
-      align-items: center;
-
-      @media screen and (max-width: 767px) {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 5px;
-      }
-
-      & span {
-        flex: 0 1 fit-content;
-        color: var(--muted);
-        font-size: 0.75rem;
-        font-weight: 600;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-      }
-
-      & > div {
-        flex: 1;
-
-        & h3 {
-          font-family: "IBM Plex Serif", Georgia, serif;
-          font-size: 1.25rem;
-          margin: 0;
-          padding: 0;
-        }
-
-        & p {
-          color: var(--muted);
-        }
-      }
-    }
-  }
-}
-
-.work-section {
-  padding-block: clamp(3rem, 1vh, 8rem);
-
-  & header {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-bottom: 15px;
-
-    & h3 {
-      color: var(--accent);
-      font-size: 0.8125rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      line-height: 1.3;
-      text-transform: uppercase;
-    }
-  }
-}
-
-.more-work {
-  margin-top: 2rem;
-}
-
-.more-work > h3 {
-  margin-bottom: 1rem;
-  font-family: "IBM Plex Serif", Georgia, serif;
-  font-size: 1.4rem;
-}
-
-.more-work-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.5rem;
-}
-
-.more-work-grid article {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: clamp(1.25rem, 3vw, 2rem);
-  border: 1px solid var(--line);
-  background: var(--surface);
-}
-
-.more-work-grid h4 {
-  margin: 0;
-  font-family: "IBM Plex Serif", Georgia, serif;
-  font-size: 1.65rem;
-  line-height: 1.25;
-}
-
-.more-work-grid p:not(.eyebrow) {
-  color: var(--muted);
-}
-
-.more-work-grid .text-link {
-  margin-top: auto;
-}
-
-@media (max-width: 760px) {
-  .more-work-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.capability-section {
-  border-block: 1px solid var(--line);
-  padding-block: clamp(3rem, 1vh, 8rem);
-  background-color: var(--surface);
-  gap: 15px;
-
-  & header {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-bottom: 15px;
-
-    & h3 {
-      color: var(--accent);
-      font-size: 0.8125rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      line-height: 1.3;
-      text-transform: uppercase;
-    }
-  }
-
-  & .capability-grid {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    border-top: 1px solid var(--line);
-    border-left: 1px solid var(--line);
-
-    @media screen and (max-width: 767px) {
-      flex-direction: column;
-    }
-
-    & h3 {
-      font-family: "IBM Plex Serif", Georgia, serif;
-      font-size: 1.25rem;
-    }
-
-    & p {
-      color: var(--muted);
-    }
-
-    & article {
-      flex: 1 1 50%;
-      padding: clamp(1.5rem, 4vw, 3rem);
-      border-right: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      gap: 15px;
-
-      & > span {
-        color: var(--accent);
-        font-size: 0.75rem;
-        font-weight: 600;
-      }
-    }
-  }
-}
-
-.labs-section {
-  padding-block: clamp(3rem, 1vh, 8rem);
-
-  & header {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-bottom: 15px;
-
-    & h3 {
-      color: var(--accent);
-      font-size: 0.8125rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      line-height: 1.3;
-      text-transform: uppercase;
-    }
-  }
-
-  & .labs-list {
-    display: flex;
-    flex-direction: column;
-
-    & h3 {
-      font-family: "IBM Plex Serif", Georgia, serif;
-      font-size: 1.25rem;
-    }
-
-    & p {
-      color: var(--muted);
-    }
-
-    & article {
-      padding-block: 1.75rem;
-      border-top: 1px solid var(--line);
-
-      & .tag-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        margin-block: 1rem;
-
-        & span {
-          padding: 0.25rem 0.5rem;
-          border: 1px solid var(--line);
-          border-radius: 0.25rem;
-          color: var(--muted);
-          font-size: 0.75rem;
-        }
-      }
-    }
-  }
-}
-
-.organizations-section {
-  border-block: 1px solid var(--line);
-  padding-block: clamp(3rem, 1vh, 8rem);
-  background-color: var(--surface);
-  gap: 15px;
-
-  & header {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-bottom: 15px;
-    text-align: center;
-
-    & h3 {
-      color: var(--accent);
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      line-height: 1.3;
-      text-transform: uppercase;
-    }
-  }
-
-  & .organization-grid {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-
-    & a {
-      width: min(100%, 10rem);
-      place-items: center;
-
-      &:hover {
-        & img {
-          filter: grayscale(0);
-          opacity: 1;
-        }
-      }
-
-      & img {
-        max-height: 4rem;
-        object-fit: contain;
-        filter: grayscale(0.9);
-        opacity: 0.6;
-        transition: filter 160ms ease, opacity 160ms ease;
-      }
-    }
-  }
-}
-
-.contact-section {
-  padding-block: clamp(3rem, 1vh, 8rem);
-  
-  & .contact-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-
-    & header {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      margin-bottom: 15px;
-
-      & h3 {
-        color: var(--accent);
-        font-size: 0.8125rem;
-        font-weight: 600;
-        letter-spacing: 0.12em;
-        line-height: 1.3;
-        text-transform: uppercase;
-      }
-    }
-
-    & .contact-copy {
-      max-width: 30rem;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      color: var(--muted);
-      font-size: 1.1rem;
-      text-align: center;
-    }
-  }
+@media (max-width: 620px) {
+  .portfolio-home { width: 100%; }
+  .portfolio-intro { display: block; padding: 25px 18px; }
+  .portfolio-intro h1 { margin-bottom: 20px; max-width: 15ch; }
+  .career-highlights { gap: 24px; }
+  .portfolio-section { grid-template-columns: 1fr; padding: 26px 18px; gap: 22px; }
+  .capability-grid, .research-list, .contact-options { grid-template-columns: 1fr; gap: 20px; }
+  .experience-entry { grid-template-columns: 1fr; gap: 8px; }
 }
 </style>

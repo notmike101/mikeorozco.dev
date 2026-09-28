@@ -3,13 +3,12 @@
     <div class="page-container footer-grid">
       <div>
         <p class="footer-name">Mike Orozco</p>
-        <p class="muted">Senior Software Engineer | Frontend Architecture &amp; Developer Tooling</p>
       </div>
       <nav aria-label="Footer navigation" class="footer-links">
-        <NuxtLink to="/#work">Past work</NuxtLink>
-        <NuxtLink to="/contact">Contact</NuxtLink>
+        <NuxtLink to="/#contact">Hiring &amp; consulting</NuxtLink>
         <a href="https://github.com/notmike101" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://www.linkedin.com/in/mikeoroz" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <NuxtLink to="/#research">Open source &amp; research</NuxtLink>
       </nav>
     </div>
   </footer>
@@ -18,7 +17,8 @@
 <style scoped>
 .site-footer {
   border-top: 1px solid var(--line);
-  padding-block: 2.5rem;
+  padding-block: 1.75rem;
+  background: var(--rail);
 }
 
 .footer-grid {
@@ -34,9 +34,8 @@
 }
 
 .footer-name {
-  font-family: "IBM Plex Serif", Georgia, serif;
-  font-size: 1.15rem;
-  font-weight: 600;
+  font-size: 1.4rem;
+  font-weight: 500;
 }
 
 .muted {

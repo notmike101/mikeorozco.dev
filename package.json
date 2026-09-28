@@ -11,6 +11,7 @@
     "dev": "nuxi dev",
     "generate": "nuxi generate",
     "typecheck": "nuxi typecheck",
+    "test": "node --experimental-strip-types scripts/verify-generated.mjs",
     "preview": "nuxi preview",
     "preview-generated": "pnpx serve ./dist",
     "postinstall": "nuxt prepare"

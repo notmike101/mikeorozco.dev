@@ -6,11 +6,9 @@ defineProps<{ flow: ProjectFlow }>();
 
 <template>
   <figure class="project-flow" :aria-label="flow.title">
-    <p class="flow-kicker">How it works</p>
     <p class="flow-title">{{ flow.title }}</p>
     <ol class="flow-steps" role="list">
-      <li v-for="(step, index) in flow.steps" :key="step.title">
-        <span class="step-number" aria-hidden="true">{{ String(index + 1).padStart(2, '0') }}</span>
+      <li v-for="step in flow.steps" :key="step.title">
         <strong>{{ step.title }}</strong>
         <p>{{ step.description }}</p>
       </li>
@@ -26,19 +24,9 @@ defineProps<{ flow: ProjectFlow }>();
   border: 1px solid var(--line);
   background: var(--surface);
 }
-.flow-kicker,
-.step-number {
-  margin: 0;
-  color: var(--accent);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
 .flow-title {
-  margin: 0.6rem 0 1.5rem;
-  font-family: "IBM Plex Serif", Georgia, serif;
-  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
   line-height: 1.3;
 }
 .flow-steps {
@@ -51,10 +39,8 @@ defineProps<{ flow: ProjectFlow }>();
 }
 .flow-steps li {
   padding: 1rem;
-  border-top: 2px solid var(--accent);
-  background: var(--accent-soft);
+  border-top: 1px solid var(--line);
 }
-.step-number,
 .flow-steps strong {
   display: block;
 }

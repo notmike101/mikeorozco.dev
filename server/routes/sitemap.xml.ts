@@ -6,7 +6,6 @@ export default defineEventHandler((event) => {
 
   const entries = [
     { path: '/', lastmod: '2026-09-27', priority: '1.0' },
-    { path: '/contact', lastmod: '2026-06-28', priority: '0.7' },
     ...caseStudies.map((project) => ({
       path: `/work/${project.slug}`,
       lastmod: project.updatedAt,
