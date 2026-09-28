@@ -19,7 +19,7 @@ git diff --check
 
 The generated-output assertions cover all 13 case studies and 14 supporting research entries, canonical directory URLs, sitemap parity, crawler policy, connected JSON-LD identities, safe serialization, usable static 404 content, images, contact privacy, and existing project-selection scrolling behavior.
 
-The browser suite passes all 60 tests, with no skipped or flaky tests, and covers:
+The browser suite passes all 61 tests, with no skipped or flaky tests, and covers:
 
 - Default Readability extraction on all 13 cases: title, author, summary, challenge, role, decisions, flow/diagram text, component explanations, outcomes, reflection, and public source links. Navigation and related work must stay outside the result.
 - Homepage introduction extraction and client-navigation extraction/metadata replacement. `isProbablyReaderable` returned `true` on the homepage and all 13 cases; these diagnostic values are recorded as test annotations, not used as acceptance assertions.
@@ -29,7 +29,7 @@ The browser suite passes all 60 tests, with no skipped or flaky tests, and cover
 - 320 CSS-pixel reflow and WCAG text-spacing overrides on the homepage and four varied case studies. The same pages also pass a 200% computed-text-size stress check at 1280px. This supplements, rather than replaces, native browser zoom checks.
 - Screenshot geometry checked against decoded image dimensions.
 
-Regression failures were observed before fixing article boundaries/mobile navigation, screenshot geometry, skip and route focus, selection announcements, unavailable storage, active Work navigation, and sticky-header overlap. A UTF-8 punctuation regression caught and corrected an encoding error in a one-off image-dimension script.
+Regression failures were observed before fixing article boundaries/mobile navigation, screenshot geometry, skip and route focus, selection announcements, unavailable storage, active Work navigation, and sticky-header overlap. A UTF-8 punctuation regression caught and corrected an encoding error in a one-off image-dimension script. Independent review found that clearing the Work anchor during in-place project selection moved focus off the desktop link or mobile select. Both paths were reproduced with failing tests and the route-focus watcher now preserves the active control for that update.
 
 Existing module-type warnings from Node and the existing Nuxt CLI/schema peer-version warning are unchanged. No new SEO, accessibility, or reader dependency ships to the browser; the new packages are development dependencies.
 
@@ -41,7 +41,7 @@ The service received the public portfolio JSON-LD, not private repository files.
 
 ## Controlled loading comparison
 
-The baseline was generated from the unchanged main checkout. Both versions were served by the same Node static server on localhost and measured in the same Chromium environment. Each cell is the median of three cold-cache runs. Desktop: 1280×900, no throttling. Mobile: 390×844, 4× CPU slowdown, 150ms latency, 200,000 bytes/s download and 93,750 bytes/s upload. Observe through network idle plus 1.5 seconds, without input.
+The baseline was generated from the unchanged main checkout. Post-change samples were taken at `9ab4353`, before the final review's in-place focus guard. Both versions were served by the same Node static server on localhost and measured in the same Chromium environment. Each cell is the median of three cold-cache runs. Desktop: 1280×900, no throttling. Mobile: 390×844, 4× CPU slowdown, 150ms latency, 200,000 bytes/s download and 93,750 bytes/s upload. Observe through network idle plus 1.5 seconds, without input.
 
 | Page and environment | LCP before → after | Layout-shift sum before → after | Resource transfer before → after |
 | --- | --- | --- | --- |
@@ -77,5 +77,6 @@ With a screen reader, traverse landmarks/headings and links; use skip navigation
 - The existing workbench content slot handles the article boundary; no new header-slot API was needed. Cost if the composition changes: revisit that boundary.
 - Browser dependencies were installed earlier than the plan's third task to measure the baseline. All remain development-only. Explicit `.ts` imports let the existing native Node regression script load shared helpers under Nuxt's no-emit TypeScript configuration.
 - Native acceptance gaps remain documented, and the PR is kept in draft pending those checks. Opening the PR does not mark native support or full WCAG conformance complete.
+- Independent review set aside native readers, spoken screen-reader output/native zoom, production hosting/indexing, and remote CI execution because it could not establish those outcomes. Native and post-deployment checks remain pending; GitHub Actions status is reported on the PR separately from local results. Cost: these acceptance boundaries require their own evidence before a release claim.
 
 PR builds run generated-output and browser checks with read-only repository permissions. Uploading the Pages artifact and deployment are limited to `main`; this branch is not merged or deployed by this task. After an approved merge, verify actual public redirects/status codes, canonicals, sitemap/robots, JSON-LD and rendered content through GitHub Pages, then request indexing through the site owner's normal search-console workflow if desired.

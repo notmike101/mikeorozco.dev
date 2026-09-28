@@ -82,5 +82,5 @@
 - [x] Add the existing Node checks and browser/extraction checks before deployment; run them on pull requests without deployment privileges. Document commands and manual browser checks.
 - [x] Compare controlled browser loading/layout measurements before/after. Run Schema.org validation against generated JSON-LD; record exact results and any tool/service limitations.
 - [x] Run final `pnpm typecheck`, `pnpm generate`, `pnpm test`, `pnpm test:browser`, and `git diff --check`; inspect results. Record native browser/platform gaps rather than treating emulated WebKit or extraction as native Safari proof.
-- [ ] Obtain one independent whole-branch review against the approved spec and Review Focus. Resolve significant findings with focused regressions and rerun affected/full checks as warranted.
+- [x] Obtain one independent whole-branch review against the approved spec and Review Focus. Resolve significant findings with focused regressions and rerun affected/full checks as warranted.
 - [ ] Commit, push `codex/portfolio-discovery-accessibility`, and open a PR against `main`. Attach the PR to this chat. Report automated results and pending human/native-browser checks. Do not merge.

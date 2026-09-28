@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const route = useRoute();
-watch(() => route.path + route.hash, async () => {
+watch([() => route.path, () => route.hash], async ([path, hash], [previousPath]) => {
+  // In-place project selection clears the anchor while keeping the active control.
+  if (path === '/' && path === previousPath && !hash && route.query.project) return;
   await nextTick();
   const id = route.hash.slice(1) || (route.path === '/' && route.query.project ? 'work' : 'main-content');
   const target = document.getElementById(id);

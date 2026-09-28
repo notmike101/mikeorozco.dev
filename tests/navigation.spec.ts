@@ -12,10 +12,13 @@ test('skip link transfers keyboard focus into main content', async ({ page }) =>
 
 test('keyboard selections retain focus and announce concise state', async ({ page }) => {
   await page.goto('/');
+  await page.getByRole('link', { name: 'Work', exact: true }).click();
+  await expect(page.locator('#work')).toBeFocused();
   const project = page.locator('.project-list a[href="/work/quire/"]');
   await project.focus();
   await page.keyboard.press('Enter');
   await expect(page.locator('#project-title')).toHaveText('Quire');
+  await expect(page).toHaveURL(/\?project=quire$/);
   await expect(project).toBeFocused();
   await expect(project).toHaveAttribute('aria-current', 'true');
   const component = page.getByRole('button', { name: projectLayers.quire![1]!.label, exact: true });
@@ -26,6 +29,19 @@ test('keyboard selections retain focus and announce concise state', async ({ pag
   await expect(page.getByRole('status')).toHaveText(`Selected Quire. Component: ${projectLayers.quire![1]!.label}.`);
   expect((await page.getByRole('status').innerText()).length).toBeLessThan(160);
   await expect(page.locator('#component-detail')).not.toHaveAttribute('aria-live');
+});
+
+test('mobile project selection after anchor navigation retains focus', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  await page.getByRole('link', { name: 'Work', exact: true }).click();
+  await expect(page.locator('#work')).toBeFocused();
+  const select = page.getByRole('combobox', { name: 'Projects', exact: true });
+  await select.focus();
+  await select.selectOption('quire');
+  await expect(page).toHaveURL(/\?project=quire$/);
+  await expect(select).toBeFocused();
+  await expect(select).toHaveValue('quire');
 });
 
 test('client navigation replaces metadata, article, announcement and focus', async ({ page }) => {
