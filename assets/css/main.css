@@ -75,7 +75,7 @@ a {
 
 button, input, select { font: inherit; color: inherit; }
 button, select { cursor: pointer; }
-section[id] { scroll-margin-top: 6rem; }
+section[id], #main-content, :focus { scroll-margin-top: 8rem; }
 
 .page-container {
   width: min(100% - 2rem, 88rem);

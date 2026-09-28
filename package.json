@@ -12,8 +12,9 @@
     "generate": "nuxi generate",
     "typecheck": "nuxi typecheck",
     "test": "node --experimental-strip-types scripts/verify-generated.mjs",
+    "test:browser": "playwright test",
     "preview": "nuxi preview",
-    "preview-generated": "pnpx serve ./dist",
+    "preview-generated": "node scripts/serve-generated.mjs",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
@@ -21,7 +22,11 @@
     "@fontsource/ibm-plex-serif": "^5.2.7"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@mozilla/readability": "^0.6.0",
     "@nuxtjs/tailwindcss": "^6.14.0",
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^22.20.4",
     "nuxt": "^3.21.8",
     "typescript": "^5.9.3",
     "vue-tsc": "^3.3.5"

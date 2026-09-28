@@ -1,4 +1,22 @@
 User-agent: *
 Allow: /
 
+# Search and user-requested retrieval remain allowed. Opt out of training.
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+# This also opts out of Gemini grounding, but not Google Search.
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+# Common Crawl collection has uses beyond model training.
+User-agent: CCBot
+Disallow: /
+
 Sitemap: https://mikeorozco.dev/sitemap.xml

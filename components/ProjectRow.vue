@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { caseStudyPath } from '~/utils/site';
 import type { CaseStudy } from '~/data/caseStudies';
 
 defineProps<{
@@ -20,7 +21,7 @@ defineProps<{
       <ul>
         <li v-for="outcome in project.outcomes.slice(0, 2)" :key="outcome">{{ outcome }}</li>
       </ul>
-      <NuxtLink class="text-link" :to="`/work/${project.slug}`" :aria-label="`Read the case study: ${project.title}`">
+      <NuxtLink class="text-link" :to="caseStudyPath(project.slug)" :aria-label="`Read the case study: ${project.title}`">
         Read the case study <span aria-hidden="true">→</span>
       </NuxtLink>
     </div>

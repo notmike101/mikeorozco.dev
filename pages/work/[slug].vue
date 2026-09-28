@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { caseStudySchema, serializeJsonLd } from '~/utils/structuredData';
 import { caseStudies, getCaseStudy } from '~/data/caseStudies';
-import { absoluteUrl, siteUrl } from '~/utils/site';
+import { projectLayers } from '~/data/projectLayers';
+import { absoluteUrl, caseStudyPath } from '~/utils/site';
 
 const route = useRoute();
 const project = getCaseStudy(String(route.params.slug));
@@ -9,9 +11,8 @@ if (!project) {
   throw createError({ statusCode: 404, statusMessage: 'Case study not found' });
 }
 
-const canonical = absoluteUrl(`/work/${project.slug}`);
+const canonical = absoluteUrl(caseStudyPath(project.slug));
 const socialImage = absoluteUrl(project.socialImage);
-const schemaType = project.repository ? 'SoftwareSourceCode' : 'CreativeWork';
 
 useSeoMeta({
   title: project.seoTitle,
@@ -34,51 +35,40 @@ useSeoMeta({
 
 useHead({
   link: [{ rel: 'canonical', href: canonical }],
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': schemaType,
-        '@id': `${canonical}#project`,
-        name: project.title,
-        description: project.summary,
-        url: canonical,
-        datePublished: project.publishedAt,
-        dateModified: project.updatedAt,
-        creator: { '@id': `${siteUrl}/#person` },
-        author: { '@id': `${siteUrl}/#person` },
-        codeRepository: project.repository,
-        programmingLanguage: project.stack,
-      }),
-    },
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
-          { '@type': 'ListItem', position: 2, name: 'Past work', item: `${siteUrl}/#work` },
-          { '@type': 'ListItem', position: 3, name: project.title, item: canonical },
-        ],
-      }),
-    },
-  ],
+  script: [{ key: 'page-schema', type: 'application/ld+json', innerHTML: serializeJsonLd(caseStudySchema(project)) }],
 });
 
 const relatedProjects = caseStudies.filter((item) => item.slug !== project.slug).slice(0, 2);
+const components = projectLayers[project.slug]!;
 </script>
 <template>
   <div class="page-container case-page">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><NuxtLink to="/">Home</NuxtLink><span aria-hidden="true"> / </span><span aria-current="page">{{ project.title }}</span></nav>
     <ProjectWorkbench :case-study="project">
       <article class="case-reader">
+        <header class="case-heading">
+          <p>{{ project.status }}</p>
+          <h1>{{ project.title }}</h1>
+          <p class="byline">By <NuxtLink to="/" rel="author">Mike Orozco</NuxtLink></p>
+        </header>
         <p class="case-lead">{{ project.summary }}</p>
         <div v-if="project.image" class="case-image"><ProjectVisual :project="project" eager /></div>
         <section class="reader-row" aria-labelledby="challenge-title"><h2 id="challenge-title">The challenge</h2><p>{{ project.problem }}</p></section>
         <section class="reader-row" aria-labelledby="role-title"><h2 id="role-title">Role</h2><p>{{ project.role }}</p></section>
         <section class="reader-row" aria-labelledby="stack-title"><h2 id="stack-title">Stack</h2><ul class="reader-stack"><li v-for="technology in project.stack" :key="technology">{{ technology }}</li></ul></section>
         <section class="reader-row" aria-labelledby="system-title"><h2 id="system-title">System</h2><ProjectFlow class="reader-flow" :flow="project.flow" /></section>
+        <section class="reader-row" aria-labelledby="components-title">
+          <h2 id="components-title">Components and evidence</h2>
+          <div class="component-evidence">
+            <section v-for="component in components" :key="component.id" :aria-labelledby="`evidence-${component.id}`">
+              <h3 :id="`evidence-${component.id}`">{{ component.label }}</h3>
+              <p>{{ component.description }}</p>
+              <ul v-if="component.diagram"><li v-for="node in component.diagram" :key="node.label"><strong>{{ node.label }}:</strong> {{ node.detail }}</li></ul>
+              <p v-if="component.source"><a :href="component.source.url" target="_blank" rel="noopener noreferrer">{{ component.source.label }}</a></p>
+              <p v-if="component.image"><a :href="component.image" target="_blank" rel="noopener noreferrer">View screenshot: {{ component.caption }}</a></p>
+            </section>
+          </div>
+        </section>
         <section v-for="(section, index) in project.details" :id="`decision-${index + 1}`" :key="section.title" class="reader-row" :aria-labelledby="`decision-title-${index + 1}`">
           <h2 :id="`decision-title-${index + 1}`">{{ section.title }}</h2>
           <div><p v-for="paragraph in section.paragraphs" :key="paragraph">{{ paragraph }}</p></div>
@@ -91,12 +81,12 @@ const relatedProjects = caseStudies.filter((item) => item.slug !== project.slug)
             <li v-for="link in project.links" :key="link.href"><a :href="link.href" target="_blank" rel="noopener noreferrer">{{ link.label }} ↗</a></li>
           </ul>
         </section>
-        <NuxtLink class="button-secondary" :to="{ path: '/', query: { project: project.slug }, hash: '#work' }">← Back to project</NuxtLink>
       </article>
+      <div class="case-actions"><NuxtLink class="button-secondary" :to="{ path: '/', query: { project: project.slug }, hash: '#work' }">← Back to project</NuxtLink></div>
     </ProjectWorkbench>
     <nav class="related-projects" aria-label="Related case studies">
       <h2>More work</h2><div class="related-grid">
-        <NuxtLink v-for="related in relatedProjects" :key="related.slug" :to="`/work/${related.slug}`"><span>{{ related.status }}</span><strong>{{ related.title }} →</strong></NuxtLink>
+        <NuxtLink v-for="related in relatedProjects" :key="related.slug" :to="caseStudyPath(related.slug)"><span>{{ related.status }}</span><strong>{{ related.title }} →</strong></NuxtLink>
       </div>
     </nav>
   </div>
@@ -105,6 +95,15 @@ const relatedProjects = caseStudies.filter((item) => item.slug !== project.slug)
 <style scoped>
 .case-page { padding-top: 24px; }
 .case-reader { padding: 26px; background: var(--surface); }
+.breadcrumbs { padding: 0 26px 20px; font-size: 14px; overflow-wrap: anywhere; }
+.case-heading { margin-bottom: 26px; }
+.case-heading h1 { font-size: clamp(23px, 2.2vw, 30px); line-height: 1.2; font-weight: 500; letter-spacing: -.7px; margin: 6px 0 12px; }
+.case-heading p { color: var(--muted); font-size: 14px; margin: 0; }
+.case-actions { padding: 0 26px 26px; }
+.component-evidence > section + section { margin-top: 24px; }
+.component-evidence h3 { font-size: 16px; font-weight: 500; margin: 0 0 8px; }
+.component-evidence ul, .component-evidence p + p { margin-top: 10px; }
+.component-evidence a { color: var(--accent); text-underline-offset: 3px; }
 .case-lead { margin: 0 0 26px; font-size: 18px; line-height: 1.6; max-width: 70ch; }
 .case-image { max-width: 800px; margin-bottom: 26px; }
 .reader-row { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 28px; padding-block: 25px; border-top: 1px solid var(--line); }

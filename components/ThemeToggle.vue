@@ -4,11 +4,12 @@ const isDark = ref(false);
 const applyTheme = (dark: boolean) => {
   isDark.value = dark;
   document.documentElement.classList.toggle('dark', dark);
-  localStorage.setItem('color-mode', dark ? 'dark' : 'light');
+  try { localStorage.setItem('color-mode', dark ? 'dark' : 'light'); } catch { /* Storage is optional. */ }
 };
 
 onMounted(() => {
-  const stored = localStorage.getItem('color-mode');
+  let stored: string | null = null;
+  try { stored = localStorage.getItem('color-mode'); } catch { /* Use the system preference. */ }
   const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches;
   applyTheme(stored ? stored === 'dark' : preferred);
 });

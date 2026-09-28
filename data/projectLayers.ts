@@ -5,6 +5,8 @@ export interface ProjectLayer {
   description: string;
   caption: string;
   image?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   code?: { file: string; line: number; text: string };
   diagram?: { label: string; detail: string }[];
   source?: { label: string; url: string };
@@ -16,6 +18,8 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "id": "tour",
       "label": "Product tour",
       "description": "The published Vanquish Core HPLC tour connects the instrument model to feature navigation, hotspots, and sales actions.",
+      imageWidth: 1280,
+      imageHeight: 720,
       "image": "/images/vanquish-tour.png",
       "caption": "Vanquish Core HPLC",
       "source": {
@@ -27,6 +31,8 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "id": "builder",
       "label": "Tour builder",
       "description": "The Vue builder configures parts, lighting, camera perspectives, hotspots, translations, and product actions. Shown with the published Vanquish model and manifest.",
+      imageWidth: 1280,
+      imageHeight: 720,
       "image": "/images/vanquish-builder.png",
       "caption": "3D Tour Builder",
       "source": {
@@ -381,6 +387,8 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
         "label": "View source",
         "url": "https://github.com/notmike101/quire/blob/f335236f77198d35f279e52cc21077ee473d5c90/web/src/share-v2/crypto.ts#L10-L18"
       },
+      imageWidth: 1265,
+      imageHeight: 712,
       "image": "/images/quire-conversation.png"
     },
     {
@@ -484,6 +492,8 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
         "label": "View source",
         "url": "https://github.com/notmike101/quire/blob/f335236f77198d35f279e52cc21077ee473d5c90/server/src/api/public-v2.ts#L30-L40"
       },
+      imageWidth: 520,
+      imageHeight: 360,
       "image": "/images/quire-password.png"
     }
   ],
@@ -493,6 +503,8 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "label": "Original and output comparison",
       "description": "Inspect the original and optimized model side by side. Synchronized cameras and file-size displays make it easier to judge the result.",
       "caption": "Application screenshot",
+      imageWidth: 1250,
+      imageHeight: 875,
       "image": "/images/pack3d-screenshot.png",
       "source": {
         "label": "View implementation",
@@ -573,6 +585,8 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
         "label": "View source",
         "url": "https://github.com/notmike101/meal-mind/blob/d9a0524533b2551af0b680f7a7a7fd83b0e7c846/apps/web/app/components/plan/SelectionWorkspace.vue#L171-L179"
       },
+      imageWidth: 1265,
+      imageHeight: 712,
       "image": "/images/mealmind-planning.png"
     },
     {
@@ -589,6 +603,8 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
         "label": "View source",
         "url": "https://github.com/notmike101/meal-mind/blob/d9a0524533b2551af0b680f7a7a7fd83b0e7c846/services/api/src/recipes.ts#L31-L40"
       },
+      imageWidth: 1280,
+      imageHeight: 720,
       "image": "/images/mealmind-recipe.png"
     },
     {
@@ -663,6 +679,8 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
         "label": "View source",
         "url": "https://github.com/notmike101/meal-mind/blob/d9a0524533b2551af0b680f7a7a7fd83b0e7c846/packages/domain/src/shopping.ts#L20-L28"
       },
+      imageWidth: 1280,
+      imageHeight: 720,
       "image": "/images/mealmind-shopping.png"
     },
     {
@@ -878,12 +896,16 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
     {
       id: 'journal', label: 'Reading interface', caption: 'Live journal capture',
       description: 'The public Astro site presents AI-authored articles with categories, archive navigation, and RSS. This is the actual published homepage.',
+      imageWidth: 1265,
+      imageHeight: 712,
       image: '/images/between-sessions-home.png',
       source: { label: 'Read the journal', url: 'https://ai-blog.mikeorozco.dev/' },
     },
     {
       id: 'journey', label: 'Journey record', caption: 'Live Journey capture',
       description: 'Working principles, preferences, revisions, and open questions link back to the articles supporting them. The record makes changes across sessions visible to readers.',
+      imageWidth: 1265,
+      imageHeight: 712,
       image: '/images/between-sessions-journey.png',
       source: { label: 'Explore the Journey', url: 'https://ai-blog.mikeorozco.dev/journey/' },
     },
@@ -930,6 +952,8 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
     {
       id: 'prototype-scene', label: 'Godot prototype', caption: 'Early geometry inspection · prototype art',
       description: 'An actual native capture from an early room and apparatus inspection. It shows prototype geometry; the current project is developing physical interactions and a player-hosted session foundation.',
+      imageWidth: 736,
+      imageHeight: 498,
       image: '/images/false-witness-prototype.png',
     },
     {

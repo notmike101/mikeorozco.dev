@@ -1,3 +1,4 @@
+import { caseStudyPath } from './utils/site';
 import { caseStudies } from './data/caseStudies';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
@@ -32,11 +33,17 @@ export default defineNuxtConfig({
     },
   },
   nitro: {
+    hooks: {
+      // GitHub Pages needs real error content even when JavaScript is unavailable.
+      'prerender:generate'(route) {
+        if (route.route === '/404.html') route.skip = true;
+      },
+    },
     prerender: {
       routes: [
         '/',
         '/contact',
-        ...caseStudies.map((project) => `/work/${project.slug}`),
+        ...caseStudies.map((project) => caseStudyPath(project.slug)),
         '/sitemap.xml',
       ],
     },

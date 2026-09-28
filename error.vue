@@ -1,18 +1,18 @@
 <script setup lang="ts">
 defineProps<{ error: { statusCode?: number; statusMessage?: string } }>();
 
-const handleError = () => clearError({ redirect: '/' });
+useSeoMeta({ title: 'Page unavailable — Mike Orozco', robots: 'noindex' });
 </script>
 
 <template>
-  <div class="error-page">
+  <main class="error-page">
     <div>
       <p class="eyebrow">{{ error.statusCode || 404 }}</p>
       <h1 class="display-title">This page isn’t part of the system.</h1>
       <p class="lede">The address may be outdated or the page may have moved.</p>
-      <button class="button-primary" type="button" @click="handleError">Return home</button>
+      <a class="button-primary" href="/">Return home</a>
     </div>
-  </div>
+  </main>
 </template>
 
 <style scoped>

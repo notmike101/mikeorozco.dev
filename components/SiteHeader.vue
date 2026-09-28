@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const route = useRoute();
 
-const isActive = (path: string) => route.path === path || (path === '/#work' && route.path.startsWith('/work/'));
 </script>
 
 <template>
@@ -13,7 +12,7 @@ const isActive = (path: string) => route.path === path || (path === '/#work' && 
       </NuxtLink>
 
       <nav aria-label="Primary navigation" class="primary-nav">
-        <NuxtLink to="/#work" :aria-current="isActive('/#work') ? 'page' : undefined">Work</NuxtLink>
+        <NuxtLink to="/#work" :aria-current="route.path.startsWith('/work/') || (route.path === '/' && route.hash === '#work') ? 'location' : undefined">Work</NuxtLink>
         <NuxtLink to="/#capabilities" :aria-current="route.path === '/' && route.hash === '#capabilities' ? 'location' : undefined">Capabilities</NuxtLink>
         <NuxtLink to="/#experience" :aria-current="route.path === '/' && route.hash === '#experience' ? 'location' : undefined">Experience</NuxtLink>
         <NuxtLink to="/#contact" :aria-current="route.path === '/' && route.hash === '#contact' ? 'location' : undefined">Contact</NuxtLink>
