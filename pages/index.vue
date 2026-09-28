@@ -331,7 +331,7 @@ useHead({
 .other-organizations span { padding-inline: 10px; }
 .contact-section { border-bottom: 0; }
 .contact-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 34px; min-width: 0; }
-.contact-options article { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; border-top: 1px solid var(--line); padding-top: 16px; }
+.contact-options article { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; padding-top: 16px; }
 .contact-options p { margin-bottom: 18px; }
 .contact-options .button-secondary { margin-top: auto; font-size: 13px; }
 @media (max-width: 920px) {
