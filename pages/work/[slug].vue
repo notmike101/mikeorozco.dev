@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { caseStudies, getCaseStudy } from '~/data/caseStudies';
-import { absoluteUrl, siteUrl } from '~/utils/site';
+import { absoluteUrl, siteUrl, caseStudyPath } from '~/utils/site';
 
 const route = useRoute();
 const project = getCaseStudy(String(route.params.slug));
@@ -9,7 +9,7 @@ if (!project) {
   throw createError({ statusCode: 404, statusMessage: 'Case study not found' });
 }
 
-const canonical = absoluteUrl(`/work/${project.slug}`);
+const canonical = absoluteUrl(caseStudyPath(project.slug));
 const socialImage = absoluteUrl(project.socialImage);
 const schemaType = project.repository ? 'SoftwareSourceCode' : 'CreativeWork';
 
@@ -46,8 +46,8 @@ useHead({
         url: canonical,
         datePublished: project.publishedAt,
         dateModified: project.updatedAt,
-        creator: { '@id': `${siteUrl}/#person` },
-        author: { '@id': `${siteUrl}/#person` },
+        creator: { '@id': `${siteUrl}#person` },
+        author: { '@id': `${siteUrl}#person` },
         codeRepository: project.repository,
         programmingLanguage: project.stack,
       }),
@@ -59,7 +59,7 @@ useHead({
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
-          { '@type': 'ListItem', position: 2, name: 'Past work', item: `${siteUrl}/#work` },
+          { '@type': 'ListItem', position: 2, name: 'Past work', item: `${siteUrl}#work` },
           { '@type': 'ListItem', position: 3, name: project.title, item: canonical },
         ],
       }),
@@ -96,7 +96,7 @@ const relatedProjects = caseStudies.filter((item) => item.slug !== project.slug)
     </ProjectWorkbench>
     <nav class="related-projects" aria-label="Related case studies">
       <h2>More work</h2><div class="related-grid">
-        <NuxtLink v-for="related in relatedProjects" :key="related.slug" :to="`/work/${related.slug}`"><span>{{ related.status }}</span><strong>{{ related.title }} →</strong></NuxtLink>
+        <NuxtLink v-for="related in relatedProjects" :key="related.slug" :to="caseStudyPath(related.slug)"><span>{{ related.status }}</span><strong>{{ related.title }} →</strong></NuxtLink>
       </div>
     </nav>
   </div>

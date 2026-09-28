@@ -1,24 +1,21 @@
 import { caseStudies } from '../../data/caseStudies';
-import { siteUrl } from '../../utils/site';
+import { absoluteUrl, caseStudyPath } from '../../utils/site';
 
 export default defineEventHandler((event) => {
   setHeader(event, 'content-type', 'application/xml; charset=utf-8');
 
   const entries = [
-    { path: '/', lastmod: '2026-09-27', priority: '1.0' },
+    { path: '/', lastmod: '2026-09-28' },
     ...caseStudies.map((project) => ({
-      path: `/work/${project.slug}`,
+      path: caseStudyPath(project.slug),
       lastmod: project.updatedAt,
-      priority: project.featured ? '0.9' : '0.6',
     })),
   ];
 
   const urls = entries.map((entry) => `
   <url>
-    <loc>${new URL(entry.path, siteUrl).toString()}</loc>
+    <loc>${absoluteUrl(entry.path)}</loc>
     <lastmod>${entry.lastmod}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>${entry.priority}</priority>
   </url>`).join('');
 
   return `<?xml version="1.0" encoding="UTF-8"?>

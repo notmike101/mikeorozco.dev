@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { caseStudyPath } from '~/utils/site';
 import { caseStudies, getCaseStudy, type CaseStudy } from '~/data/caseStudies';
 import { projectLayers } from '~/data/projectLayers';
 import { revealActiveProject } from '~/utils/revealActiveProject';
@@ -52,7 +53,7 @@ const onProjectClick = (event: MouseEvent, slug: string) => {
     <aside class="project-index">
       <p class="index-label">Projects</p>
       <nav ref="projectList" class="project-list" aria-label="Projects">
-        <a v-for="item in caseStudies" :key="item.slug" :href="`/work/${item.slug}`" :aria-current="project.slug === item.slug ? 'true' : undefined" @click="onProjectClick($event, item.slug)">
+        <a v-for="item in caseStudies" :key="item.slug" :href="caseStudyPath(item.slug)" :aria-current="project.slug === item.slug ? 'true' : undefined" @click="onProjectClick($event, item.slug)">
           <strong>{{ item.shortTitle }}</strong><small>{{ item.status }}</small>
         </a>
       </nav>
@@ -63,7 +64,7 @@ const onProjectClick = (event: MouseEvent, slug: string) => {
     <div class="project-studio">
       <header class="project-heading">
         <div><p>{{ project.status }}</p><component :is="caseStudy ? 'h1' : 'h2'" id="project-title">{{ project.title }}</component></div>
-        <NuxtLink v-if="!caseStudy" class="button-primary" :to="`/work/${project.slug}`">Case study</NuxtLink>
+        <NuxtLink v-if="!caseStudy" class="button-primary" :to="caseStudyPath(project.slug)">Case study</NuxtLink>
         <NuxtLink v-else class="button-secondary" :to="{ path: '/', query: { project: project.slug }, hash: '#work' }">← Back to project</NuxtLink>
       </header>
       <slot v-if="caseStudy" />

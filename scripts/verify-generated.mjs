@@ -4,6 +4,16 @@ import { resolve } from 'node:path';
 
 const output = resolve('.output/public');
 const home = readFileSync(resolve(output, 'index.html'), 'utf8');
+assert.ok(home.includes('<link rel="canonical" href="https://mikeorozco.dev/">'), 'Homepage canonical must match the served root URL');
+const robots = readFileSync(resolve(output, 'robots.txt'), 'utf8');
+const groups = new Map([...robots.matchAll(/User-agent:\s*(\S+)\s*\n(Allow|Disallow):\s*(\S+)/gi)].map(([, agent, action, path]) => [agent.toLowerCase(), { action, path }]));
+for (const agent of ['Googlebot', 'Bingbot', 'Applebot', 'OAI-SearchBot', 'ChatGPT-User', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Perplexity-User']) {
+  assert.deepEqual(groups.get(agent.toLowerCase()) || groups.get('*'), { action: 'Allow', path: '/' }, `${agent} must remain allowed`);
+}
+for (const agent of ['GPTBot', 'ClaudeBot', 'Google-Extended', 'Applebot-Extended', 'CCBot']) {
+  assert.deepEqual(groups.get(agent.toLowerCase()), { action: 'Disallow', path: '/' }, `${agent} must be opted out`);
+}
+assert.ok(robots.includes('Sitemap: https://mikeorozco.dev/sitemap.xml'));
 assert.ok(!home.includes('Assembled') && !home.includes('Exploded'), 'Components must remain visible without the assembly slider');
 assert.ok(home.includes('data-project-component='), 'Homepage must render project components before JavaScript');
 const { caseStudies, additionalProjects } = await import('../data/caseStudies.ts');
@@ -87,7 +97,7 @@ for (const project of caseStudies) {
   for (const text of [project.summary, project.problem, project.role, project.reflection, project.flow.title, project.flow.caption, ...project.flow.steps.flatMap(step => [step.title, step.description]), ...project.outcomes, ...project.details.flatMap(section => section.paragraphs)]) {
     assert.ok(page.includes(escape(text)), `Case-study content lost: ${project.slug}: ${text.slice(0, 50)}`);
   }
-  assert.ok(page.includes(`https://mikeorozco.dev/work/${project.slug}`), `Missing canonical route: ${project.slug}`);
+  assert.ok(page.includes(`<link rel="canonical" href="https://mikeorozco.dev/work/${project.slug}/">`), `Canonical must match served directory: ${project.slug}`);
   if (project.image) assert.ok(existsSync(resolve(output, project.image.src.slice(1))), `Missing image: ${project.image.src}`);
 }
 assert.equal(new Set(caseStudies.map(project => project.slug)).size, caseStudies.length, 'Case-study routes must be unique');
@@ -109,4 +119,10 @@ for (const page of [home, legacyContact]) {
   assert.ok(!page.includes('>me@mikeorozco.dev<') && !page.includes('"email":"me@mikeorozco.dev"'), 'Email address must not appear as visible text or structured metadata');
 }
 assert.ok(!readFileSync(resolve(output, 'sitemap.xml'), 'utf8').includes('https://mikeorozco.dev/contact'), 'The sitemap must point to the homepage rather than the legacy contact route');
+const sitemapUrls = [...readFileSync(resolve(output, 'sitemap.xml'), 'utf8').matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
+assert.deepEqual(sitemapUrls, ['https://mikeorozco.dev/', ...caseStudies.map(project => `https://mikeorozco.dev/work/${project.slug}/`)]);
+const notFound = readFileSync(resolve(output, '404.html'), 'utf8');
+assert.ok(/<title>[^<]+<\/title>/.test(notFound), '404 needs a title');
+assert.ok(notFound.includes('name="robots" content="noindex"'), '404 must opt out of indexing');
+assert.ok(/<main[\s>]/.test(notFound) && /<a[^>]+href="\/"/.test(notFound), '404 must provide a main landmark and a non-JavaScript home link');
 console.log(`PASS: variable evidence components, navigation scrolling, ${caseStudies.length} complete case studies, ${additionalProjects.length} research projects, images, metadata and contact`);
