@@ -10,20 +10,141 @@ const proofPoints = [
 
 const capabilities = [
   {
-    title: 'Frontend architecture & authoring tools',
-    description: 'Reusable browser runtimes and Vue authoring interfaces that let content teams configure product tours and sales demos.',
+    title: 'Frontend architecture',
+    description: 'Reusable component systems, content-authoring tools, and responsive applications across web, desktop, and mobile.',
+    skills: ['TypeScript', 'JavaScript', 'Vue', 'React', 'Nuxt', 'Web Components', 'Electron', 'React Native'],
+    links: [{ label: 'MealMind', href: '/work/mealmind' }, { label: 'ZCode Extensions', href: '/work/zcode-desktop-extensions' }],
   },
   {
-    title: 'Interactive web applications',
-    description: 'Product tours and virtual sales demos built with Three.js, Babylon.js, Vue, React, and TypeScript.',
+    title: 'Interactive 3D & authoring',
+    description: 'Product tours, virtual sales demos, shared browser runtimes, and editors that turn content into interactive experiences.',
+    skills: ['Three.js', 'Babylon.js', 'WebGL', 'Unity web UI', 'JSON manifests'],
+    links: [{ label: '3D Product Tour', href: '/work/immersive-product-platform' }],
   },
   {
-    title: 'Backend, cloud & performance',
-    description: 'Node.js APIs, data integrations, Azure migrations, Cloudflare delivery, Docker, and CI/CD.',
+    title: 'Backend & data integration',
+    description: 'API design, data models, and integration layers connecting applications to databases and external services. Recent contributions also include Java/Spring Boot APIs.',
+    skills: ['Node.js', 'Python', 'REST', 'GraphQL', 'SOAP', 'PostgreSQL', 'MySQL', 'MongoDB', 'SQLite'],
+    links: [{ label: 'Quire', href: '/work/quire' }, { label: 'Monrovia', href: '/work/monrovia-web-platform' }],
   },
   {
-    title: 'Developer tooling & technical leadership',
-    description: 'Codex plugins for engineering workflows and a local MCP usage-reporting prototype, alongside code review, security remediation, and mentorship.',
+    title: 'Cloud & delivery',
+    description: 'Cloud migrations, containerized applications, deployment pipelines, and ongoing service operation, from client hosting to enterprise infrastructure.',
+    skills: ['Microsoft Azure', 'AWS', 'Docker', 'Cloudflare', 'GitHub Actions', 'CI/CD'],
+    links: [{ label: 'Monrovia', href: '/work/monrovia-web-platform' }],
+  },
+  {
+    title: 'Performance engineering',
+    description: 'Browser preloading, API caching, CDN delivery, and 3D asset optimization, with attention to loading time, runtime cost, and visual quality.',
+    skills: ['Caching', 'Load balancing', 'Preloading', 'Asset compression'],
+    links: [{ label: 'Pack3D', href: '/work/pack3d' }, { label: 'Monrovia', href: '/work/monrovia-web-platform' }],
+  },
+  {
+    title: 'Developer tools & AI workflows',
+    description: 'Plugins, CLI helpers, and integrations for planning, implementation, testing, and review. Local prototypes explore LangGraph orchestration and A2A agent communication.',
+    skills: ['Codex', 'MCP', 'Jira', 'Confluence', 'Figma', 'LangChain'],
+    links: [{ label: 'Engineering Marketplace', href: '/work/engineering-workflow-tooling' }, { label: 'ZCode Extensions', href: '/work/zcode-desktop-extensions' }],
+  },
+  {
+    title: 'Application security',
+    description: 'Vulnerability investigation, reproducible findings, and practical fixes. Work spans enterprise remediation, confidential client assessments, and independent research.',
+    skills: ['Secure coding', 'Penetration testing', 'Impact analysis', 'Responsible reporting'],
+    links: [{ label: 'Quire', href: '/work/quire' }, { label: 'Security research', href: '/#research' }],
+  },
+  {
+    title: 'Technical leadership & consulting',
+    description: 'Architecture and code review, developer mentoring, requirements clarification, and delivery ownership. Explain technical decisions to clients and cross-functional teams.',
+    skills: ['Architecture reviews', 'Mentoring', 'Technical documentation', 'Client consulting'],
+    links: [{ label: '3D Product Tour', href: '/work/immersive-product-platform' }],
+  },
+];
+
+const experience = [
+  {
+    company: 'Thermo Fisher Scientific',
+    role: 'Developer III (Senior Software Engineer)',
+    period: 'Sep 2022 — Present',
+    scope: 'Immersive Technologies · Digital Engineering',
+    highlights: [
+      'Led the 3D Product Tour and built Vue authoring tools for tours and sales demos. Collaborated on the shared Three.js/Babylon.js runtime and later took on broader stewardship of the ecosystem.',
+      'Built a templated, sandboxed web interface for Unity experiences, with asynchronous loading and HTML-based authoring.',
+      'Created and maintained a Codex plugin marketplace for engineering workflows, including Jira, Confluence, and Figma integrations. Built a local MCP usage-reporting prototype.',
+      'Remediated persistent XSS, SQL injection, and denial-of-service issues. Reviewed architecture and code, mentored developers, and contributed Java/Spring Boot endpoints and service refactoring across teams.',
+    ],
+    recognition: 'Outstanding Achievement for the 3D Product Tour · Innovation Award for foundational technical solutions',
+    links: [{ label: '3D Product Tour', href: '/work/immersive-product-platform' }, { label: 'Engineering Marketplace', href: '/work/engineering-workflow-tooling' }],
+  },
+  {
+    company: 'Independent Consulting',
+    role: 'Freelance Web & Software Developer',
+    period: 'Jan 2013 — Present',
+    scope: 'Client engagements across e-commerce, healthcare, legal services, and education',
+    highlights: [
+      'Delivered 50+ custom web and software solutions, often as the sole engineer from discovery and architecture through implementation, deployment, and ongoing support.',
+      'Built frontend and backend applications with React, Vue, Node.js, Python, and SQL. Managed multiple engagements and explained technical trade-offs to nontechnical clients.',
+      'Performed confidential application-security assessments and penetration testing, with reproducible findings, impact analysis, and remediation guidance.',
+    ],
+  },
+  {
+    company: 'Monrovia Plants',
+    role: 'Web Developer',
+    period: 'Apr 2019 — Oct 2021',
+    scope: 'Web infrastructure · Backend integration · Community products',
+    highlights: [
+      'Migrated web services to Azure, reducing hosting costs and improving website response time by approximately 20%. A separate Cloudflare integration reduced average page load times by approximately 30%.',
+      'Designed a unified Node.js API over SOAP services, MySQL, and external data, using caching, load balancing, and modular services.',
+      'Built a Nuxt and Docker community application with server-side rendering and plant recommendations, partnering with marketing and IT.',
+    ],
+    links: [{ label: 'Monrovia infrastructure', href: '/work/monrovia-web-platform' }],
+  },
+  {
+    company: 'MKTR INC',
+    role: 'UI/UX Programmer',
+    period: 'Jun 2018 — Dec 2018',
+    scope: 'E-commerce SaaS · Web and mobile',
+    highlights: [
+      'Led the Vue frontend and reusable component library for a SaaS product serving online retailers. Integrated its REST API with error handling and logging.',
+      'Built a cross-platform React Native application and incorporated design and user-testing feedback into the interfaces.',
+    ],
+  },
+];
+
+const earlierExperience = [
+  {
+    company: 'Valiant Technology',
+    role: 'Technical Support Technician',
+    period: 'Jul 2017 — May 2018',
+    description: 'Diagnosed workstation, network, and server issues across client environments. Managed approximately 200 support tickets per month and automated recurring support tasks.',
+  },
+  {
+    company: 'Artris',
+    role: 'Frontend Web Developer',
+    period: 'Aug 2015 — Dec 2016',
+    description: 'Maintained a JavaScript performance library using page preloading and caching. Built the company website and demonstrated the library against real sites.',
+  },
+  {
+    company: 'InTouch Marketing LLC',
+    role: 'Frontend Developer',
+    period: 'Jan 2015 — Sep 2015',
+    description: 'Led development and maintenance across 30+ client websites. Built WordPress themes and plugins, HubSpot templates, and managed virtual-server environments.',
+  },
+  {
+    company: 'TOTAL PC',
+    role: 'On-Site Technician',
+    period: 'May 2014 — Jan 2015',
+    description: 'Provided hardware and software troubleshooting, system setup, hardware replacement, and data-recovery assistance for residential and business customers.',
+  },
+  {
+    company: 'MedeMedia',
+    role: 'Web Developer',
+    period: 'Nov 2013 — Feb 2014',
+    description: 'Led a small web-development team, coordinated deployments, built administrative interfaces, and collaborated on an online reading and content-sharing platform.',
+  },
+  {
+    company: 'Yuba-Sutter Chamber of Commerce',
+    role: 'Marketing & Technical Intern',
+    period: 'Sep 2012 — Mar 2013',
+    description: 'Created web marketing assets and newsletter templates, maintained business data, and helped migrate the organization to an updated database.',
   },
 ];
 
@@ -96,16 +217,33 @@ useHead({
     <section id="capabilities" class="portfolio-section" aria-labelledby="capabilities-title">
       <h2 id="capabilities-title">Capabilities</h2>
       <div class="capability-grid">
-        <article v-for="capability in capabilities" :key="capability.title"><h3>{{ capability.title }}</h3><p>{{ capability.description }}</p></article>
+        <article v-for="capability in capabilities" :key="capability.title">
+          <h3>{{ capability.title }}</h3>
+          <p>{{ capability.description }}</p>
+          <ul class="capability-skills" :aria-label="`${capability.title} skills`"><li v-for="skill in capability.skills" :key="skill">{{ skill }}</li></ul>
+          <div class="evidence-links"><NuxtLink v-for="link in capability.links" :key="link.href" :to="link.href">{{ link.label }} <span aria-hidden="true">↗</span></NuxtLink></div>
+        </article>
       </div>
     </section>
     <section id="experience" class="portfolio-section" aria-labelledby="experience-title">
       <h2 id="experience-title">Experience</h2>
       <div class="experience-list">
-        <article><span>2022—Present</span><div><h3>Senior Software Engineer, Immersive Technologies</h3><p>Led development of the 3D Product Tour, built Vue authoring and configuration tools, and collaborated on the shared runtime. Developed a team Codex plugin marketplace and a local MCP usage-reporting prototype.</p></div></article>
-        <article><span>2013—Present</span><div><h3>Independent Web &amp; Software Engineer</h3><p>Delivered 50+ custom web and software solutions across client engagements, often owning architecture, implementation, deployment, and support.</p></div></article>
-        <article><span>2019—2021</span><div><h3>Web Developer, Monrovia Plants</h3><p>Azure migration improved website response time by approximately 20%. A separate Cloudflare integration reduced average page load times by approximately 30%.</p></div></article>
-        <article><span>2022</span><div><h3>Thermo Fisher Scientific awards</h3><p>Outstanding Achievement for the 3D Product Tour and an Innovation Award for foundational technical solutions.</p></div></article>
+        <article v-for="job in experience" :key="job.company" class="experience-entry">
+          <span class="experience-period">{{ job.period }}</span>
+          <div>
+            <h3>{{ job.company }}</h3>
+            <p class="experience-role">{{ job.role }}</p>
+            <p class="experience-scope">{{ job.scope }}</p>
+            <ul class="experience-highlights"><li v-for="highlight in job.highlights" :key="highlight">{{ highlight }}</li></ul>
+            <p v-if="job.recognition" class="experience-recognition"><span>Awards</span>{{ job.recognition }}</p>
+            <div v-if="job.links" class="evidence-links"><NuxtLink v-for="link in job.links" :key="link.href" :to="link.href">{{ link.label }} <span aria-hidden="true">↗</span></NuxtLink></div>
+          </div>
+        </article>
+        <h3 class="earlier-title">Earlier experience</h3>
+        <article v-for="job in earlierExperience" :key="job.company" class="experience-entry earlier-entry">
+          <span class="experience-period">{{ job.period }}</span>
+          <div><h4>{{ job.company }}</h4><p class="experience-role">{{ job.role }}</p><p>{{ job.description }}</p></div>
+        </article>
       </div>
     </section>
     <section id="research" class="portfolio-section" aria-labelledby="research-title">
@@ -142,10 +280,28 @@ useHead({
 .portfolio-section h3 { margin: 0; font-size: 16px; font-weight: 500; line-height: 1.4; }
 .portfolio-section p { color: var(--muted); font-size: 14px; line-height: 1.65; margin: 6px 0 0; }
 .capability-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 34px; }
-.experience-list article { display: grid; grid-template-columns: 115px minmax(0, 1fr); gap: 24px; padding: 18px 0; border-top: 1px solid var(--line); }
-.experience-list article:first-child { padding-top: 0; border: 0; }
-.experience-list article:last-child { padding-bottom: 0; }
-.experience-list article > span { font-size: 12px; color: var(--muted); padding-top: 3px; }
+.capability-grid article { display: flex; flex-direction: column; min-width: 0; border-top: 1px solid var(--line); padding-top: 16px; }
+.capability-skills { display: flex; flex-wrap: wrap; gap: 6px 8px; list-style: none; margin: 14px 0 16px; padding: 0; }
+.capability-skills li { padding: 3px 7px; background: var(--rail); border: 1px solid var(--line); font-size: 11px; line-height: 1.5; }
+.evidence-links { display: flex; flex-wrap: wrap; gap: 7px 18px; font-size: 12px; }
+.evidence-links a { color: var(--accent); text-underline-offset: 3px; }
+.capability-grid .evidence-links { margin-top: auto; }
+.experience-entry { display: grid; grid-template-columns: 145px minmax(0, 1fr); gap: 24px; padding: 24px 0; border-top: 1px solid var(--line); }
+.experience-entry:first-child { padding-top: 0; border: 0; }
+.experience-entry:last-child { padding-bottom: 0; }
+.experience-period { font-size: 12px; color: var(--muted); padding-top: 3px; }
+.portfolio-section .experience-role { color: var(--ink); font-size: 14px; margin-top: 4px; }
+.portfolio-section .experience-scope { font-size: 12px; margin-top: 3px; }
+.experience-highlights { margin: 16px 0; padding-left: 16px; list-style: disc; color: var(--muted); font-size: 14px; line-height: 1.65; }
+.experience-highlights li + li { margin-top: 9px; }
+.experience-highlights li::marker { color: var(--accent); }
+.portfolio-section .experience-recognition { margin: 16px 0; padding: 12px 14px; background: var(--accent-soft); font-size: 12px; color: var(--ink); }
+.experience-recognition > span { display: block; color: var(--accent); margin-bottom: 4px; font-weight: 500; }
+.portfolio-section .earlier-title { padding: 8px 0 16px; font-size: 13px; color: var(--muted); }
+.earlier-entry { padding-block: 18px; }
+.earlier-entry h4 { margin: 0; font-size: 15px; font-weight: 500; line-height: 1.4; }
+.earlier-entry .experience-role { font-size: 12px; }
+.earlier-entry p:last-child { font-size: 13px; }
 .research-list { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 34px; }
 .research-list article { padding-bottom: 20px; border-bottom: 1px solid var(--line); }
 .research-list a { text-decoration: none; }
@@ -170,6 +326,6 @@ useHead({
   .career-highlights { gap: 24px; }
   .portfolio-section { grid-template-columns: 1fr; padding: 26px 18px; gap: 22px; }
   .capability-grid, .research-list { grid-template-columns: 1fr; gap: 20px; }
-  .experience-list article { grid-template-columns: 1fr; gap: 6px; }
+  .experience-entry { grid-template-columns: 1fr; gap: 8px; }
 }
 </style>

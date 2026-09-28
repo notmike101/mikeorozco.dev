@@ -37,6 +37,14 @@ Captured from the actual source revisions above on 2026-09-27, using temporary l
 - **Wildly Unqualified:** local source at 711d85457c85de1199416ae4926d0778f240e5df, docs/MAINTAINING.md and docs/SERVER.md. Client, shared world, simulation, persistence, and release responsibilities match the implementation. Gameplay acceptance remains incomplete. Private source code is not reproduced.
 - The separate orchestration runtime now has a runnable implementation, so the obsolete “design-stage” reference was removed without folding it into the marketplace case study.
 
+## Capabilities and career history
+
+The homepage expansion uses the supplied `Resumes/Web/cv.html` and `Resumes/Web/index.html`, checked on 2026-09-27. Capability groups summarize the CV's technical expertise section (539–548) and the existing project evidence above. Project links illustrate related work; they do not imply every listed skill was used on every linked project. Java/Spring Boot is described as a recent contribution, while LangGraph/A2A work remains labeled as local prototypes.
+
+Role dates and responsibilities come from the CV: Thermo Fisher Scientific (217–305), independent consulting (312–330), Monrovia (334–360), MKTR (363–376), and the six earlier roles (382–448). Consulting overlaps employment and is presented separately. The expanded history retains the approximately 20% response-time and 30% page-load improvements as separate Monrovia results, 50+ custom consulting solutions, 30+ InTouch websites, and approximately 200 monthly Valiant support tickets.
+
+The two Thermo Fisher awards sit within that role. Shared runtime development remains collaborative; authoring ownership, later platform stewardship, Unity web UI integration, security remediation, mentoring, and API contributions retain the CV's stated scope. No new seniority, proficiency scores, deployment claims, or undisclosed client findings are inferred.
+
 ## Organizations
 
 The CV identifies MKTR INC (365–376), Valiant Technology (384–392), Artris (397–405), TOTAL PC (425–430), and MedeMedia (434–439).
