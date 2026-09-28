@@ -2,6 +2,7 @@
 import { additionalProjects } from '~/data/caseStudies';
 import { defaultDescription, defaultSocialImage, defaultTitle, siteUrl } from '~/utils/site';
 
+const emailHref = (subject: string) => `mailto:me@mikeorozco.dev?subject=${encodeURIComponent(subject)}`;
 
 const proofPoints = [
   { value: '13+', label: 'Years in web and software development' },
@@ -193,6 +194,7 @@ useHead({
           name: 'Mike Orozco',
           url: siteUrl,
           jobTitle: 'Senior Software Engineer | Frontend Architecture & Developer Tooling',
+          email: 'me@mikeorozco.dev',
           homeLocation: { '@type': 'Place', name: 'Texas, USA' },
           knowsAbout: ['Frontend architecture', 'Vue authoring tools', 'TypeScript', 'Immersive web', 'Developer tooling', 'Application security'],
           sameAs: ['https://github.com/notmike101', 'https://www.linkedin.com/in/mikeoroz'],
@@ -263,6 +265,24 @@ useHead({
         <p class="other-organizations">Artris <span>·</span> TOTAL PC <span>·</span> MedeMedia</p>
       </div>
     </section>
+    <section id="contact" class="portfolio-section contact-section" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact</h2>
+      <div class="contact-content">
+        <a class="contact-email" href="mailto:me@mikeorozco.dev">me@mikeorozco.dev</a>
+        <div class="contact-options">
+          <article>
+            <h3>Hiring opportunity</h3>
+            <p>For senior engineering roles involving frontend architecture, interactive web applications, developer tooling, or technical leadership.</p>
+            <a class="button-secondary" :href="emailHref('Senior engineering opportunity')">Discuss an opportunity</a>
+          </article>
+          <article>
+            <h3>Consulting project</h3>
+            <p>For custom software, SaaS products, web development, architecture reviews, or focused implementation.</p>
+            <a class="button-secondary" :href="emailHref('Consulting project inquiry')">Discuss a project</a>
+          </article>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -313,6 +333,14 @@ useHead({
 .organizations a.dark-logo { background: #242833; }
 .other-organizations { flex-basis: 100%; margin: 0 !important; }
 .other-organizations span { padding-inline: 10px; }
+.contact-section { border-bottom: 0; }
+.contact-content { min-width: 0; }
+.contact-email { display: inline-block; color: var(--accent); font-size: clamp(22px, 2.5vw, 30px); font-weight: 500; line-height: 1.4; letter-spacing: -.6px; text-decoration: none; overflow-wrap: anywhere; }
+.contact-email:hover { text-decoration: underline; text-underline-offset: 5px; }
+.contact-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 34px; margin-top: 24px; }
+.contact-options article { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; border-top: 1px solid var(--line); padding-top: 16px; }
+.contact-options p { margin-bottom: 18px; }
+.contact-options .button-secondary { margin-top: auto; font-size: 13px; }
 @media (max-width: 920px) {
   .portfolio-intro { grid-template-columns: 250px minmax(0, 1fr); gap: 24px; }
   .career-highlights { gap: 16px; }
@@ -325,7 +353,7 @@ useHead({
   .portfolio-intro h1 { margin-bottom: 20px; max-width: 15ch; }
   .career-highlights { gap: 24px; }
   .portfolio-section { grid-template-columns: 1fr; padding: 26px 18px; gap: 22px; }
-  .capability-grid, .research-list { grid-template-columns: 1fr; gap: 20px; }
+  .capability-grid, .research-list, .contact-options { grid-template-columns: 1fr; gap: 20px; }
   .experience-entry { grid-template-columns: 1fr; gap: 8px; }
 }
 </style>

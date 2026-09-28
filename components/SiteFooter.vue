@@ -2,10 +2,10 @@
   <footer class="site-footer">
     <div class="page-container footer-grid">
       <div>
-        <p class="footer-name">Contact</p>
+        <p class="footer-name">Mike Orozco</p>
       </div>
       <nav aria-label="Footer navigation" class="footer-links">
-        <NuxtLink to="/contact">Hiring &amp; consulting</NuxtLink>
+        <NuxtLink to="/#contact">Hiring &amp; consulting</NuxtLink>
         <a href="https://github.com/notmike101" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://www.linkedin.com/in/mikeoroz" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <NuxtLink to="/#research">Open source &amp; research</NuxtLink>
