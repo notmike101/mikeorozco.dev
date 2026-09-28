@@ -18,6 +18,7 @@ assert.ok(!home.includes('Assembled') && !home.includes('Exploded'), 'Components
 assert.ok(home.includes('data-project-component='), 'Homepage must render project components before JavaScript');
 const { caseStudies, additionalProjects } = await import('../data/caseStudies.ts');
 const { projectLayers } = await import('../data/projectLayers.ts');
+assert.equal(projectLayers.quire[0].caption, 'Conversation reader · sample session', 'Component text must preserve UTF-8 punctuation');
 assert.equal((home.match(/data-project-component=/g) || []).length, projectLayers[caseStudies[0].slug].length);
 assert.ok(new Set(Object.values(projectLayers).map(parts => parts.length)).size > 1, 'Project component counts must be independent');
 for (const project of caseStudies) {

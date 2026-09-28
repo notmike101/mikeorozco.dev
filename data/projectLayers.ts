@@ -61,7 +61,7 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
         },
         {
           "label": "Explore the product",
-          "detail": "7 views Â· 28 hotspots"
+          "detail": "7 views · 28 hotspots"
         },
         {
           "label": "Product actions",
@@ -377,7 +377,7 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "id": "browser-reader",
       "label": "Conversation reader",
       "description": "Read a shared coding session as a conversation. Jump between prompts, open tool results, and read formatted explanations. The browser decrypts the content using the link key.",
-      "caption": "Conversation reader Â· sample session",
+      "caption": "Conversation reader · sample session",
       "code": {
         "file": "web/src/share-v2/crypto.ts",
         "line": 10,
@@ -482,7 +482,7 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "id": "access-gate",
       "label": "Share access controls",
       "description": "The public API requires a ready share, checks expiration, and validates the unlock cookie when the owner set a password.",
-      "caption": "Password protection Â· sample share",
+      "caption": "Password protection · sample share",
       "code": {
         "file": "server/src/api/public-v2.ts",
         "line": 30,
@@ -575,7 +575,7 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "id": "planning-workspace",
       "label": "Weekly planning workspace",
       "description": "Build a week of meals, change recipes, adjust servings, and skip days in one editable workspace.",
-      "caption": "Weekly planner Â· sample data",
+      "caption": "Weekly planner · sample data",
       "code": {
         "file": "apps/web/app/components/plan/SelectionWorkspace.vue",
         "line": 171,
@@ -593,7 +593,7 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "id": "recipe-catalog",
       "label": "Recipe library",
       "description": "Browse recipes and open their ingredients, instructions, and serving controls. CookLang documents in PostgreSQL supply the structured recipe data.",
-      "caption": "Recipe details Â· sample data",
+      "caption": "Recipe details · sample data",
       "code": {
         "file": "services/api/src/recipes.ts",
         "line": 31,
@@ -669,7 +669,7 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
       "id": "shopping-list",
       "label": "Shopping list",
       "description": "Meal ingredients are scaled to selected servings and pantry staples are removed before the shopping workflow creates and stores the list.",
-      "caption": "Shopping list Â· sample data",
+      "caption": "Shopping list · sample data",
       "code": {
         "file": "packages/domain/src/shopping.ts",
         "line": 20,
@@ -881,7 +881,7 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
     },
     {
       id: 'runtime-guard', label: 'Runtime coordination', caption: 'How it works',
-      description: 'A shared file lock prevents simultaneous mutations from multiple MCP processes. Checks cover observation age, bridge version, the game process, and the experimentâ€™s fixed seed.',
+      description: 'A shared file lock prevents simultaneous mutations from multiple MCP processes. Checks cover observation age, bridge version, the game process, and the experiment’s fixed seed.',
       diagram: [{ label: 'Acquire shared lock', detail: 'One process mutates the game at a time' }, { label: 'Run preflight', detail: 'Process, seed, version, and fresh observation' }, { label: 'Execute and release', detail: 'Keep the action inside the guarded operation' }],
       source: { label: 'Inspect runtime checks', url: 'https://github.com/notmike101/balatro-mcp/blob/9b27ce9fdbc52aa5b462caaa7daa528ec2b5808f/src/backend/runtime.rs' },
     },
@@ -911,7 +911,7 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
     },
     {
       id: 'content-checks', label: 'Content checks', caption: 'How it works',
-      description: 'Validation checks article metadata, dates, category identifiers, restricted embeds, selected privacy patterns, and Journey references. It checks structure, not the truth of an articleâ€™s claims.',
+      description: 'Validation checks article metadata, dates, category identifiers, restricted embeds, selected privacy patterns, and Journey references. It checks structure, not the truth of an article’s claims.',
       diagram: [{ label: 'Markdown + metadata', detail: 'Articles, dates, categories, and sources' }, { label: 'Content validation', detail: 'Reject malformed content and selected privacy risks' }, { label: 'Journey references', detail: 'Require supporting article slugs to exist' }],
       source: { label: 'Inspect the validator', url: 'https://github.com/notmike101/ai-blog/blob/5fcdf8f2d2dc3c9e5a0aa2b2c1008ae92ae85737/scripts/validate-content.mjs' },
     },
@@ -950,7 +950,7 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
   ],
   'false-witness': [
     {
-      id: 'prototype-scene', label: 'Godot prototype', caption: 'Early geometry inspection Â· prototype art',
+      id: 'prototype-scene', label: 'Godot prototype', caption: 'Early geometry inspection · prototype art',
       description: 'An actual native capture from an early room and apparatus inspection. It shows prototype geometry; the current project is developing physical interactions and a player-hosted session foundation.',
       imageWidth: 736,
       imageHeight: 498,

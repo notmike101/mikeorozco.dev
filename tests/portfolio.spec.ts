@@ -9,12 +9,13 @@ const require = createRequire(resolve('package.json'));
 
 const normalize = (text: string) => text.replace(/\s+/g, ' ').trim();
 async function extract(page: Page) {
+  await page.addScriptTag({ path: require.resolve('@mozilla/readability/Readability-readerable.js') });
   await page.addScriptTag({ path: require.resolve('@mozilla/readability/Readability.js') });
   return page.evaluate(() => {
     const result = new (window as any).Readability(document.cloneNode(true)).parse();
     const content = document.createElement('div');
     content.innerHTML = result?.content || '';
-    return { title: result?.title, byline: result?.byline, text: result?.textContent || '', links: [...content.querySelectorAll('a')].map(a => a.href) };
+    return { probable: (window as any).isProbablyReaderable(document), title: result?.title, byline: result?.byline, text: result?.textContent || '', links: [...content.querySelectorAll('a')].map(a => a.href) };
   });
 }
 
@@ -23,6 +24,7 @@ for (const project of caseStudies) {
     await page.goto(`/work/${project.slug}/`);
     await expect(page.locator('article h1')).toHaveText(project.title);
     const article = await extract(page);
+    test.info().annotations.push({ type: 'isProbablyReaderable', description: String(article.probable) });
     expect(article.title).toBe(project.title);
     expect(article.byline).toBe('Mike Orozco');
     const text = normalize(article.text);
@@ -40,7 +42,19 @@ for (const project of caseStudies) {
 test('homepage reading starts with the professional introduction', async ({ page }) => {
   await page.goto('/');
   const article = await extract(page);
+  test.info().annotations.push({ type: 'isProbablyReaderable', description: String(article.probable) });
   expect(normalize(article.text)).toContain('I build frontend systems, Vue authoring tools, and developer tools for product teams.');
+});
+
+test('reader metadata and text follow client navigation', async ({ page }) => {
+  await page.goto('/work/quire/');
+  await page.locator('.related-projects a').first().click();
+  const next = caseStudies.find(project => project.slug !== 'quire')!;
+  await expect(page.locator('article h1')).toHaveText(next.title);
+  const article = await extract(page);
+  expect(article.title).toBe(next.title);
+  expect(article.byline).toBe('Mike Orozco');
+  expect(normalize(article.text)).toContain(normalize(next.summary));
 });
 
 test('mobile project navigation works without JavaScript', async ({ browser }) => {

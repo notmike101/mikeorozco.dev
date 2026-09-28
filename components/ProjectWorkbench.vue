@@ -76,6 +76,7 @@ const onProjectClick = (event: MouseEvent, slug: string) => {
       </header>
       <slot v-if="caseStudy" />
       <div v-else class="project-desk">
+        <p class="sr-only" role="status" aria-atomic="true">Selected {{ project.title }}. Component: {{ layer.label }}.</p>
         <div class="project-canvas">
           <div class="component-grid" role="group" aria-label="Project components">
             <button v-for="(item, i) in artwork" :key="item.id" :data-project-component="item.id" type="button" :aria-pressed="selectedLayer === i" :aria-label="item.label" aria-controls="component-detail" @click="selectedLayer = i">
@@ -83,7 +84,7 @@ const onProjectClick = (event: MouseEvent, slug: string) => {
               <span>{{ item.label }}</span>
             </button>
           </div>
-          <section id="component-detail" class="component-detail" aria-live="polite" aria-labelledby="component-title">
+          <section id="component-detail" class="component-detail" aria-labelledby="component-title">
             <header><h3 id="component-title">{{ layer.label }}</h3><span>{{ layer.caption }}</span></header>
             <ProjectLayerGraphic :artwork="layer" />
             <p>{{ layer.description }}</p>
@@ -108,7 +109,7 @@ const onProjectClick = (event: MouseEvent, slug: string) => {
 </template>
 
 <style scoped>
-.workbench { display: grid; grid-template-columns: 196px minmax(0, 1fr); border-block: 1px solid var(--line); scroll-margin-top: 6rem; }
+.workbench { display: grid; grid-template-columns: 196px minmax(0, 1fr); border-block: 1px solid var(--line);  }
 .project-index { display: flex; flex-direction: column; min-height: 0; background: var(--rail); border-right: 1px solid var(--line); }
 .index-label { margin: 0; padding: 22px 18px 16px; color: var(--muted); font-size: 13px; }
 .project-list { flex: 1; min-height: 0; contain: size; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
