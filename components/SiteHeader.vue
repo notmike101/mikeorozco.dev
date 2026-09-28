@@ -9,18 +9,17 @@ const isActive = (path: string) => route.path === path || (path === '/#work' && 
   <header class="site-header">
     <div class="page-container header-inner">
       <NuxtLink class="wordmark" to="/" aria-label="Mike Orozco, home">
-        MO<span aria-hidden="true">.</span>
+        <span class="monogram" aria-hidden="true">MO</span><span>Mike Orozco</span>
       </NuxtLink>
 
       <nav aria-label="Primary navigation" class="primary-nav">
         <NuxtLink to="/#work" :aria-current="isActive('/#work') ? 'page' : undefined">Work</NuxtLink>
-        <NuxtLink to="/#capabilities">Capabilities</NuxtLink>
+        <NuxtLink to="/#capabilities" :aria-current="route.path === '/' && route.hash === '#capabilities' ? 'location' : undefined">Capabilities</NuxtLink>
+        <NuxtLink to="/#experience" :aria-current="route.path === '/' && route.hash === '#experience' ? 'location' : undefined">Experience</NuxtLink>
         <NuxtLink to="/contact" :aria-current="isActive('/contact') ? 'page' : undefined">Contact</NuxtLink>
       </nav>
 
       <div class="header-actions">
-        <a href="https://github.com/notmike101" target="_blank" rel="noopener noreferrer" aria-label="Mike Orozco on GitHub">GitHub</a>
-        <a href="https://www.linkedin.com/in/mikeoroz" target="_blank" rel="noopener noreferrer" aria-label="Mike Orozco on LinkedIn">LinkedIn</a>
         <ThemeToggle />
       </div>
     </div>
@@ -57,22 +56,25 @@ const isActive = (path: string) => route.path === path || (path === '/#work' && 
 .header-inner {
   display: grid;
   min-height: 4.5rem;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr auto auto;
   align-items: center;
   gap: 2rem;
 }
 
 .wordmark {
   color: var(--ink);
-  font-family: "IBM Plex Serif", Georgia, serif;
-  font-size: 1.35rem;
-  font-weight: 600;
-  letter-spacing: -0.04em;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1rem;
+  font-weight: 500;
   text-decoration: none;
 }
 
-.wordmark span {
-  color: var(--accent);
+.monogram {
+  border: 1px solid var(--line);
+  padding: 5px;
+  font: 12px ui-monospace, monospace;
 }
 
 .primary-nav,
@@ -99,18 +101,19 @@ const isActive = (path: string) => route.path === path || (path === '/#work' && 
 
 .primary-nav a:hover,
 .primary-nav a[aria-current='page'],
+.primary-nav a[aria-current='location'],
 .header-actions a:hover {
   color: var(--accent);
 }
 
-@media (max-width: 800px) {
+@media (max-width: 700px) {
   .header-inner {
-    gap: 1rem;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    padding-block: 12px;
   }
-
-  .primary-nav a:not(:first-child):not(:last-child),
-  .header-actions a {
-    display: none;
-  }
+  .primary-nav { grid-row: 2; grid-column: 1 / -1; justify-content: space-between; gap: 10px; }
+  .primary-nav a { padding-block: 6px; font-size: 13px; }
+  .header-actions { grid-row: 1; grid-column: 2; }
 }
 </style>

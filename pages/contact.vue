@@ -69,15 +69,13 @@ useHead({
 
 <style scoped>
 .contact-page {
-  margin-top: 15px;
-  margin-bottom: 15px;
-  padding-top: clamp(3rem, 1vh, 8rem);
+  padding-block: 40px;
 }
 
 .contact-options {
   display: flex;
   flex-direction: row;
-  margin-top: clamp(4rem, 8vw, 7rem);
+  margin-top: 28px;
   border-top: 1px solid var(--line);
   border-left: 1px solid var(--line);
 
@@ -90,7 +88,7 @@ useHead({
     flex-direction: column;
     gap: 15px;
     flex: 1;
-    padding: clamp(1.5rem, 5vw, 3.5rem);
+    padding: clamp(1.5rem, 3vw, 2rem);
     border-right: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
 
@@ -102,8 +100,7 @@ useHead({
 
   & h2 {
     margin: 0;
-    font-family: "IBM Plex Serif", Georgia, serif;
-    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-size: clamp(1.5rem, 3vw, 2rem);
     font-weight: 500;
   }
 }

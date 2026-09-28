@@ -22,8 +22,8 @@ export default defineNuxtConfig({
       htmlAttrs: { lang: 'en' },
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'theme-color', content: '#f7f6f2', media: '(prefers-color-scheme: light)' },
-        { name: 'theme-color', content: '#101820', media: '(prefers-color-scheme: dark)' },
+        { name: 'theme-color', content: '#f4f5f7', media: '(prefers-color-scheme: light)' },
+        { name: 'theme-color', content: '#151619', media: '(prefers-color-scheme: dark)' },
       ],
       link: [
         { rel: 'icon', href: '/favicon.ico', sizes: 'any' },

@@ -27,10 +27,13 @@ The local site is available at `http://localhost:3000`.
 ```powershell
 pnpm typecheck
 pnpm generate
+pnpm test
 ```
 
 The generated static site is written to `.output/public`. GitHub Actions runs the same command before deploying to GitHub Pages.
 
 ## Content model
 
-Featured work and case-study metadata are defined in `data/caseStudies.ts`. The same records drive homepage project rows, case-study routes, structured data, and the XML sitemap.
+Case-study content and metadata are defined in `data/caseStudies.ts`. The same records drive the project index, case-study routes, structured data, and the XML sitemap. `data/projectLayers.ts` supplies conceptual artwork for each flow step; `ProjectLayerGraphic.vue` draws it. The diagrams illustrate the documented responsibilities, not private screens or exact deployment topology.
+
+`pnpm test` checks the generated output after `pnpm generate`, including populated layers, complete case-study content, research entries, images, metadata, and contact paths.
