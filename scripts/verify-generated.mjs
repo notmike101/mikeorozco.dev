@@ -53,6 +53,33 @@ assert.equal(router.options.scrollBehavior(route('/', { project: 'quire' }), rou
 assert.equal(delegated, 3, 'Anchors, case-study navigation and browser history must retain default scrolling');
 assert.equal(router.options.scrollBehavior(route('/', { project: 'quire' }), route('/work/pack3d'), null), fallback);
 assert.equal(lastScrollTarget.hash, '#work', 'Reader project selection must land at the workbench without adding a URL hash');
+
+// A shorter project must keep the active row visible inside the resized list.
+const { revealActiveProject } = await import('../utils/revealActiveProject.ts');
+let activeOffset = 734;
+const navigation = {
+  clientHeight: 880,
+  scrollTop: 0,
+  getBoundingClientRect() { return { top: 100, bottom: 100 + this.clientHeight }; },
+  querySelector(selector) {
+    assert.equal(selector, '[aria-current]');
+    return { getBoundingClientRect: () => ({ top: 100 + activeOffset - this.scrollTop, bottom: 172 + activeOffset - this.scrollTop }) };
+  },
+};
+revealActiveProject(navigation);
+assert.equal(navigation.scrollTop, 0, 'A visible selected row must not move the list');
+navigation.clientHeight = 680;
+revealActiveProject(navigation);
+assert.equal(navigation.scrollTop, 126, 'Reveal the selected row after the list shrinks');
+revealActiveProject(navigation);
+assert.equal(navigation.scrollTop, 126, 'Repeated layout checks must not move a visible row');
+activeOffset = 0;
+revealActiveProject(navigation);
+assert.equal(navigation.scrollTop, 0, 'Reveal a selection above the current list viewport');
+navigation.clientHeight = 0;
+activeOffset = 734;
+revealActiveProject(navigation);
+assert.equal(navigation.scrollTop, 0, 'Leave the hidden desktop list alone on mobile');
 const escape = text => text.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
 for (const project of caseStudies) {
   assert.ok(home.includes(`/work/${project.slug}`), `Missing crawlable project link: ${project.slug}`);

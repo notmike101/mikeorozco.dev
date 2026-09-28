@@ -1,16 +1,23 @@
 <script setup lang="ts">
 import { caseStudies, getCaseStudy, type CaseStudy } from '~/data/caseStudies';
 import { projectLayers } from '~/data/projectLayers';
+import { revealActiveProject } from '~/utils/revealActiveProject';
 
 const props = defineProps<{ caseStudy?: CaseStudy }>();
 const route = useRoute();
 const router = useRouter();
 const selectedSlug = useState('portfolio-project', () => caseStudies[0]!.slug);
 const selectedLayer = ref(0);
+const projectList = ref<HTMLElement>();
+let navigationResize: ResizeObserver | undefined;
 
 const project = computed(() => props.caseStudy || getCaseStudy(selectedSlug.value) || caseStudies[0]!);
 const artwork = computed(() => projectLayers[project.value.slug]!);
 const layer = computed(() => artwork.value[selectedLayer.value] || artwork.value[0]!);
+const revealSelection = () => {
+  if (projectList.value) revealActiveProject(projectList.value);
+};
+watch(() => project.value.slug, revealSelection, { flush: 'post' });
 const selectProject = (slug: string) => {
   if (!getCaseStudy(slug)) return;
   selectedSlug.value = slug;
@@ -25,7 +32,13 @@ onMounted(() => {
       selectedLayer.value = 0;
     }
   }, { immediate: true });
+  if (projectList.value) {
+    navigationResize = new ResizeObserver(revealSelection);
+    navigationResize.observe(projectList.value);
+    revealSelection();
+  }
 });
+onBeforeUnmount(() => navigationResize?.disconnect());
 const onProjectClick = (event: MouseEvent, slug: string) => {
   // Preserve modified clicks and normal links when JavaScript is unavailable.
   if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
@@ -38,7 +51,7 @@ const onProjectClick = (event: MouseEvent, slug: string) => {
   <section id="work" class="workbench" aria-label="Work">
     <aside class="project-index">
       <p class="index-label">Projects</p>
-      <nav class="project-list" aria-label="Projects">
+      <nav ref="projectList" class="project-list" aria-label="Projects">
         <a v-for="item in caseStudies" :key="item.slug" :href="`/work/${item.slug}`" :aria-current="project.slug === item.slug ? 'true' : undefined" @click="onProjectClick($event, item.slug)">
           <strong>{{ item.shortTitle }}</strong><small>{{ item.status }}</small>
         </a>
