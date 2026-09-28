@@ -320,6 +320,7 @@ useHead({
 .earlier-entry p:last-child { font-size: 13px; }
 .research-list { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 34px; }
 .research-list article { padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+.research-list article:nth-last-child(-n + 2) { border-bottom: 0; }
 .research-list a { text-decoration: none; }
 .research-list a:hover { color: var(--accent); }
 .research-tags { display: flex; gap: 6px 13px; flex-wrap: wrap; padding: 0; list-style: none; margin: 12px 0 0; color: var(--muted); font-size: 12px; }
