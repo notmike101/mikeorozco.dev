@@ -30,6 +30,8 @@ const capabilities = [
 const organizations = [
   { name: 'Thermo Fisher Scientific', logo: '/images/thermofisher.svg', url: 'https://www.thermofisher.com' },
   { name: 'Monrovia', logo: '/images/monrovia.svg', url: 'https://www.monrovia.com' },
+  { name: 'MKTR INC', logo: '/images/mktr.png', url: 'https://www.mktr.co/', dark: true },
+  { name: 'Valiant Technology', logo: '/images/valiant.svg', url: 'https://thevaliantway.com/', dark: true },
   { name: 'InTouch Marketing', logo: '/images/intouch-marketing.png', url: 'https://intouch-marketing.com' },
   { name: 'Katz Law', logo: '/images/katzlaw.png', url: 'https://www.katzlaw.com' },
   { name: 'Yuba-Sutter Chamber of Commerce', logo: '/images/yuba-sutter-chamber-of-commerce.png', url: 'https://www.yubasutterchamber.com' },
@@ -119,7 +121,8 @@ useHead({
     <section class="portfolio-section" aria-labelledby="organizations-title">
       <h2 id="organizations-title">Organizations I've supported</h2>
       <div class="organizations">
-        <a v-for="organization in organizations" :key="organization.name" :href="organization.url" target="_blank" rel="noopener noreferrer" :aria-label="organization.name"><img :src="organization.logo" :alt="organization.name" loading="lazy" /></a>
+        <a v-for="organization in organizations" :key="organization.name" :href="organization.url" :class="{ 'dark-logo': organization.dark }" target="_blank" rel="noopener noreferrer" :aria-label="organization.name"><img :src="organization.logo" :alt="organization.name" loading="lazy" /></a>
+        <p class="other-organizations">Artris <span>·</span> TOTAL PC <span>·</span> MedeMedia</p>
       </div>
     </section>
   </div>
@@ -151,6 +154,9 @@ useHead({
 .organizations { display: flex; flex-wrap: wrap; gap: 22px; align-items: center; }
 .organizations a { width: 130px; min-height: 70px; padding: 10px; display: grid; place-items: center; background: #fff; border-radius: 2px; }
 .organizations img { display: block; max-height: 42px; max-width: 110px; object-fit: contain; }
+.organizations a.dark-logo { background: #242833; }
+.other-organizations { flex-basis: 100%; margin: 0 !important; }
+.other-organizations span { padding-inline: 10px; }
 @media (max-width: 920px) {
   .portfolio-intro { grid-template-columns: 250px minmax(0, 1fr); gap: 24px; }
   .career-highlights { gap: 16px; }

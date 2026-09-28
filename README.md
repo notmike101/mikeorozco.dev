@@ -34,6 +34,6 @@ The generated static site is written to `.output/public`. GitHub Actions runs th
 
 ## Content model
 
-Case-study content and metadata are defined in `data/caseStudies.ts`. The same records drive the project index, case-study routes, structured data, and the XML sitemap. `data/projectLayers.ts` supplies conceptual artwork for each flow step; `ProjectLayerGraphic.vue` draws it. The diagrams illustrate the documented responsibilities, not private screens or exact deployment topology.
+Case-study content and metadata are defined in `data/caseStudies.ts`. The same records drive the project index, case-study routes, structured data, and the XML sitemap. `data/projectLayers.ts` supplies each project's actual components, independently of its narrative flow. `ProjectLayerGraphic.vue` renders screenshots, pinned public source excerpts, and documented architecture. See `docs/portfolio-evidence.md` for provenance and scope.
 
 `pnpm test` checks the generated output after `pnpm generate`, including populated layers, complete case-study content, research entries, images, metadata, and contact paths.

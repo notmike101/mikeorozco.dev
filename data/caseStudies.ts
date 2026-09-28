@@ -81,7 +81,7 @@ export const caseStudies: CaseStudy[] = [
     seoDescription: 'How Vue authoring tools, JSON configuration, and a shared 3D runtime support reusable enterprise product tours and sales demos.',
     socialImage: '/images/og-default.png',
     image: {
-      src: '/images/thermofisher-vanquish-tour.png',
+      src: '/images/vanquish-tour.png',
       alt: 'Vanquish Core HPLC product tour showing the interactive instrument and feature controls',
       width: 1280,
       height: 720,
@@ -100,6 +100,8 @@ export const caseStudies: CaseStudy[] = [
     },
     links: [
       { label: 'Live Vanquish Core HPLC 3D tour', href: 'https://www.thermofisher.com/us/en/home/virtual/vanquish-core-hplc-3d-tour.html' },
+      { label: '3D Tour Builder', href: 'https://builder.immersive.tf/' },
+      { label: 'Published Vanquish Core manifest', href: 'https://www.thermofisher.com/content/dam/LifeTech/virtual/vanquish-core-hplc/vanquish-core-35.json' },
     ],
   },
   {
@@ -310,8 +312,8 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'engineering-workflow-tooling',
-    title: 'Engineering Workflow Tooling',
-    shortTitle: 'Engineering workflows',
+    title: 'Engineering Plugin Marketplace',
+    shortTitle: 'Engineering Marketplace',
     summary: 'A reusable internal plugin marketplace connecting engineering context, implementation, validation, and human review.',
     problem: 'AI-assisted engineering needs more than a useful instruction in one session. Engineers need project context, a repeatable way to use it, and a clear record of what has been decided or validated. Rebuilding those instructions for every project also makes distribution and maintenance part of the problem. My internal tooling work addressed that shared workflow.',
     role: 'Senior Software Engineer at Thermo Fisher Scientific — created and maintained the Codex plugin marketplace, shared skills, helper tooling, workflow integrations, and installation guidance.',
@@ -351,13 +353,13 @@ export const caseStudies: CaseStudy[] = [
       'Connected planning, implementation, validation, and delivery handoffs to project context and human review.',
       'Built a separate local usage-reporting prototype and developed requirements-reconciliation extensions.',
     ],
-    reflection: 'The engineering focus is repeatability and inspectability: making context available, recording decisions, and giving reviewers evidence they can assess. The marketplace is implemented internal tooling. Usage reporting is a locally exercised prototype, and reconciliation extensions remain in development and testing. Separate A2A experiments and a design-stage orchestration initiative have their own scope. The practical result described here is a maintained toolset and explicit workflow, rather than a measured organization-wide productivity gain.',
+    reflection: 'The engineering focus is repeatability and inspectability: making context available, recording decisions, and giving reviewers evidence they can assess. The marketplace is implemented internal tooling. Usage reporting is a locally exercised prototype, and reconciliation extensions remain in development and testing. Separate A2A experiments and an orchestration runtime have their own scope. The practical result described here is a maintained toolset and explicit workflow, rather than a measured organization-wide productivity gain.',
     stack: ['Codex plugins', 'MCP', 'Jira', 'Confluence', 'Figma', 'Git'],
     status: 'Internal tooling',
     featured: false,
     publishedAt: '2026-09-27',
     updatedAt: '2026-09-27',
-    seoTitle: 'Engineering Workflow Tooling — Mike Orozco',
+    seoTitle: 'Engineering Plugin Marketplace — Mike Orozco',
     seoDescription: 'An internal plugin marketplace connecting project context, engineering workflows, validation, and human review, with clearly scoped prototypes.',
     socialImage: '/images/og-default.png',
     flow: {
@@ -383,7 +385,7 @@ export const caseStudies: CaseStudy[] = [
       {
         title: 'Start with recipes and an editable plan',
         paragraphs: [
-          'MealMind stores recipes as CookLang files and exposes structured ingredients, instructions, timers, and other recipe details. The web interface renders those details alongside the planning and shopping workflows. Recipes remain concrete application data that a plan can reference.',
+          'MealMind stores CookLang recipe documents in PostgreSQL and exposes structured ingredients, instructions, timers, and other recipe details. The web interface renders those details alongside the planning and shopping workflows. Recipes remain concrete application data that a plan can reference.',
           'A weekly plan supports any number of dated meals, with an optional slot label and a serving count. Users can create a blank plan, add or remove meals, or ask for a generated draft with a chosen meal count. This allows manual and AI-assisted planning to use the same underlying workflow.',
         ],
       },

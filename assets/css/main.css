@@ -11,12 +11,6 @@
   --rail: #eceef2;
   --hover: #e1e5ed;
   --grid: #e3e6ec;
-  --shadow: #9198a7;
-  --diagram-sheet: #fbfcff;
-  --diagram-panel: #edf0f7;
-  --diagram-line: #bbc4d3;
-  --diagram-ink: #34415b;
-  --diagram-edge: #b8c2d3;
 }
 
 .dark {
@@ -32,12 +26,6 @@
   --rail: #111216;
   --hover: #20242d;
   --grid: #2a2e37;
-  --shadow: #08090d;
-  --diagram-sheet: #272d39;
-  --diagram-panel: #343e50;
-  --diagram-line: #586881;
-  --diagram-ink: #d5deee;
-  --diagram-edge: #191e28;
 }
 
 html {
