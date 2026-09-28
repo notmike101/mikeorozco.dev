@@ -83,4 +83,6 @@
 - [x] Compare controlled browser loading/layout measurements before/after. Run Schema.org validation against generated JSON-LD; record exact results and any tool/service limitations.
 - [x] Run final `pnpm typecheck`, `pnpm generate`, `pnpm test`, `pnpm test:browser`, and `git diff --check`; inspect results. Record native browser/platform gaps rather than treating emulated WebKit or extraction as native Safari proof.
 - [x] Obtain one independent whole-branch review against the approved spec and Review Focus. Resolve significant findings with focused regressions and rerun affected/full checks as warranted.
-- [ ] Commit, push `codex/portfolio-discovery-accessibility`, and open a PR against `main`. Attach the PR to this chat. Report automated results and pending human/native-browser checks. Do not merge.
+- [x] Commit, push `codex/portfolio-discovery-accessibility`, and open a PR against `main`. Attach the PR to this chat. Report automated results and pending human/native-browser checks. Do not merge.
+
+Delivered as draft [PR #22](https://github.com/notmike101/mikeorozco.dev/pull/22). The validation report preserves the native-browser and screen-reader acceptance gates; the implementation checkboxes above do not mark those gates passed.
