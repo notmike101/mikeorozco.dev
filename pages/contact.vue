@@ -14,7 +14,6 @@ onNuxtReady(() => router.replace('/#contact'));
 <template>
   <div class="page-container legacy-contact">
     <h1>Contact Mike Orozco</h1>
-    <a class="text-link" href="mailto:me@mikeorozco.dev">me@mikeorozco.dev</a>
     <NuxtLink class="button-secondary" to="/#contact">Hiring &amp; consulting</NuxtLink>
   </div>
 </template>

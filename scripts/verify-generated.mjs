@@ -104,6 +104,9 @@ for (const subject of ['Senior engineering opportunity', 'Consulting project inq
   assert.ok(home.includes(`mailto:me@mikeorozco.dev?subject=${encodeURIComponent(subject)}`), `Missing contact option: ${subject}`);
 }
 const legacyContact = readFileSync(resolve(output, 'contact/index.html'), 'utf8');
-assert.ok(legacyContact.includes('href="/#contact"') && legacyContact.includes('mailto:me@mikeorozco.dev'), 'Old contact links must retain a usable fallback');
+assert.ok(legacyContact.includes('href="/#contact"'), 'Old contact links must retain a usable fallback');
+for (const page of [home, legacyContact]) {
+  assert.ok(!page.includes('>me@mikeorozco.dev<') && !page.includes('"email":"me@mikeorozco.dev"'), 'Email address must not appear as visible text or structured metadata');
+}
 assert.ok(!readFileSync(resolve(output, 'sitemap.xml'), 'utf8').includes('https://mikeorozco.dev/contact'), 'The sitemap must point to the homepage rather than the legacy contact route');
 console.log(`PASS: variable evidence components, navigation scrolling, ${caseStudies.length} complete case studies, ${additionalProjects.length} research projects, images, metadata and contact`);
