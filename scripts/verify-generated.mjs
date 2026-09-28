@@ -91,6 +91,20 @@ activeOffset = 734;
 revealActiveProject(navigation);
 assert.equal(navigation.scrollTop, 0, 'Leave the hidden desktop list alone on mobile');
 const escape = text => text.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
+const graphOf = html => {
+  const scripts = [...html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)];
+  assert.equal(scripts.length, 1, 'Each page needs one authoritative JSON-LD graph');
+  const schema = JSON.parse(scripts[0][1]);
+  assert.equal(schema['@context'], 'https://schema.org');
+  assert.ok(Array.isArray(schema['@graph']), 'Structured data must connect page, author, and content');
+  const graph = schema['@graph'];
+  const ids = graph.map(node => node['@id']);
+  assert.equal(new Set(ids).size, ids.length, 'Graph entity IDs must be unique');
+  for (const reference of JSON.stringify(graph).matchAll(/"@id":"([^"]+)"/g)) assert.ok(ids.includes(reference[1]), `Unresolved schema identity: ${reference[1]}`);
+  return graph;
+};
+const profileGraph = graphOf(home);
+assert.equal(profileGraph.find(node => node['@type'] === 'ProfilePage').mainEntity['@id'], 'https://mikeorozco.dev/#person');
 for (const project of caseStudies) {
   assert.ok(home.includes(`/work/${project.slug}`), `Missing crawlable project link: ${project.slug}`);
   const page = readFileSync(resolve(output, 'work', project.slug, 'index.html'), 'utf8');
@@ -98,6 +112,15 @@ for (const project of caseStudies) {
     assert.ok(page.includes(escape(text)), `Case-study content lost: ${project.slug}: ${text.slice(0, 50)}`);
   }
   assert.ok(page.includes(`<link rel="canonical" href="https://mikeorozco.dev/work/${project.slug}/">`), `Canonical must match served directory: ${project.slug}`);
+  const graph = graphOf(page);
+  const article = graph.find(node => node['@type'] === 'Article');
+  assert.equal(article?.headline, project.title, `Missing Article: ${project.slug}`);
+  assert.equal(article.author.name, 'Mike Orozco');
+  assert.equal(article.author.url, 'https://mikeorozco.dev/');
+  assert.equal(article.mainEntityOfPage['@id'], `https://mikeorozco.dev/work/${project.slug}/#webpage`);
+  assert.equal(article.about['@id'], `https://mikeorozco.dev/work/${project.slug}/#project`);
+  assert.equal(graph.find(node => node['@type'] === 'WebPage').mainEntity['@id'], article['@id']);
+  assert.ok(!JSON.stringify(graph).includes('"email"'), 'Schema must preserve contact privacy');
   if (project.image) assert.ok(existsSync(resolve(output, project.image.src.slice(1))), `Missing image: ${project.image.src}`);
 }
 assert.equal(new Set(caseStudies.map(project => project.slug)).size, caseStudies.length, 'Case-study routes must be unique');
@@ -125,4 +148,11 @@ const notFound = readFileSync(resolve(output, '404.html'), 'utf8');
 assert.ok(/<title>[^<]+<\/title>/.test(notFound), '404 needs a title');
 assert.ok(notFound.includes('name="robots" content="noindex"'), '404 must opt out of indexing');
 assert.ok(/<main[\s>]/.test(notFound) && /<a[^>]+href="\/"/.test(notFound), '404 must provide a main landmark and a non-JavaScript home link');
+const { serializeJsonLd } = await import('../utils/structuredData.ts');
+const hostileText = { text: '</script><b>&\u2028' };
+assert.ok(!serializeJsonLd(hostileText).includes('<'), 'JSON-LD cannot close its HTML script');
+assert.deepEqual(JSON.parse(serializeJsonLd(hostileText)), hostileText, 'Escaping must preserve content');
+const { absoluteUrl, caseStudyPath } = await import('../utils/site.ts');
+assert.equal(absoluteUrl(caseStudyPath('quire')), 'https://mikeorozco.dev/work/quire/');
+for (const [input, expected] of [['/images/og-default.png', 'https://mikeorozco.dev/images/og-default.png'], ['/#contact', 'https://mikeorozco.dev/#contact'], ['/?project=quire#work', 'https://mikeorozco.dev/?project=quire#work'], ['mailto:example@example.com', 'mailto:example@example.com']]) assert.equal(absoluteUrl(input), expected);
 console.log(`PASS: variable evidence components, navigation scrolling, ${caseStudies.length} complete case studies, ${additionalProjects.length} research projects, images, metadata and contact`);

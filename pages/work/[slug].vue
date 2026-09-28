@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { caseStudySchema, serializeJsonLd } from '~/utils/structuredData';
 import { caseStudies, getCaseStudy } from '~/data/caseStudies';
 import { absoluteUrl, siteUrl, caseStudyPath } from '~/utils/site';
 
@@ -34,37 +35,7 @@ useSeoMeta({
 
 useHead({
   link: [{ rel: 'canonical', href: canonical }],
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': schemaType,
-        '@id': `${canonical}#project`,
-        name: project.title,
-        description: project.summary,
-        url: canonical,
-        datePublished: project.publishedAt,
-        dateModified: project.updatedAt,
-        creator: { '@id': `${siteUrl}#person` },
-        author: { '@id': `${siteUrl}#person` },
-        codeRepository: project.repository,
-        programmingLanguage: project.stack,
-      }),
-    },
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
-          { '@type': 'ListItem', position: 2, name: 'Past work', item: `${siteUrl}#work` },
-          { '@type': 'ListItem', position: 3, name: project.title, item: canonical },
-        ],
-      }),
-    },
-  ],
+  script: [{ key: 'page-schema', type: 'application/ld+json', innerHTML: serializeJsonLd(caseStudySchema(project)) }],
 });
 
 const relatedProjects = caseStudies.filter((item) => item.slug !== project.slug).slice(0, 2);

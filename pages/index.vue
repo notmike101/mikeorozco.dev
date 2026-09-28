@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { profileSchema, serializeJsonLd } from '~/utils/structuredData';
 import { additionalProjects } from '~/data/caseStudies';
 import { defaultDescription, defaultSocialImage, defaultTitle, siteUrl } from '~/utils/site';
 
@@ -178,29 +179,7 @@ useSeoMeta({
 
 useHead({
   link: [{ rel: 'canonical', href: siteUrl }],
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'ProfilePage',
-        '@id': `${siteUrl}#profile`,
-        url: siteUrl,
-        name: defaultTitle,
-        description: defaultDescription,
-        mainEntity: {
-          '@type': 'Person',
-          '@id': `${siteUrl}#person`,
-          name: 'Mike Orozco',
-          url: siteUrl,
-          jobTitle: 'Senior Software Engineer | Frontend Architecture & Developer Tooling',
-          homeLocation: { '@type': 'Place', name: 'Texas, USA' },
-          knowsAbout: ['Frontend architecture', 'Vue authoring tools', 'TypeScript', 'Immersive web', 'Developer tooling', 'Application security'],
-          sameAs: ['https://github.com/notmike101', 'https://www.linkedin.com/in/mikeoroz'],
-        },
-      }),
-    },
-  ],
+  script: [{ key: 'page-schema', type: 'application/ld+json', innerHTML: serializeJsonLd(profileSchema()) }],
 });
 </script>
 <template>
