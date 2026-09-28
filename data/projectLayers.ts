@@ -841,5 +841,128 @@ export const projectLayers: Record<string, ProjectLayer[]> = {
         }
       ]
     }
-  ]
+  ],
+  'balatro-mcp': [
+    {
+      id: 'decision-loop', label: 'Agent decision loop', caption: 'How it works',
+      description: 'The Rust MCP server gives an agent the visible game state and legal choices. Each action carries the decision identifier it belongs to, so a choice based on old state can be rejected.',
+      diagram: [{ label: 'Observe the game', detail: 'Visible state and a decision identifier' }, { label: 'Choose a legal action', detail: 'Typed action and selection parameters' }, { label: 'Check the live decision', detail: 'Reject stale choices before execution' }],
+      source: { label: 'Inspect the decision interface', url: 'https://github.com/notmike101/balatro-mcp/blob/9b27ce9fdbc52aa5b462caaa7daa528ec2b5808f/src/tools.rs' },
+    },
+    {
+      id: 'game-bridge', label: 'Lua game bridge', caption: 'How it works',
+      description: 'A Lua bridge captures observations inside Balatro, receives serialized commands, and returns correlated results. Hidden card identities are withheld before the agent sees the observation.',
+      diagram: [{ label: 'Balatro + Lua bridge', detail: 'Capture visible state and execute commands' }, { label: 'File communication', detail: 'Match each response to its command' }, { label: 'Rust interface', detail: 'Sanitize observations returned to the agent' }],
+      source: { label: 'Inspect the game bridge', url: 'https://github.com/notmike101/balatro-mcp/blob/9b27ce9fdbc52aa5b462caaa7daa528ec2b5808f/mod/codex_agent.lua' },
+    },
+    {
+      id: 'legal-actions', label: 'Policy and scoring', caption: 'How it works',
+      description: 'The policy backend builds the available action set for the current phase, checks selected cards, and provides scoring estimates based on visible hands.',
+      diagram: [{ label: 'Current phase', detail: 'Hand, shop, selection, or other game state' }, { label: 'Policy checks', detail: 'Valid selections and available actions' }, { label: 'Decision context', detail: 'Visible-hand classifications and scoring estimates' }],
+      source: { label: 'Inspect action policy', url: 'https://github.com/notmike101/balatro-mcp/blob/9b27ce9fdbc52aa5b462caaa7daa528ec2b5808f/src/backend/policy.rs' },
+    },
+    {
+      id: 'runtime-guard', label: 'Runtime coordination', caption: 'How it works',
+      description: 'A shared file lock prevents simultaneous mutations from multiple MCP processes. Checks cover observation age, bridge version, the game process, and the experiment’s fixed seed.',
+      diagram: [{ label: 'Acquire shared lock', detail: 'One process mutates the game at a time' }, { label: 'Run preflight', detail: 'Process, seed, version, and fresh observation' }, { label: 'Execute and release', detail: 'Keep the action inside the guarded operation' }],
+      source: { label: 'Inspect runtime checks', url: 'https://github.com/notmike101/balatro-mcp/blob/9b27ce9fdbc52aa5b462caaa7daa528ec2b5808f/src/backend/runtime.rs' },
+    },
+    {
+      id: 'decision-history', label: 'Decision history', caption: 'How it works',
+      description: 'SQLite stores decision rationale, outcomes, lessons, and replay history. Explicit runtime resets archive the state and replay databases, including their sidecar files.',
+      diagram: [{ label: 'Decision record', detail: 'Observed state, rationale, and result' }, { label: 'SQLite stores', detail: 'Retain state, lessons, and replay history' }, { label: 'Recall or reset', detail: 'Query the record or archive it explicitly' }],
+      source: { label: 'Inspect persistent state', url: 'https://github.com/notmike101/balatro-mcp/blob/9b27ce9fdbc52aa5b462caaa7daa528ec2b5808f/src/backend/state.rs' },
+    },
+  ],
+  'between-sessions': [
+    {
+      id: 'journal', label: 'Reading interface', caption: 'Live journal capture',
+      description: 'The public Astro site presents AI-authored articles with categories, archive navigation, and RSS. This is the actual published homepage.',
+      image: '/images/between-sessions-home.png',
+      source: { label: 'Read the journal', url: 'https://ai-blog.mikeorozco.dev/' },
+    },
+    {
+      id: 'journey', label: 'Journey record', caption: 'Live Journey capture',
+      description: 'Working principles, preferences, revisions, and open questions link back to the articles supporting them. The record makes changes across sessions visible to readers.',
+      image: '/images/between-sessions-journey.png',
+      source: { label: 'Explore the Journey', url: 'https://ai-blog.mikeorozco.dev/journey/' },
+    },
+    {
+      id: 'content-checks', label: 'Content checks', caption: 'How it works',
+      description: 'Validation checks article metadata, dates, category identifiers, restricted embeds, selected privacy patterns, and Journey references. It checks structure, not the truth of an article’s claims.',
+      diagram: [{ label: 'Markdown + metadata', detail: 'Articles, dates, categories, and sources' }, { label: 'Content validation', detail: 'Reject malformed content and selected privacy risks' }, { label: 'Journey references', detail: 'Require supporting article slugs to exist' }],
+      source: { label: 'Inspect the validator', url: 'https://github.com/notmike101/ai-blog/blob/5fcdf8f2d2dc3c9e5a0aa2b2c1008ae92ae85737/scripts/validate-content.mjs' },
+    },
+    {
+      id: 'publishing', label: 'Publishing workflow', caption: 'How it works',
+      description: 'Pull requests run content, site, and browser checks. A separate main-branch workflow builds and publishes the static site to GitHub Pages.',
+      diagram: [{ label: 'Pull request', detail: 'Review the proposed article and site changes' }, { label: 'Validation', detail: 'Content, build, and browser behavior checks' }, { label: 'Main branch deployment', detail: 'Generate and publish the static site' }],
+      source: { label: 'Inspect the publishing checks', url: 'https://github.com/notmike101/ai-blog/blob/5fcdf8f2d2dc3c9e5a0aa2b2c1008ae92ae85737/.github/workflows/validate.yml' },
+    },
+  ],
+  'digital-garden-pipeline': [
+    {
+      id: 'publishing-system', label: 'Publishing pipeline', caption: 'System diagram',
+      description: 'Three containers connect a synchronized Obsidian vault to a generated website. The integration uses the upstream LiveSync Bridge, a publication processor, VitePress, and Nginx.',
+      diagram: [{ label: 'Sync + select', detail: 'Upstream LiveSync and opt-in publication rules' }, { label: 'Build', detail: 'VitePress generates pages from selected Markdown' }, { label: 'Serve', detail: 'Nginx delivers the static build output' }],
+      source: { label: 'Inspect the container layout', url: 'https://github.com/notmike101/digital-garden-app/blob/feb2765bb9a4b465e7b9a0d5832cbe354dd743d4/docker-compose.yml' },
+    },
+    {
+      id: 'publication-rules', label: 'Note selection', caption: 'How it works',
+      description: 'Notes opt into publication through frontmatter. The processor prepares selected Markdown, applies an optional output path, and strips publishing-control fields.',
+      diagram: [{ label: 'Note frontmatter', detail: 'Explicit publish flag and optional path' }, { label: 'Publication processor', detail: 'Select notes and prepare their Markdown' }, { label: 'Published input volume', detail: 'Only selected documents reach the builder' }],
+      source: { label: 'Inspect the publication processor', url: 'https://github.com/notmike101/digital-garden-app/blob/feb2765bb9a4b465e7b9a0d5832cbe354dd743d4/livesync-bridge/processor.js' },
+    },
+    {
+      id: 'site-build', label: 'Automatic builds', caption: 'How it works',
+      description: 'The build service watches published Markdown and regenerates the VitePress site after changes, including an initial build at startup.',
+      diagram: [{ label: 'Published Markdown', detail: 'Read from the shared input volume' }, { label: 'File watcher', detail: 'Trigger the initial and subsequent builds' }, { label: 'Static output', detail: 'Write pages for the web container' }],
+      source: { label: 'Inspect the build watcher', url: 'https://github.com/notmike101/digital-garden-app/blob/feb2765bb9a4b465e7b9a0d5832cbe354dd743d4/watch-build.js' },
+    },
+    {
+      id: 'static-delivery', label: 'Static delivery', caption: 'How it works',
+      description: 'Nginx reads the generated output through a read-only mount. This is public static content; the optional browser-side password display gate does not protect private notes.',
+      diagram: [{ label: 'Generated files', detail: 'HTML and assets in the build-output volume' }, { label: 'Read-only web mount', detail: 'Keep serving separate from generation' }, { label: 'Nginx', detail: 'Deliver public pages to the browser' }],
+      source: { label: 'Inspect delivery configuration', url: 'https://github.com/notmike101/digital-garden-app/blob/feb2765bb9a4b465e7b9a0d5832cbe354dd743d4/nginx.conf' },
+    },
+  ],
+  'false-witness': [
+    {
+      id: 'prototype-scene', label: 'Godot prototype', caption: 'Early geometry inspection · prototype art',
+      description: 'An actual native capture from an early room and apparatus inspection. It shows prototype geometry; the current project is developing physical interactions and a player-hosted session foundation.',
+      image: '/images/false-witness-prototype.png',
+    },
+    {
+      id: 'physical-interactions', label: 'Physical interactions', caption: 'Implemented prototype',
+      description: 'The controller handles movement, stance, carry poses, and input. The interaction world coordinates actors, items, doors, placement, handoffs, and action results.',
+      diagram: [{ label: 'Player controller', detail: 'Movement, stance, and interaction input' }, { label: 'Interaction world', detail: 'Ownership, placement, handoffs, and doors' }, { label: 'World response', detail: 'Apply and report the action result' }],
+    },
+    {
+      id: 'session-foundation', label: 'Session networking', caption: 'Implemented prototype',
+      description: 'Host and join flows cover invitation trust, admission, roster and snapshot synchronization, chat, and reconnect behavior. Distinct-PC gameplay acceptance remains unfinished.',
+      diagram: [{ label: 'Host / join interface', detail: 'Invitation, trust, approval, and roster' }, { label: 'Session protocol', detail: 'Admission, snapshots, chat, and pings' }, { label: 'Connection lifecycle', detail: 'Liveness, loss detection, and reconnect' }],
+    },
+    {
+      id: 'content-validation', label: 'Content validation', caption: 'Implemented prototype',
+      description: 'Authored environments and props enter through a content boundary that checks asset manifests, location data, and build identity before loading.',
+      diagram: [{ label: 'Authored content', detail: 'Blender environments and props' }, { label: 'Content checks', detail: 'Manifest, location, and build identity' }, { label: 'Godot scene', detail: 'Load the validated content set' }],
+    },
+  ],
+  'stateful-workflow-runtime': [
+    {
+      id: 'proof-workflow', label: 'Pause and resume', caption: 'Local prototype',
+      description: 'A bounded LangGraph workflow generates requirements, pauses for operator review, resumes into review and an image probe, and persists the accepted artifact. Full project delivery is still planned.',
+      diagram: [{ label: 'Generate', detail: 'Run a bounded read-only worker task' }, { label: 'Pause for the operator', detail: 'Retain the execution checkpoint' }, { label: 'Resume and review', detail: 'Complete the remaining proof steps' }],
+    },
+    {
+      id: 'durable-records', label: 'Durable records', caption: 'Local prototype',
+      description: 'Execution checkpoints, SQLite domain records, and content-addressed artifacts have separate responsibilities. Artifact files are persisted before their database references.',
+      diagram: [{ label: 'Graph checkpoint', detail: 'Where execution should continue' }, { label: 'SQLite records', detail: 'Authoritative operational state and receipts' }, { label: 'Immutable artifacts', detail: 'Content-addressed files referenced by the record' }],
+    },
+    {
+      id: 'dispatch-ledger', label: 'Dispatch ledger', caption: 'Local prototype',
+      description: 'Stable dispatch keys connect request hashes, worker thread and turn identifiers, results, and promotion receipts. A resumed controller can recover completed model work without routinely submitting it again.',
+      diagram: [{ label: 'Dispatch request', detail: 'Stable key and request hash' }, { label: 'Worker adapter', detail: 'Start bounded work or recover its response' }, { label: 'Result receipt', detail: 'Retain the outcome and artifact promotion' }],
+    },
+  ],
 };

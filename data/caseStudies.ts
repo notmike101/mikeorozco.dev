@@ -16,7 +16,7 @@ export interface CaseStudy {
   reflection: string;
   stack: string[];
   repository?: string;
-  status: 'Enterprise work' | 'Open source' | 'Internal tooling' | 'Independent application' | 'In development';
+  status: 'Enterprise work' | 'Open source' | 'Public source' | 'Internal tooling' | 'Independent application' | 'In development';
   featured: boolean;
   publishedAt: string;
   updatedAt: string;
@@ -598,15 +598,230 @@ export const caseStudies: CaseStudy[] = [
       { label: 'Runtime architecture and maintenance guide', href: 'https://github.com/notmike101/wildly-unqualified/blob/main/docs/MAINTAINING.md' },
     ],
   },
+  {
+    slug: 'balatro-mcp',
+    title: 'Balatro MCP',
+    shortTitle: 'Balatro MCP',
+    summary: 'A Rust interface that lets an AI agent play a controlled Balatro run through legal actions, with a Lua game bridge and a durable decision history.',
+    problem: 'A game-playing agent needs a reliable view of what it can see and do. Raw commands can target an old game state, two agent processes can collide, and hidden card identities can accidentally leak into observations. The integration needs to make those boundaries explicit before an action reaches the game.',
+    role: 'Independent project spanning the Rust MCP server, action policy, Lua bridge, runtime coordination, and SQLite persistence.',
+    details: [
+      {
+        title: 'Make each decision belong to the current game',
+        paragraphs: ['The server returns the visible game state and its legal actions. An agent submits an action identifier with the decision identifier it received. Before execution, the server checks the live decision and resolves the action against the current legal set. Stale choices are rejected instead of being applied to a changed hand or menu.', 'A compact decision response keeps the normal loop small. Detailed scoring context, recall, and replay remain available separately when the agent needs more information.'],
+      },
+      {
+        title: 'Connect Rust policy to a Lua game bridge',
+        paragraphs: ['Rust owns the tool interface, action policy, and persistence. A Lua bridge captures observations inside Balatro and executes serialized commands through file-based communication. Responses are correlated with the command that produced them.', 'Hidden-card handling exists on both sides of the boundary. The bridge withholds face-down identities, and the Rust serializer sanitizes hidden cards and internal command fields before returning observations to the agent.'],
+      },
+      {
+        title: 'Coordinate processes and preserve the record',
+        paragraphs: ['A shared file lock serializes mutations across MCP processes. Runtime checks cover the game process, bridge version, observation freshness, and the allowed seed. SQLite stores decisions, outcomes, lessons, and replay records; an explicit reset archives the runtime databases and their sidecars.', 'This is a controlled gameplay experiment. The current implementation restricts runs to seed 2K9H9HN. The public repository excludes game binaries, saves, local databases, and proprietary game data.'],
+      },
+    ],
+    outcomes: ['Built a structured agent-to-game integration in Rust and Lua.', 'Implemented freshness checks, hidden-card filtering, and coordination across agent processes.', 'Added persistent decision and replay records with explicit reset and recovery behavior.'],
+    reflection: 'The interesting problem is keeping an agent’s decision connected to the state it actually observed. The project makes that contract inspectable without claiming a win rate or general game-playing ability.',
+    stack: ['Rust', 'Lua', 'MCP', 'SQLite', 'Tokio'],
+    repository: 'https://github.com/notmike101/balatro-mcp',
+    status: 'Public source', featured: false,
+    publishedAt: '2026-09-27', updatedAt: '2026-09-27',
+    seoTitle: 'Balatro MCP — Game Agent Integration | Mike Orozco',
+    seoDescription: 'A Rust and Lua game-agent integration with legal actions, fresh-state validation, runtime coordination, and SQLite replay.',
+    socialImage: '/images/og-default.png',
+    flow: {
+      title: 'Observe, decide, validate, act',
+      steps: [
+        { title: 'Observe', description: 'Read visible state through the Lua bridge.' },
+        { title: 'Choose', description: 'Select from legal actions for that decision.' },
+        { title: 'Validate', description: 'Lock the runtime and check the current state.' },
+        { title: 'Record', description: 'Execute the action and retain its outcome.' },
+      ],
+      caption: 'Implementation responsibilities for a fixed-seed local experiment. This diagram is not a gameplay result.',
+    },
+    links: [{ label: 'Project and setup', href: 'https://github.com/notmike101/balatro-mcp' }, { label: 'Action and decision implementation', href: 'https://github.com/notmike101/balatro-mcp/blob/9b27ce9fdbc52aa5b462caaa7daa528ec2b5808f/src/tools.rs' }],
+  },
+  {
+    slug: 'between-sessions',
+    title: 'Between Sessions',
+    shortTitle: 'Between Sessions',
+    summary: 'An AI-authored journal with a real reading interface, an evolving record of ideas, and a publishing workflow that checks content before it reaches the site.',
+    problem: 'An ongoing AI publication needs more than a stream of generated articles. Readers need a usable archive, continuity between sessions, and a way to follow how ideas change. Publishing also needs checks for malformed content, broken references, and accidental disclosure.',
+    role: 'Independent publishing-system project: the Astro site, content checks, Journey record, and GitHub publishing workflow. The articles are written by an AI agent.',
+    details: [
+      {
+        title: 'Give the publication a usable home',
+        paragraphs: ['Markdown articles become a static Astro site with article and category pages, archive search and pagination, RSS, and canonical metadata. Readers can follow the archive without requiring a client-side application to load first.', 'The interface identifies the writing as AI-authored. Analytics loads after an explicit opt-in, and readers can revisit their tracking choice from the footer.'],
+      },
+      {
+        title: 'Make continuity visible',
+        paragraphs: ['The Journey page collects working principles, emerging preferences, revisions, and open questions. Each entry links to the article that supports or introduced it, giving readers a record they can inspect instead of an unsupported claim that the agent remembers.', 'The continuity record is structured data. Validation checks its sections and verifies that the referenced article slugs exist. The public page turns that record into part of the reading experience.'],
+      },
+      {
+        title: 'Check the publication boundary',
+        paragraphs: ['Content validation checks metadata, time-zone-aware publication dates, duplicate dates, category slug collisions, restricted embeds, selected privacy patterns, and Journey references. Pull requests run site validation and browser checks; production deployment runs separately from the main branch.', 'These checks catch structural problems. They do not establish the truth of an article’s claims, so citations, corrections, and changes of mind remain visible parts of the publication.'],
+      },
+    ],
+    outcomes: ['Published a browsable AI-authored journal with article, category, archive, and RSS views.', 'Made evolving ideas and revisions inspectable through article-linked Journey records.', 'Separated content checks and browser validation from production deployment.'],
+    reflection: 'Continuity is more useful when readers can inspect it. The engineering work supports an ongoing publication while keeping AI authorship and the limits of automated validation clear.',
+    stack: ['Astro', 'TypeScript', 'Markdown', 'GitHub Actions', 'Playwright'],
+    repository: 'https://github.com/notmike101/ai-blog',
+    status: 'Independent application', featured: false,
+    publishedAt: '2026-09-27', updatedAt: '2026-09-27',
+    seoTitle: 'Between Sessions — AI Publishing System | Mike Orozco',
+    seoDescription: 'An AI-authored journal with an Astro reading interface, evidence-linked continuity records, content validation, and a reviewable publishing workflow.',
+    socialImage: '/images/og-default.png',
+    image: { src: '/images/between-sessions-home.png', alt: 'Between Sessions live journal homepage', width: 1265, height: 712, href: 'https://ai-blog.mikeorozco.dev/', label: 'The live AI-authored journal' },
+    flow: {
+      title: 'From a researched question to a public record',
+      steps: [
+        { title: 'Write', description: 'Create an article with sources and metadata.' },
+        { title: 'Connect', description: 'Link developing ideas to published evidence.' },
+        { title: 'Check', description: 'Validate content and exercise the reading interface.' },
+        { title: 'Publish', description: 'Build the static site from the main branch.' },
+      ],
+      caption: 'The publication workflow checks content structure and site behavior; factual accuracy still requires editorial verification.',
+    },
+    links: [{ label: 'Read the journal', href: 'https://ai-blog.mikeorozco.dev/' }, { label: 'Follow the Journey', href: 'https://ai-blog.mikeorozco.dev/journey/' }, { label: 'Source and publishing workflow', href: 'https://github.com/notmike101/ai-blog' }],
+  },
+  {
+    slug: 'digital-garden-pipeline',
+    title: 'Digital Garden Pipeline',
+    shortTitle: 'Digital Garden',
+    summary: 'A self-hosted publishing pipeline that turns selected Obsidian notes into a VitePress site through synchronization, publication rules, and automatic rebuilds.',
+    problem: 'Publishing from a personal knowledge base should not require copying notes into a second repository after every edit. The pipeline needs an explicit choice about which notes become public and a clear path from synchronized Markdown to served pages.',
+    role: 'Independent integration project: Docker services, publication filtering, rebuild automation, and VitePress/Nginx delivery. Vault synchronization uses the upstream Obsidian LiveSync Bridge.',
+    details: [
+      {
+        title: 'Keep the publishing choice with the note',
+        paragraphs: ['The processor selects Markdown notes marked publish: true. It can map a custom output path and removes publishing-control fields from the generated document. This keeps the author’s export decision beside the content being edited.', 'The pipeline reuses the upstream LiveSync Bridge for CouchDB-backed vault synchronization. My work connects that sync stage to the publication processor and downstream site build.'],
+      },
+      {
+        title: 'Separate synchronization, building, and serving',
+        paragraphs: ['Docker Compose runs three services. The bridge writes selected Markdown to a shared volume; the builder reads it and writes generated output; Nginx serves that output. The builder’s input and web server’s output mounts are read-only.', 'A file watcher performs an initial build and rebuilds when Markdown changes. The implementation favors a small, inspectable self-hosted pipeline over a separate publishing dashboard.'],
+      },
+      {
+        title: 'Keep public content public',
+        paragraphs: ['The optional browser-side password feature only controls display. Generated content still reaches the browser, so it is not an access-control system and is unsuitable for sensitive notes. Publication filtering decides what enters the public site.'],
+      },
+    ],
+    outcomes: ['Connected selected Obsidian notes to a containerized static-site publishing workflow.', 'Placed publication controls in Markdown frontmatter.', 'Separated sync, generation, and delivery into inspectable services.'],
+    reflection: 'This project’s value is the connection between tools: a note changes in the authoring environment, passes an explicit publishing rule, and becomes a generated page. The source documents that path without claiming a production deployment or secure private publishing.',
+    stack: ['Docker', 'JavaScript', 'Obsidian', 'CouchDB', 'VitePress', 'Nginx'],
+    repository: 'https://github.com/notmike101/digital-garden-app',
+    status: 'Public source', featured: false,
+    publishedAt: '2026-09-27', updatedAt: '2026-09-27',
+    seoTitle: 'Digital Garden — Publishing Pipeline | Mike Orozco',
+    seoDescription: 'A Docker pipeline connecting Obsidian LiveSync, frontmatter publication rules, VitePress generation, and Nginx delivery.',
+    socialImage: '/images/og-default.png',
+    flow: {
+      title: 'A note becomes a page',
+      steps: [
+        { title: 'Synchronize', description: 'Use the upstream LiveSync Bridge to receive vault changes.' },
+        { title: 'Select', description: 'Prepare notes explicitly marked for publication.' },
+        { title: 'Build', description: 'Generate the VitePress site when Markdown changes.' },
+        { title: 'Serve', description: 'Deliver static output through Nginx.' },
+      ],
+      caption: 'Source-backed container responsibilities. The sync engine is an upstream dependency; no live deployment is claimed.',
+    },
+    links: [{ label: 'Source and setup', href: 'https://github.com/notmike101/digital-garden-app' }, { label: 'Upstream LiveSync Bridge', href: 'https://github.com/vrtmrz/livesync-bridge' }],
+  },
+  {
+    slug: 'false-witness',
+    title: 'False Witness',
+    shortTitle: 'False Witness',
+    summary: 'A cooperative horror prototype in Godot, combining physical interactions, authored environments, and player-hosted session networking.',
+    problem: 'The intended four-player game asks a crew to stage a haunting while an investigator’s observations establish its rules. That premise needs believable physical interactions and a shared session that can keep track of players, objects, and connection changes.',
+    role: 'Independent game direction and architecture, with agent-assisted implementation and review of interaction, content, and networking systems.',
+    details: [
+      {
+        title: 'Build physical actions into the world',
+        paragraphs: ['The prototype separates the player controller from the interaction world. Movement, stance, carry poses, and input belong to the controller; the world coordinates actors, items, doors, placement, handoffs, and action results.', 'Local scene records cover pickup, carry, placement, handoff, and door behavior. The screenshot shows an earlier geometry inspection with prototype art, rather than the finished gameplay or visual target.'],
+      },
+      {
+        title: 'Treat joining and reconnecting as part of the game',
+        paragraphs: ['The session layer implements admission, roster and snapshot exchange, chat, pings, liveness, and reconnect behavior. The host/join interface exposes invitation trust, approval, and synchronization status.', 'Packaged loopback checks exercise transport loss and reconnection. Those results establish a bounded network foundation; the current host/join flow reaches pre-game synchronization, and distinct-PC cooperative gameplay remains an acceptance task.'],
+      },
+      {
+        title: 'Keep content and validation traceable',
+        paragraphs: ['Blender-authored content feeds the Godot environment. Content loading checks asset manifests, location data, and build identity before use.', 'The project keeps logic checks, native scene observations, exported-package checks, and human cooperation results separate. A successful package or reconnect test does not establish that the complete game is playable or enjoyable.'],
+      },
+    ],
+    outcomes: ['Implemented the local movement and physical interaction foundation.', 'Built player admission, synchronization, and reconnect systems with recorded packaged loopback checks.', 'Established content validation and a separate acceptance path for the full cooperative experience.'],
+    reflection: 'A multiplayer prototype needs honest boundaries between what works locally, what survives a network interruption, and what people can actually play together. False Witness is still in development; the complete loop, distinct-PC cooperation, and voice remain unvalidated.',
+    stack: ['Godot', 'GDScript', 'Blender', 'ENet', 'DTLS'],
+    status: 'In development', featured: false,
+    publishedAt: '2026-09-27', updatedAt: '2026-09-27',
+    seoTitle: 'False Witness — Godot Prototype | Mike Orozco',
+    seoDescription: 'A cooperative horror game prototype with physical interactions, content validation, and player-hosted session networking.',
+    socialImage: '/images/og-default.png',
+    image: { src: '/images/false-witness-prototype.png', alt: 'Early native Godot geometry inspection with a room, apparatus, and prototype art', width: 736, height: 498, label: 'Early geometry inspection · prototype art' },
+    flow: {
+      title: 'Physical play inside a shared session',
+      steps: [
+        { title: 'Load content', description: 'Validate manifests, locations, and build identity.' },
+        { title: 'Join', description: 'Admit players and synchronize the session.' },
+        { title: 'Interact', description: 'Coordinate movement, objects, handoffs, and doors.' },
+        { title: 'Recover', description: 'Handle liveness and reconnect transitions.' },
+      ],
+      caption: 'Implemented prototype responsibilities, not a claim that the complete cooperative gameplay loop is finished.',
+    },
+    links: [],
+  },
+  {
+    slug: 'stateful-workflow-runtime',
+    title: 'Stateful Workflow Runtime',
+    shortTitle: 'Workflow Runtime',
+    summary: 'A local orchestration prototype that pauses for review, resumes from durable state, and retains model-work receipts and immutable artifacts.',
+    problem: 'Engineering work spread across agent sessions can lose execution context and repeat completed steps. The prototype explores how to separate workflow position, operational records, and artifacts so an operator can pause and resume a bounded process.',
+    role: 'Workflow architecture and implementation direction, with an agent-assisted local prototype. The broader requirements-to-readiness automation remains in design.',
+    details: [
+      {
+        title: 'Separate execution position from durable records',
+        paragraphs: ['LangGraph tracks the position in the proof workflow. SQLite stores domain records separately, while content-addressed files retain immutable artifacts. An artifact is written before the database stores its reference.', 'The implemented graph generates a small requirements artifact, pauses for an operator, reviews it, performs an image probe, and persists the accepted result. Setup, proof, and status commands expose that bounded workflow.'],
+      },
+      {
+        title: 'Remember completed model work',
+        paragraphs: ['A dispatch ledger records request hashes, worker thread and turn identifiers, recovered responses, and promotion receipts. Stable dispatch keys let a resumed controller reuse completed work instead of routinely submitting it again.', 'The focused resume test uses real checkpoint files and SQLite with a controlled worker adapter. It asserts that generation is not dispatched twice after a new controller resumes the proof. This is bounded recovery evidence, not a general exactly-once execution guarantee.'],
+      },
+      {
+        title: 'Keep the operator in the workflow',
+        paragraphs: ['The generation and review stages are separated by an explicit pause. An execution adapter opens read-only worker threads and retrieves their results through the app-server protocol.', 'The proof uses small synthetic requirements and an image probe. Full project intake, implementation, and readiness orchestration remain planned work; the prototype is not presented as an autonomous delivery system.'],
+      },
+    ],
+    outcomes: ['Implemented a local generate, pause, review, and persist workflow.', 'Separated graph checkpoints, SQLite records, and immutable artifacts.', 'Added dispatch receipts and a focused restart/resume check for completed model work.'],
+    reflection: 'Durability comes from deciding which state belongs where and what a resumed controller can trust. This prototype makes those decisions concrete before expanding into a larger engineering workflow.',
+    stack: ['JavaScript', 'Node.js', 'LangGraph.js', 'SQLite', 'Codex app-server'],
+    status: 'In development', featured: false,
+    publishedAt: '2026-09-27', updatedAt: '2026-09-27',
+    seoTitle: 'Stateful Workflow Runtime — Orchestration Prototype | Mike Orozco',
+    seoDescription: 'A local workflow prototype with durable pause/resume, SQLite state, a dispatch ledger, immutable artifacts, and explicit operator review.',
+    socialImage: '/images/og-default.png',
+    flow: {
+      title: 'Pause without losing the work',
+      steps: [
+        { title: 'Generate', description: 'Dispatch bounded work and retain the result receipt.' },
+        { title: 'Pause', description: 'Persist execution position for operator review.' },
+        { title: 'Resume', description: 'Recover completed work and run the remaining steps.' },
+        { title: 'Retain', description: 'Store the artifact and its database reference.' },
+      ],
+      caption: 'The implemented local proof. Broader project intake and delivery automation remain in design.',
+    },
+    links: [],
+  },
 ];
 
 export const additionalProjects = [
   {
-    title: 'Between Sessions',
-    description: 'An AI-authored journal exploring research, writing, and revision across sessions. Articles and an evolving record of ideas are backed by content checks and an auditable publishing workflow.',
-    website: 'https://ai-blog.mikeorozco.dev/',
-    repository: 'https://github.com/notmike101/ai-blog',
-    tags: ['AI publishing', 'Astro', 'Markdown', 'GitHub Actions'],
+    title: 'Vibe Translate contribution',
+    description: 'Merged upstream: a native ChatGPT subscription provider for an existing macOS translation app, including device sign-in, Keychain credential storage, streamed responses, cancellation, and focused provider tests.',
+    repository: 'https://github.com/suicvne/vibe-translate/pull/1',
+    tags: ['Merged contribution', 'Swift', 'macOS', 'OAuth'],
+  },
+  {
+    title: 'ZCode Token Speed',
+    description: 'An extension showing live estimates and finalized token throughput beside assistant responses, with a session dashboard and bounded history. Prompt and response content stays out of its metrics records.',
+    repository: 'https://github.com/notmike101/zcode-tps-extension',
+    tags: ['TypeScript', 'Desktop extensions', 'Observability'],
   },
   {
     title: 'WordPress Persistence Security Research',
@@ -619,12 +834,6 @@ export const additionalProjects = [
     description: 'Synchronizes Wordfence IP blocks to Cloudflare WAF rules with reconciliation, retry behavior, cleanup, and operational logging.',
     repository: 'https://github.com/notmike101/wordfence-cloudflare-firewall-sync',
     tags: ['Security', 'Cloudflare', 'WordPress'],
-  },
-  {
-    title: 'Digital Garden Pipeline',
-    description: 'A Docker-based publishing pipeline that transforms selected Obsidian notes into a live VitePress site.',
-    repository: 'https://github.com/notmike101/digital-garden-app',
-    tags: ['TypeScript', 'Docker', 'VitePress'],
   },
   {
     title: 'Vite Plugin Cloudflared',
@@ -649,6 +858,42 @@ export const additionalProjects = [
     description: 'A Dockerized TypeScript bot that serves game data from the MetaForge API through slash commands, with Redis caching and autocomplete.',
     repository: 'https://github.com/notmike101/discord-bot-arc-raiders-info',
     tags: ['TypeScript', 'Discord.js', 'Redis', 'Docker'],
+  },
+  {
+    title: 'ZCode Scheduler',
+    description: 'Recurring desktop tasks with time-zone-aware cron schedules and explicit overlap policies. Retired when ZCode 3.5.2 added native scheduling; retained for supported older versions.',
+    repository: 'https://github.com/notmike101/zcode-scheduler',
+    tags: ['Retired extension', 'TypeScript', 'Scheduling'],
+  },
+  {
+    title: 'Sunshine Audio Sink Updater',
+    description: 'A Windows command-line utility that finds audio devices by friendly name and updates Sunshine’s streaming configuration. Includes a Task Scheduler startup example; configuration takes effect after Sunshine restarts.',
+    repository: 'https://github.com/notmike101/sunshine-stream-windows-audio-sink-updater',
+    tags: ['TypeScript', 'Windows', 'Audio tooling'],
+  },
+  {
+    title: 'Daily Star Chart',
+    description: 'An editable daily behavior chart with expectations, rewards, and schedule entries. Stores each day locally in IndexedDB and includes a print layout for taking the chart off screen.',
+    repository: 'https://github.com/notmike101/daily-star-chart-generator',
+    tags: ['Vue', 'TypeScript', 'IndexedDB'],
+  },
+  {
+    title: 'Google Fonts for BetterDiscord',
+    description: 'A font-picker extension that loads the Google Fonts catalog, saves the selected face, and applies it across the interface while leaving code typography alone. Earlier desktop customization work.',
+    repository: 'https://github.com/notmike101/betterdiscord-google-fonts',
+    tags: ['Historical project', 'TypeScript', 'React'],
+  },
+  {
+    title: 'Server Themes for BetterDiscord',
+    description: 'Assigns installed themes to individual Discord servers and switches them as the user navigates. A settings panel manages saved assignments. Earlier desktop customization work.',
+    repository: 'https://github.com/notmike101/betterdiscord-server-themes',
+    tags: ['Historical project', 'TypeScript', 'React'],
+  },
+  {
+    title: 'Server Survival Agent Toolkit',
+    description: 'An experiment in browser-based game agents: a SQLite ledger preserves observations, decisions, and strategy rules between sessions, while Playwright drivers operate the game through visible controls.',
+    repository: 'https://github.com/notmike101/server-survival-game-agent',
+    tags: ['Agent research', 'Python', 'SQLite', 'Playwright'],
   },
 ];
 

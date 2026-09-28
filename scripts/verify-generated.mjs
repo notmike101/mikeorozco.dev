@@ -22,7 +22,7 @@ for (const project of caseStudies) {
     if (part.diagram) assert.ok(part.diagram.length > 1 && part.diagram.every(node => node.label && node.detail), 'Diagrams must describe actual responsibilities');
   }
 }
-for (const slug of ['quire', 'mealmind', 'pack3d']) {
+for (const slug of ['quire', 'mealmind', 'pack3d', 'between-sessions', 'false-witness']) {
   assert.ok(projectLayers[slug][0].image, `${slug} must lead with its real interface`);
 }
 for (const logo of ['mktr.png', 'valiant.svg']) assert.ok(existsSync(resolve(output, 'images', logo)), `Missing organization logo: ${logo}`);
@@ -63,6 +63,13 @@ for (const project of caseStudies) {
   assert.ok(page.includes(`https://mikeorozco.dev/work/${project.slug}`), `Missing canonical route: ${project.slug}`);
   if (project.image) assert.ok(existsSync(resolve(output, project.image.src.slice(1))), `Missing image: ${project.image.src}`);
 }
-for (const project of additionalProjects) assert.ok(home.includes(escape(project.description)), `Research content lost: ${project.title}`);
+assert.equal(new Set(caseStudies.map(project => project.slug)).size, caseStudies.length, 'Case-study routes must be unique');
+assert.ok(!caseStudies.some(project => /vibe.?translate/i.test(project.slug)), 'Vibe Translate belongs in supporting contributions');
+assert.ok(additionalProjects.some(project => project.repository === 'https://github.com/suicvne/vibe-translate/pull/1'), 'The merged Vibe Translate contribution must remain discoverable');
+for (const project of additionalProjects) {
+  assert.ok(home.includes(escape(project.description)), `Research content lost: ${project.title}`);
+  assert.ok(home.includes(project.repository), `Research evidence link lost: ${project.title}`);
+  assert.ok(!caseStudies.some(study => study.repository === project.repository), `Duplicate project placement: ${project.title}`);
+}
 assert.ok(readFileSync(resolve(output, 'contact/index.html'), 'utf8').includes('mailto:me@mikeorozco.dev'), 'Contact paths must remain available');
 console.log(`PASS: variable evidence components, navigation scrolling, ${caseStudies.length} complete case studies, ${additionalProjects.length} research projects, images, metadata and contact`);
